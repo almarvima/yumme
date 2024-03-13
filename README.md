@@ -14,9 +14,9 @@ This web app is a dynamic platform where culinary enthusiasts can upload and dis
 
 ## Technology Stack
 
-- **Frontend:** React.js, TailwindCSS
-- **Backend:** Spring Boot
-- **Database:** MySQL
+- **Frontend:** React.js, TailwindCSS <a href="https://reactjs.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/react-colored.svg" width="20" height="20" alt="React" /></a> <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/tailwindcss-colored.svg" width="20" height="20" alt="TailwindCSS" /></a>
+- **Backend:** Spring Boot <a href="https://spring.io/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/springio/springio-icon.svg" alt="spring" width="20" height="20"/></a>
+- **Database:** MySQL <a href="https://www.mysql.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/mysql-colored.svg" width="20" height="20" alt="MySQL" /></a>
 
 ## Installation
 
