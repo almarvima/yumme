@@ -1,4 +1,4 @@
-# Project Title: Your Recipe Web App
+# Project Title: YumMe
 
 ![Project Image](https://i.ibb.co/8PRXLTH/yum-Me-logo.webp)
 
@@ -24,7 +24,7 @@ To set up the project locally, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/your-repo-name.git
+   git clone https://github.com/almarvima/yumme.git
 
 2. Navigate to the project directory:
    ```bash
@@ -35,7 +35,38 @@ To set up the project locally, follow these steps:
    # For the frontend
    npm install
 
-   # For the backend (assuming you use Maven with Spring Boot)
+   # For the backend
    mvn install
 
-4. 
+4. Start the Vite development server:
+   ```bash
+   npm run dev
+
+  This will serve the frontend on: http://localhost:5173
+
+5. For the backend, ensure you're in the backend directory and then start the Spring Boot application:
+   ```sh
+   ./mvnw spring-boot:run
+
+The application should now be running, with the frontend accessible on http://localhost:5173 and the backend on its respective port (commonly http://localhost:8080).
+
+## Pallet Colours
+
+![Project Image](https://i.ibb.co/JsZp9DQ/Pallet-Colours.png)
+
+
+## Contributing
+We welcome contributions! If you'd like to contribute, please follow these steps:
+
+- Fork the repository.
+- Create a new branch: git checkout -b your-branch-name.
+- Make your changes and commit them: git commit -am 'Add some feature'
+- Push to the original branch: git push origin your-repo-name/your-branch-name
+- Create the pull request.
+
+Alternatively, see the GitHub documentation on **creating a pull request**.
+
+![Project Image](https://i.ibb.co/gFBxLN3/log.png)
+
+
+
