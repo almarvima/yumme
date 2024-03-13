@@ -1,4 +1,4 @@
-# Project Title: YumMe
+# Project Title: **YumMe**
 
 ![Project Image](https://i.ibb.co/8PRXLTH/yum-Me-logo.webp)
 
@@ -59,12 +59,12 @@ The application should now be running, with the frontend accessible on http://lo
 We welcome contributions! If you'd like to contribute, please follow these steps:
 
 - Fork the repository.
-- Create a new branch: git checkout -b your-branch-name.
+- Create a new branch: git swithc -c your-branch-name.
 - Make your changes and commit them: git commit -am 'Add some feature'
 - Push to the original branch: git push origin your-repo-name/your-branch-name
 - Create the pull request.
 
-Alternatively, see the GitHub documentation on **creating a pull request**.
+Alternatively, see the GitHub documentation on [creating a pull request](https://docs.github.com/es/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request).
 
 ![Project Image](https://i.ibb.co/gFBxLN3/log.png)
 
