@@ -1,78 +1,99 @@
+@import url("https://fonts.cdnfonts.com/css/poppins");
+@import url("https://fonts.cdnfonts.com/css/inter");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz@1,8..144&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
- 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
- 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
- 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
- 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
- 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
- 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
- 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
- 
+    --background: 178.6 100% 100%;
+    --foreground: 178.6 5% 10%;
+    --card: 178.6 50% 100%;
+    --card-foreground: 178.6 5% 15%;
+    --popover: 178.6 100% 100%;
+    --popover-foreground: 178.6 100% 10%;
+    --primary: 178.6 84.3% 10%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 178.6 30% 90%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 140.6 30% 95%;
+    --muted-foreground: 178.6 5% 40%;
+    --accent: 140.6 30% 90%;
+    --accent-foreground: 178.6 5% 15%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 178.6 5% 100%;
+    --border: 178.6 30% 82%;
+    --input: 178.6 30% 50%;
+    --ring: 178.6 84.3% 10%;
     --radius: 0.5rem;
   }
- 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
- 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
- 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
- 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
- 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
- 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
- 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
- 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
- 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --background: 178.6 50% 10%;
+    --foreground: 178.6 5% 100%;
+    --card: 178.6 50% 10%;
+    --card-foreground: 178.6 5% 100%;
+    --popover: 178.6 50% 5%;
+    --popover-foreground: 178.6 5% 100%;
+    --primary: 178.6 84.3% 10%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 178.6 30% 20%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 140.6 30% 25%;
+    --muted-foreground: 178.6 5% 65%;
+    --accent: 140.6 30% 25%;
+    --accent-foreground: 178.6 5% 95%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 178.6 5% 100%;
+    --border: 178.6 30% 50%;
+    --input: 178.6 30% 50%;
+    --ring: 178.6 84.3% 10%;
+    --radius: 0.5rem;
   }
 }
- 
+
 @layer base {
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
+    font-family: "Inter", sans-serif;
+  }
+
+  h1 {
+    @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
+  }
+
+  h2 {
+    @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
+  }
+
+  h3 {
+    @apply scroll-m-20 text-2xl font-semibold tracking-tight;
+  }
+  h4 {
+    @apply scroll-m-20 text-xl font-semibold tracking-tight;
+  }
+  p {
+    @apply leading-7 [&:not(:first-child)]:mt-6;
+    font-family: "Poppins", sans-serif;
+  }
+  blockquote {
+    font-family: "Roboto Serif", serif;
+  }
+  table th {
+    @apply border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right;
+  }
+  table td {
+    @apply border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right;
+  }
+  ul {
+    @apply my-6 ml-6 list-disc [&>li]:mt-2;
+  }
+
+  code {
+    @apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
   }
 }

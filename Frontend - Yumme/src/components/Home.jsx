@@ -24,7 +24,7 @@ const mockRecipes = [
 export const Home = () => {
   return (
     <div className="flex flex-col gap-4">
-      <section>hero section</section>
+      <section><h1>hero section</h1> </section>
       <section>
         {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 md:gap-x-8 gap-4">

@@ -9,7 +9,7 @@ import Layout from "./components/Layout";
 
 function App() {
   return (
-    <div className="w-full h-screen flex flex-col gap-8">
+    <div className="w-full h-screen flex flex-col gap-8 bg-white">
       <Layout>
         <Outlet />
       </Layout>
