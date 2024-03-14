@@ -9,7 +9,7 @@ const Header = () => {
         <div>logo</div>
         <HeaderMenu />
         <div>
-          <Button variant={"default"}>Login</Button>
+          <Button variant={"default"}>Login test</Button>
         </div>
       </div>
     </header>
