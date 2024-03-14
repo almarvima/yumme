@@ -1,6 +1,7 @@
 package com.yumme.backendyumme.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name = "role")
@@ -9,9 +10,11 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @NotBlank
+    @Column(length = 50)
     private String type;
 
+    @NotBlank
     @OneToOne(mappedBy = "role")
     private User user;
 
