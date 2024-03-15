@@ -3,6 +3,8 @@ package com.yumme.backendyumme.domain;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -12,9 +14,12 @@ public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinTable(name= "user", joinColumns = @JoinColumn(name ="user_id", referencedColumnName = "id"))
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name ="owner_id", referencedColumnName = "id")
     private User owner_id;
+    @NotBlank
+    @ManyToMany(mappedBy = "recipesSet")
+    private Set<User> usersSet = new HashSet<>();
     @NotBlank
     @Column(length = 100)
     private String title;
