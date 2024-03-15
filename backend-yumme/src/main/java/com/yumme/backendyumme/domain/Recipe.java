@@ -12,8 +12,8 @@ public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name ="user_id", referencedColumnName = "id")
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinTable(name= "user", joinColumns = @JoinColumn(name ="user_id", referencedColumnName = "id"))
     private User owner_id;
     @NotBlank
     @Column(length = 100)
@@ -30,16 +30,16 @@ public class Recipe {
     private String ingredients;
     @NotBlank
     @Column(length = 100)
-    private String receipe_type;
+    private String receipe_category;
     @NotBlank
-    private Date create_at;
+    private Date created_at;
     @NotBlank
-    private Date update_at;
+    private Date updated_at;
 
     public Recipe() {
     }
 
-    public Recipe(Long id, User owner_id, String title, String description, Integer cooking_time, Integer per_person, String ingredients, String receipe_type, Date create_at) {
+    public Recipe(Long id, User owner_id, String title, String description, Integer cooking_time, Integer per_person, String ingredients, String receipe_category, Date created_at) {
         this.id = id;
         this.owner_id = owner_id;
         this.title = title;
@@ -47,8 +47,8 @@ public class Recipe {
         this.cooking_time = cooking_time;
         this.per_person = per_person;
         this.ingredients = ingredients;
-        this.receipe_type = receipe_type;
-        this.create_at = create_at;
+        this.receipe_category = receipe_category;
+        this.created_at = created_at;
     }
 
     public Long getId() {
@@ -108,26 +108,26 @@ public class Recipe {
     }
 
     public String getReceipe_type() {
-        return receipe_type;
+        return receipe_category;
     }
 
     public void setReceipe_type(String receipe_type) {
-        this.receipe_type = receipe_type;
+        this.receipe_category = receipe_type;
     }
 
     public Date getCreate_at() {
-        return create_at;
+        return created_at;
     }
 
     public void setCreate_at(Date create_at) {
-        this.create_at = create_at;
+        this.created_at = create_at;
     }
 
     public Date getUpdate_at() {
-        return update_at;
+        return updated_at;
     }
 
     public void setUpdate_at(Date update_at) {
-        this.update_at = update_at;
+        this.updated_at = update_at;
     }
 }

@@ -3,6 +3,8 @@ package com.yumme.backendyumme.domain;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "role")
 public class Role {
@@ -15,8 +17,8 @@ public class Role {
     private String type;
 
     @NotBlank
-    @OneToOne(mappedBy = "role")
-    private User user;
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    private List<User> user;
 
     public Role() {
     }
