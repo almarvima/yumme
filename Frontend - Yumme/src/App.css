@@ -14,7 +14,7 @@
     --card-foreground: 178.6 5% 15%;
     --popover: 178.6 100% 100%;
     --popover-foreground: 178.6 100% 10%;
-    --primary: 178.6 84.3% 10%;
+    --primary:  178.6 84.3% 10%;
     --primary-foreground: 0 0% 100%;
     --secondary: 178.6 30% 90%;
     --secondary-foreground: 0 0% 0%;
@@ -22,9 +22,9 @@
     --muted-foreground: 178.6 5% 40%;
     --accent: 140.6 30% 90%;
     --accent-foreground: 178.6 5% 15%;
-    --destructive: 0 100% 50%;
+    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 178.6 5% 100%;
-    --border: 178.6 30% 82%;
+    --border: 240 5.9% 90%;
     --input: 178.6 30% 50%;
     --ring: 178.6 84.3% 10%;
     --radius: 0.5rem;
@@ -67,7 +67,7 @@
   }
 
   h2 {
-    @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
+    @apply scroll-m-20 border-b  text-3xl font-semibold tracking-tight first:mt-0;
   }
 
   h3 {
@@ -76,8 +76,10 @@
   h4 {
     @apply scroll-m-20 text-xl font-semibold tracking-tight;
   }
+
+  /* [&:not(:first-child)]:mt-6 */
   p {
-    @apply leading-7 [&:not(:first-child)]:mt-6;
+    @apply leading-7 ;
     font-family: "Poppins", sans-serif;
   }
   blockquote {

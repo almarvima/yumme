@@ -4,7 +4,7 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import { Button } from "./components/ui/button";
 import { Outlet } from "react-router-dom";
-import Header from "./components/Header";
+import Header from "./components/Header/Header";
 import Layout from "./components/Layout";
 
 function App() {
