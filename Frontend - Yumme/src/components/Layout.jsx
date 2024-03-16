@@ -9,10 +9,10 @@ import Header from "./Header/Header";
  */
 const Layout = ({ children }) => {
   return (
-    <div className="flex h-screen flex-col gap-8">
+    <div className="flex h-screen flex-col gap-8 ">
       <Header />
 
-      <main className="container h-full flex flex-col gap-8">{children}</main>
+      <main className="container  flex flex-col  gap-8">{children}</main>
       <p>footer TODO</p>
     </div>
   );

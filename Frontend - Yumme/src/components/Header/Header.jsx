@@ -1,13 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
-import { menuItems } from '../../constants/index.jsx';
-import BurgerMenu from './BurgerMenu.jsx';
-import HeadersButtons from './HeaderButtons.jsx';
+import { menuItems } from "../../constants/index.jsx";
+import BurgerMenu from "./BurgerMenu.jsx";
+import HeadersButtons from "./HeaderButtons.jsx";
 
 const Header = () => {
   return (
-    <header className="w-full  flex flex-col shadow-sm bg-gray-50 ">
+    <header className="w-full  flex flex-col shadow-sm bg-teal-100 ">
       <div className=" flex justify-between gap-4  items-center p-8 container ">
         <div className="">
           <img src="/logo.png" className="w-20 rounded-xl" alt="" />
