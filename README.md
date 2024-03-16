@@ -50,10 +50,6 @@ To set up the project locally, follow these steps:
 
 The application should now be running, with the frontend accessible on http://localhost:5173 and the backend on its respective port (commonly http://localhost:8080).
 
-## Pallet Colours
-
-![Project Image](https://i.ibb.co/JsZp9DQ/Pallet-Colours.png)
-
 
 ## Contributing
 We welcome contributions! If you'd like to contribute, please follow these steps:
