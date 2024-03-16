@@ -1,3 +1,11 @@
+/*
+  This file is used to define the global styles for the application.
+  It uses Tailwind CSS to define some styles.
+
+  In addition we declare a few custom CSS variables to define the color scheme or theme for the application.
+
+*/
+
 @import url("https://fonts.cdnfonts.com/css/poppins");
 @import url("https://fonts.cdnfonts.com/css/inter");
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz@1,8..144&display=swap");
@@ -14,7 +22,7 @@
     --card-foreground: 178.6 5% 15%;
     --popover: 178.6 100% 100%;
     --popover-foreground: 178.6 100% 10%;
-    --primary:  178.6 84.3% 10%;
+    --primary: 178.6 84.3% 10%;
     --primary-foreground: 0 0% 100%;
     --secondary: 178.6 30% 90%;
     --secondary-foreground: 0 0% 0%;
@@ -79,7 +87,7 @@
 
   /* [&:not(:first-child)]:mt-6 */
   p {
-    @apply leading-7 ;
+    @apply leading-7;
     font-family: "Poppins", sans-serif;
   }
   blockquote {

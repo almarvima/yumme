@@ -1,12 +1,14 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
-import { Button } from "./components/ui/button";
-import { Outlet } from "react-router-dom";
-import Header from "./components/Header/Header";
-import Layout from "./components/Layout";
+import './App.css';
+import { Outlet } from 'react-router-dom';
+import Layout from './components/Layout';
 
+
+
+/**
+ * The main component of the application.
+ *
+ * @returns {JSX.Element} The rendered App component.
+ */
 function App() {
   return (
     <div className="w-full h-screen flex flex-col gap-8 bg-white">

@@ -1,3 +1,8 @@
+/**
+ * Tailwind CSS Configuration File
+ * @see Docs: https://tailwindcss.com/docs/configuration
+ */
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
@@ -14,12 +19,11 @@ module.exports = {
       padding: "2rem",
       screens: {
         "2xl": "1400px",
-        
       },
     },
     extend: {
       screens: {
-        "xs": "375px",
+        xs: "375px",
       },
       colors: {
         border: "hsl(var(--border))",

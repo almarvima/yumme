@@ -1,5 +1,10 @@
 import React from "react";
 
+
+/**
+ * Renders the SignIn component
+ * @return {JSX.Element}
+ */
 const SignIn = () => {
   return (
     <div>

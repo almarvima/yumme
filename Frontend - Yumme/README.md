@@ -1,30 +1,101 @@
-# React + TypeScript + Vite
+# Project Title: **YumMe**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Project Image](https://i.ibb.co/8PRXLTH/yum-Me-logo.webp)
 
-Currently, two official plugins are available:
+## Introduction
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This web app is a dynamic platform where culinary enthusiasts can upload and discover various recipes. It provides a user-friendly interface for users to share their unique recipes and explore a wide array of culinary creations through a simple search feature.
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Upload Recipes:** Users can easily upload their recipe details, including ingredients, preparation steps, and images.
+- **Search Functionality:** A robust search bar allows users to quickly find recipes based on keywords, ingredients, or categories.
+- **Responsive Design:** Crafted with React and TailwindCSS, the app showcases a responsive design that adapts seamlessly to different device screens.
 
-- Configure the top-level `parserOptions` property like this:
+## Technology Stack
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- **Frontend:** React.js <a href="https://reactjs.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/react-colored.svg" width="30" height="30" alt="React" /></a>, TailwindCSS <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/tailwindcss-colored.svg" width="30" height="30" alt="TailwindCSS" /></a>
+- **Backend:** Spring Boot <a href="https://spring.io/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/springio/springio-icon.svg" alt="spring" width="30" height="30"/></a>
+- **Database:** MySQL <a href="https://www.mysql.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/mysql-colored.svg" width="30" height="30" alt="MySQL" /></a>
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Installation
+
+To set up the project locally, follow these steps:
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/almarvima/yumme.git
+
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd your-repo-name
+
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   # For the frontend
+   npm install
+
+   # For the backend
+   mvn install
+
+   ```
+
+4. Start the Vite development server:
+   ```bash
+   npm run dev
+   ```
+
+This will serve the frontend on: http://localhost:5173
+
+5. For the backend, ensure you're in the backend directory and then start the Spring Boot application:
+   ```sh
+   ./mvnw spring-boot:run
+   ```
+
+The application should now be running, with the frontend accessible on http://localhost:5173 and the backend on its respective port (commonly http://localhost:8080).
+
+## Contributing
+
+We welcome contributions! If you'd like to contribute, please follow these steps:
+
+- Fork the repository.
+- Create a new branch: git swithc -c your-branch-name.
+- Make your changes and commit them: git commit -am 'Add some feature'
+- Push to the original branch: git push origin your-repo-name/your-branch-name
+- Create the pull request.
+
+Alternatively, see the GitHub documentation on [creating a pull request](https://docs.github.com/es/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request).
+
+## Project Structure
+
+The project structure is as follows:
+
+- **Backend:** Contains the Spring Boot application.
+- **Frontend:** Contains the React application.
+
+### Frontend project structure
+
+The code is organized into different folders to maintain a clean and scalable codebase.
+
+Besides of this structure, you can find a better understanding of the project by looking at the code.
+
+The frontend project structure is as follows:
+
+- **public:** Contains the public assets.
+- **src:** Contains the source code.
+  - **components:** Contains the React components.
+    - **ui**: The most atomic components.
+      >To see more about these components see [Shadcn Documentation](https://ui.shadcn.com/)
+  - **lib:** Contains utility functions.
+  - **constants**: Contains the application constants.
+  - **router**: Contains the application router.
+  - **api**: Contains the API calls.
+
+![Project Image](https://i.ibb.co/gFBxLN3/log.png)

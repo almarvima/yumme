@@ -1,6 +1,10 @@
 import React from "react";
 import { Button } from "./ui/button";
 
+/**
+ * HeroSection component
+ * @status : todo
+ */
 const HeroSection = () => {
   return (
     <section className="w-full py-12 ">
@@ -9,10 +13,7 @@ const HeroSection = () => {
           <img
             alt="Delicious Recipe"
             className="w-full rounded-lg aspect-video"
-            
             src="https://via.placeholder.com/1400"
-            
-        
           />
         </div>
         <div className="space-y-3">

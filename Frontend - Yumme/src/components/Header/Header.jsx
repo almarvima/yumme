@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import HeaderButtons from "./HeaderButtons";
-import BurgerMenu from "./BurgerMenu.jsx";
-import { menuItems } from "../../constants/index.jsx";
-import { Link } from "react-router-dom";
+import { menuItems } from '../../constants/index.jsx';
+import BurgerMenu from './BurgerMenu.jsx';
+import HeadersButtons from './HeaderButtons.jsx';
 
 const Header = () => {
   return (
@@ -25,7 +25,9 @@ const Header = () => {
               </Link>
             ))}
           </div>
-          <HeaderButtons />
+
+          {/* The buttons in the header */}
+          <HeadersButtons />
         </div>
 
         <div className="flex md:hidden">

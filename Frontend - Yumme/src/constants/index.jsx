@@ -17,35 +17,41 @@ import {
 
 const ICON_SIZE = "20";
 
-export const menuItems = [
-  // TODO: Hacer objeto navegable por clave
+export const Routes = {
+  HOME: "/",
+  RECIPE: "/recipe/:id",
+  ABOUT: "/about",
+  CONTACT: "/contact",
+  SIGN_IN: "/sign-in",
+  SIGN_UP: "/sign-up",
+  RECIPES: "/recipes", // ? Needed
+};
 
+export const menuItems = [
   {
     icon: <Home height={ICON_SIZE} />,
-    label: "Home ",
-    to: "/",
+    label: "Home",
+    to: Routes.HOME,
   },
   {
     icon: <Apple height={ICON_SIZE} />,
     label: "Recipes",
-    to: "recipe",
+    to: Routes.RECIPES,
   },
   {
     icon: <MessageCircleQuestion height={ICON_SIZE} />,
 
     label: "About",
-    to: "about",
+    to: Routes.ABOUT,
   },
   {
     icon: <Phone height={ICON_SIZE} />,
     label: "Contact",
-    to: "contact",
+    to: Routes.CONTACT,
   },
 ];
 
 export const categories = [
-  
-
   {
     icon: <Carrot height={ICON_SIZE} />,
     label: "Vegan",

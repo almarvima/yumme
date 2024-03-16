@@ -4,15 +4,9 @@ import App from "../App";
 import { Home } from "../components/Home";
 import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
+import { Routes } from "../constants";
 
-export const Routes = {
-  HOME: "/",
-  RECIPE: "/recipe/:id",
-  ABOUT: "/about",
-  CONTACT: "/contact",
-  SIGN_IN: "/sign-in",
-  SIGN_OUT: "/sign-up",
-};
+
 
 export const router = createBrowserRouter([
   {
@@ -29,7 +23,7 @@ export const router = createBrowserRouter([
         element: <SignIn />,
       },
       {
-        path: Routes.SIGN_OUT,
+        path: Routes.SIGN_UP,
         element: <SignUp />,
       },
       {
