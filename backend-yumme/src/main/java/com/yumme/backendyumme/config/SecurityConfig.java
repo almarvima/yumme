@@ -1,6 +1,7 @@
 package com.yumme.backendyumme.config;
 
 import com.yumme.backendyumme.jwt.JwtAuthenticationFilter;
+import com.yumme.backendyumme.user.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
