@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-
+/*
 @Entity
 @Table(name = "recipe")
 public class Recipe {
@@ -136,3 +136,5 @@ public class Recipe {
         this.updated_at = update_at;
     }
 }
+*/
+

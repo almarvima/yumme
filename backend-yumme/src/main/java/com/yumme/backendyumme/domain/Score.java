@@ -3,6 +3,7 @@ package com.yumme.backendyumme.domain;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
+/*
 @Entity
 @Table(name="score")
 public class Score {
@@ -21,3 +22,5 @@ public class Score {
     @NotBlank
     private int score;
 }
+
+ */

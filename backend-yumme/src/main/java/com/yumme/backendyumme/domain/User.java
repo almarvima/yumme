@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
+/*
 @Entity
 @Table(name = "user")
 public class User {
@@ -55,3 +55,5 @@ public class User {
         this.created_at = created_at;
     }
 }
+
+ */

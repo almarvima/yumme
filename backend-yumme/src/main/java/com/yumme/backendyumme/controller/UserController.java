@@ -1,5 +1,5 @@
 package com.yumme.backendyumme.controller;
-
+/*
 import com.yumme.backendyumme.domain.User;
 import com.yumme.backendyumme.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,3 +29,5 @@ public class UserController {
     }
 
 }
+
+ */

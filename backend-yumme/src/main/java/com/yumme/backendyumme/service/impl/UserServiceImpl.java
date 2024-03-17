@@ -1,5 +1,5 @@
 package com.yumme.backendyumme.service.impl;
-
+/*
 import com.yumme.backendyumme.domain.User;
 import com.yumme.backendyumme.repository.UserRepository;
 import com.yumme.backendyumme.service.UserService;
@@ -18,3 +18,5 @@ public class UserServiceImpl implements UserService {
     }
 
 }
+
+ */
