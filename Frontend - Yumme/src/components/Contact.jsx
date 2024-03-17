@@ -9,7 +9,6 @@ import { Youtube } from 'lucide-react'
 import { Twitter } from 'lucide-react'
 import { Instagram } from 'lucide-react'
 import { Facebook } from 'lucide-react'
-import { Twitch } from 'lucide-react'
 
 /**
  * Renders the Contact component with an image and contact information
