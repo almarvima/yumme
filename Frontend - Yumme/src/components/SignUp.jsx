@@ -53,13 +53,12 @@ const SignUp = () => {
             <Input id='confirmPassword' type='password' placeholder='Confirm Password' className='w-full' />
           </div>
           <div className='flex flex-col md:flex-row items-center justify-between space-y-2 md:space-y-0'>
-            <Button variant='outline' color='purple' type='submit' className='w-full py-2 text-base'>
+            <Button variant='outline' type='submit' className='w-full py-2 text-base'>
               Sign Up
             </Button>
             <Button
               variant='secondary'
-              color='gray'
-              className='w-full py-2 md:ml-4 text-base border border-gray-500 hover:border-gray-100'
+              className='w-full py-2 md:ml-4 text-base border border-gray-500 hover:border-teal-50 hover:bg-teal-900 hover:text-teal-50 bg-teal-100'
               onClick={() => {
                 navigate(Routes.HOME)
               }}>

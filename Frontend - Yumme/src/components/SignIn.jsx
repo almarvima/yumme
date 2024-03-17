@@ -35,13 +35,12 @@ const SignIn = () => {
             <Input id='password' type='password' placeholder='*************' className='w-full' />
           </div>
           <div className='flex flex-col md:flex-row items-center justify-between space-y-2 md:space-y-0'>
-            <Button variant='outline' color='purple' type='submit' className='w-full py-2 text-base'>
+            <Button variant='outline' type='submit' className='w-full py-2 text-base'>
               Sign In
             </Button>
             <Button
               variant='secondary'
-              color='gray'
-              className='w-full py-2 md:ml-4 text-base border border-gray-500 hover:border-gray-100'
+              className='w-full py-2 md:ml-4 text-base border border-gray-500 hover:border-teal-50 hover:bg-teal-900 hover:text-teal-50 bg-teal-100'
               onClick={() => {
                 /* navigates to home */
                 navigate('/')
@@ -52,7 +51,7 @@ const SignIn = () => {
         </form>
         <p className='text-center text-gray-500 text-xs md:text-lg'>
           Don't have a user account?{' '}
-          <Link to={Routes.SIGN_UP} className='text-purple-500 hover:text-purple-600'>
+          <Link to={Routes.SIGN_UP} className='text-purple-500 hover:text-teal-900'>
             Click here to sign up!
           </Link>
         </p>
