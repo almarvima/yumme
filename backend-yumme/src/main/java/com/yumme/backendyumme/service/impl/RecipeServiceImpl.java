@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class RecipeServiceImpl implements RecipeService {
@@ -16,7 +18,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Autowired
     private RecipeRepository recipeRepository;
     @Override
-    public void createRecipe(RecipeRequest request, User user) {
+    public boolean createRecipe(RecipeRequest request, User user) {
 
        Recipe recipe = Recipe.builder()
                .title(request.getTitle())
@@ -28,6 +30,22 @@ public class RecipeServiceImpl implements RecipeService {
                .receipe_category(request.getReceipe_category())
                .build();
 
-       recipeRepository.save(recipe);
+       recipe.onCreate();
+       recipe.onUpdate();
+
+        Recipe savedRecipe = recipeRepository.save(recipe);
+
+       return savedRecipe != null;
+    }
+
+    @Override
+    public List<Recipe> getAllRecipes() {
+
+        return recipeRepository.findAll();
+    }
+
+    @Override
+    public List<Recipe> getRecipesById(Long id) {
+        return recipeRepository.findByOwnerId(id);
     }
 }
