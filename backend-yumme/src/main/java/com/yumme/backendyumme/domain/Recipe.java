@@ -25,15 +25,18 @@ public class Recipe {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="owner_id", referencedColumnName = "id")
     private User owner_id;
-    
+
     @ManyToMany(mappedBy = "recipesSet")
     private Set<User> usersSet = new HashSet<>();
-    
+
     @Column(length = 100, nullable = false)
     private String title;
-    
+
     @Column(length = 4096, nullable = false)
     private String description;
+
+    @Column(length = 1024)
+    private String imgUrl;
 
     @Column(nullable = false)
     private Integer cooking_time;
@@ -45,9 +48,9 @@ public class Recipe {
 
     @Column(length = 100, nullable = false)
     private String receipe_category;
-    
+
     private Date created_at;
-    
+
     private Date updated_at;
 
     public Recipe(Long id, User owner_id, String title, String description, Integer cooking_time, Integer per_person, String ingredients, String receipe_category, Date created_at) {
@@ -141,4 +144,8 @@ public class Recipe {
     public void setUpdate_at(Date update_at) {
         this.updated_at = update_at;
     }
+
+    public void onCreate() { created_at = new Date(); }
+
+    public void onUpdate() { updated_at = new Date(); }
 }

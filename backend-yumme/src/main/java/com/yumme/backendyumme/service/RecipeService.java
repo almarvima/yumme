@@ -5,5 +5,5 @@ import com.yumme.backendyumme.dto.request.RecipeRequest;
 
 public interface RecipeService {
 
-    void createRecipe(RecipeRequest request, User user);
+    boolean createRecipe(RecipeRequest request, User user);
 }
