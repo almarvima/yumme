@@ -1,25 +1,23 @@
 package com.yumme.backendyumme.controller;
 
-import com.yumme.backendyumme.auth.Request.LoginRequest;
-import com.yumme.backendyumme.auth.Response.AuthResponse;
 import com.yumme.backendyumme.domain.User;
 import com.yumme.backendyumme.dto.request.RecipeRequest;
 import com.yumme.backendyumme.dto.response.ValidationResponse;
-import com.yumme.backendyumme.repository.RecipeRepository;
 import com.yumme.backendyumme.repository.UserRepository;
 import com.yumme.backendyumme.security.jwt.JwtService;
 import com.yumme.backendyumme.service.RecipeService;
 import com.yumme.backendyumme.utils.SpringUtils;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.header.Header;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -32,40 +30,61 @@ public class RecipeController {
     @Autowired
     private final RecipeService rs;
 
-    //TODO: Falta millorar el createRecipe, control d'errors
     @PostMapping("recipe")
     public ResponseEntity<?> createRecipe(
             @RequestBody RecipeRequest request,
-            HttpServletRequest header)
-    {
+            HttpServletRequest header) {
         ValidationResponse validationResponse = validateTokenAndUser(header);
 
-        if(validationResponse.isValid()){
+        if (validationResponse.isValid()) {
             String userName = validationResponse.getUserName();
             Optional<User> userOptional = ur.findByUsername(userName);
-            if(userOptional.isPresent()){
+            if (userOptional.isPresent()) {
                 User user = userOptional.get();
                 boolean isRecipeCreated = rs.createRecipe(request, user);
-                if(isRecipeCreated){
+                if (isRecipeCreated) {
                     return SpringUtils.retornarRecetaCreada();
-                }else {
+                } else {
                     return SpringUtils.errorReceta();
                 }
-            }else{
+            } else {
                 return SpringUtils.usuerNotExist();
             }
-        }else {
+        } else {
             return SpringUtils.invalidToken();
         }
     }
 
-    //TODO: Falta fer el GetRecipe, DeleteRecipe i UpdateRecipe
+    @PostMapping("myrecipe")
+    public ResponseEntity<?> getRecipeById(HttpServletRequest header) {
+        List recipesById;
 
+        ValidationResponse validationResponse = validateTokenAndUser(header);
 
-    //TODO: Metode per validar token i usuari.
+        if (validationResponse.isValid()) {
+            String userName = validationResponse.getUserName();
+            Optional<User> userOptional = ur.findByUsername(userName);
+            if (userOptional.isPresent()) {
+                Long userId = userOptional.get().getId();
+                recipesById = rs.getRecipesById(userId);
+                if (!recipesById.isEmpty()) {
+                    return ResponseEntity.ok(recipesById);
+                } else {
+                    return null; // no hay recetas usuario crear nueva jsonresponse
+                }
+            } else {
+                return SpringUtils.usuerNotExist();
+            }
+        } else {
+            return SpringUtils.invalidToken();
+        }
+    }
 
-
-    private ValidationResponse  validateTokenAndUser(HttpServletRequest header ) {
+    //TODO: Falta fer elDeleteRecipe i UpdateRecipe
+    /*
+    *
+    * */
+    private ValidationResponse validateTokenAndUser(HttpServletRequest header) {
         String jwtToken = jwtService.parseJwt(header);
         boolean isValid = false;
         User user = null;
