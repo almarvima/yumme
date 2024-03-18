@@ -1,5 +1,6 @@
 package com.yumme.backendyumme.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -24,6 +25,7 @@ public class Recipe {
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="owner_id", referencedColumnName = "id")
+    @JsonIgnore
     private User owner_id;
 
     @ManyToMany(mappedBy = "recipesSet")
@@ -121,27 +123,27 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
-    public String getReceipe_type() {
+    public String getreceipe_category() {
         return receipe_category;
     }
 
-    public void setReceipe_type(String receipe_type) {
-        this.receipe_category = receipe_type;
+    public void setreceipe_category(String receipe_category) {
+        this.receipe_category = receipe_category;
     }
 
-    public Date getCreate_at() {
+    public Date getCreated_at() {
         return created_at;
     }
 
-    public void setCreate_at(Date create_at) {
+    public void setCreated_at(Date create_at) {
         this.created_at = create_at;
     }
 
-    public Date getUpdate_at() {
+    public Date getUpdated_at() {
         return updated_at;
     }
 
-    public void setUpdate_at(Date update_at) {
+    public void setUpdated_at(Date update_at) {
         this.updated_at = update_at;
     }
 
