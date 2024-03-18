@@ -2,11 +2,19 @@ package com.yumme.backendyumme.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "recipe")
 public class Recipe {
@@ -17,32 +25,30 @@ public class Recipe {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="owner_id", referencedColumnName = "id")
     private User owner_id;
-    @NotBlank
+    
     @ManyToMany(mappedBy = "recipesSet")
     private Set<User> usersSet = new HashSet<>();
-    @NotBlank
-    @Column(length = 100)
+    
+    @Column(length = 100, nullable = false)
     private String title;
-    @NotBlank
-    @Column(length = 4096)
+    
+    @Column(length = 4096, nullable = false)
     private String description;
-    @NotBlank
-    private Integer cooking_time;
-    @NotBlank
-    private Integer per_person;
-    @NotBlank
-    @Column(length = 1024)
-    private String ingredients;
-    @NotBlank
-    @Column(length = 100)
-    private String receipe_category;
-    @NotBlank
-    private Date created_at;
-    @NotBlank
-    private Date updated_at;
 
-    public Recipe() {
-    }
+    @Column(nullable = false)
+    private Integer cooking_time;
+    @Column(nullable = false)
+    private Integer per_person;
+
+    @Column(length = 1024, nullable = false)
+    private String ingredients;
+
+    @Column(length = 100, nullable = false)
+    private String receipe_category;
+    
+    private Date created_at;
+    
+    private Date updated_at;
 
     public Recipe(Long id, User owner_id, String title, String description, Integer cooking_time, Integer per_person, String ingredients, String receipe_category, Date created_at) {
         this.id = id;

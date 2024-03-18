@@ -1,7 +1,11 @@
 package com.yumme.backendyumme.service;
 
-import com.yumme.backendyumme.domain.User;
+import com.yumme.backendyumme.auth.Request.LoginRequest;
+import com.yumme.backendyumme.auth.Request.RegisterRequest;
+import com.yumme.backendyumme.auth.Response.AuthResponse;
 
 public interface UserService {
-    void addUser(User user);
+    AuthResponse addUser(RegisterRequest request);
+
+    AuthResponse login(LoginRequest request);
 }

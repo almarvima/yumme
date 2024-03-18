@@ -18,6 +18,6 @@ public class Score {
     @ManyToOne
     @JoinColumn(name = "recipe_id")
     private Recipe recipe;
-    @NotBlank
+    @Column(nullable = false)
     private int score;
 }
