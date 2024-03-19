@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
@@ -10,13 +11,37 @@ import axios from "axios";
  *
  */
 
-export const getRecipes = () => {
-  return useQuery({
-    queryKey: ["recipes"],
-    queryFn: () => {
-      const data = axios.get("https://jsonplaceholder.typicode.com/posts");
-      console.log("🚀 ~ getRecipes ~ data:", data)
-      return data;
-    },
-  });
+const fetchData = async (url: string) => {
+  console.log("🚀 ~ url:", url);
+
+  const { data } = await axios.get(url);
+
+  return data;
+};
+
+export const useRecipes = () => {
+  const getRecipes = () => {
+    return useQuery({
+      queryKey: ["recipes"],
+      queryFn: () => fetchData("https://jsonplaceholder.typicode.com/posts"),
+    });
+  };
+
+  const getRecipe = (id: string) => {
+    return useQuery({
+      queryKey: ["recipe", id],
+      queryFn: () =>
+        fetchData(`https://jsonplaceholder.typicode.com/posts/${id}`),
+    });
+  };
+
+  const createRecipe = (recipe: unknown) => {
+    return axios.post("https://jsonplaceholder.typicode.com/posts", recipe);
+  };
+
+  return {
+    getRecipes,
+    getRecipe,
+    createRecipe,
+  };
 };

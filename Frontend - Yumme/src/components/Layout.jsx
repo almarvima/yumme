@@ -10,7 +10,7 @@ import Footer from './Footer/Footer'
  */
 const Layout = ({ children }) => {
   return (
-    <div className='flex h-screen flex-col gap-8 '>
+    <div className='flex lg:h-screen flex-col gap-8 '>
       <Header />
       <main className='container  flex flex-col  gap-8'>{children}</main>
       <Footer />
