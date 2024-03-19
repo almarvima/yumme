@@ -55,7 +55,7 @@ The application should now be running, with the frontend accessible on http://lo
 We welcome contributions! If you'd like to contribute, please follow these steps:
 
 - Fork the repository.
-- Create a new branch: git swithc -c your-branch-name.
+- Create a new branch: git switch -c your-branch-name.
 - Make your changes and commit them: git commit -am 'Add some feature'
 - Push to the original branch: git push origin your-repo-name/your-branch-name
 - Create the pull request.
