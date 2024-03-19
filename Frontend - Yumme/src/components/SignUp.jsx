@@ -6,6 +6,9 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Label } from "./ui/label";
 import { useForm } from "react-hook-form";
+import { useUser } from "../api";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 
 /**
  * Renders the SignUp component
@@ -39,7 +42,17 @@ const SignUp = () => {
    *
    * @param {Object} data - The form data.
    */
-  const onSubmit = (data) => console.log(data);
+  const { registerUser } = useUser();
+  // const onSubmit = (data) => {
+  //   registerUser(data);
+  //   navigate(Routes.SIGN_IN);
+  // };
+
+  const { mutate: onSubmit } = useMutation({
+    mutationFn: (values) =>
+      axios.post("https://jsonplaceholder.typicode.com/users", values),
+    onSuccess: () => {},
+  });
 
   return (
     <div className="min-h-screen flex flex-col items-center pt-8 sm:pt-16">
@@ -63,6 +76,7 @@ const SignUp = () => {
               type="text"
               placeholder="joe_doe"
               className="w-full"
+              defaultValue={"test"}
             />
             {errors.username?.type === "required" && (
               <p role="alert" className="text-destructive">
@@ -78,6 +92,7 @@ const SignUp = () => {
               First Name
             </Label>
             <Input
+              defaultValue={"test"}
               aria-invalid={errors.firstName ? "true" : "false"}
               {...register("firstName", { required: true })}
               id="firstName"
@@ -99,6 +114,7 @@ const SignUp = () => {
               Last Name
             </Label>
             <Input
+              defaultValue={"test"}
               aria-invalid={errors.lastName ? "true" : "false"}
               {...register("lastName", { required: true })}
               id="lastName"
@@ -120,6 +136,7 @@ const SignUp = () => {
               Email Address
             </Label>
             <Input
+              defaultValue={"test@test.com"}
               aria-invalid={errors.email ? "true" : "false"}
               {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
               id="email"
@@ -141,6 +158,7 @@ const SignUp = () => {
               Password
             </Label>
             <Input
+              defaultValue={"test"}
               aria-invalid={errors.password ? "true" : "false"}
               {...register("password", { required: true })}
               id="password"

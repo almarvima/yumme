@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
-import { getRecipes } from "../../api";
+import { useRecipes } from "../../api";
 import RecipeCard from "./RecipeCard";
 
 const mockRecipes = [
@@ -50,7 +50,8 @@ const mockRecipes = [
 
 const Recipes = () => {
   // Ejemplo de implementación de useQuery
-  const { data: recipes, isLoading, isError } = getRecipes();
+  const { getRecipes } = useRecipes();
+  const { data: recipes, isLoading } = getRecipes();
 
   return (
     <section className="py-8">

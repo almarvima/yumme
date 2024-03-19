@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 /**
@@ -12,10 +12,7 @@ import axios from "axios";
  */
 
 const fetchData = async (url: string) => {
-  console.log("🚀 ~ url:", url);
-
   const { data } = await axios.get(url);
-
   return data;
 };
 
@@ -43,5 +40,32 @@ export const useRecipes = () => {
     getRecipes,
     getRecipe,
     createRecipe,
+  };
+};
+
+export const useUser = () => {
+  const getUser = (id: string) => {
+    return useQuery({
+      queryKey: ["user", id],
+      queryFn: () =>
+        fetchData(`https://jsonplaceholder.typicode.com/users/${id}`),
+    });
+  };
+
+  const registerUser = (user) => {
+    console.log(user);
+
+    return useMutation({
+      mutationFn: () =>
+        axios.post("https://jsonplaceholder.typicode.com/users", user),
+      onSuccess: () => {
+        console.log("User registered");
+      },
+    });
+  };
+
+  return {
+    getUser,
+    registerUser,
   };
 };
