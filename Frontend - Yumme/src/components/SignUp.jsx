@@ -42,11 +42,6 @@ const SignUp = () => {
    *
    * @param {Object} data - The form data.
    */
-  const { registerUser } = useUser();
-  // const onSubmit = (data) => {
-  //   registerUser(data);
-  //   navigate(Routes.SIGN_IN);
-  // };
 
   const { mutate: onSubmit } = useMutation({
     mutationFn: (values) =>
