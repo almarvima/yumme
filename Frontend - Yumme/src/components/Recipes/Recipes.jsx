@@ -1,3 +1,4 @@
+import { getRecipes } from "../../api";
 import RecipeCard from "./RecipeCard";
 
 const mockRecipes = [
@@ -46,10 +47,16 @@ const mockRecipes = [
 ];
 
 const Recipes = () => {
+  // Ejemplo de implementación de useQuery
+  const { data, isLoading, isError } = getRecipes();
+  console.log("🚀 ~ Recipes ~ data:", data)
+
   return (
     <section className="py-8">
       <div className="grid grid-cols-1 gap-y-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-x-8 md:gap-y-16 gap-4">
-        {mockRecipes.map((recipe) => (
+        
+        
+        {data && data.recipes.map((recipe) => (
           <RecipeCard
             id={recipe.id}
             title={recipe.title}

@@ -1,13 +1,13 @@
 import React from 'react'
 
-import { Phone } from 'lucide-react'
+import { Instagram, Phone } from 'lucide-react'
 import { Mail } from 'lucide-react'
 import { MapPin } from 'lucide-react'
 
 import { Linkedin } from 'lucide-react'
 import { Youtube } from 'lucide-react'
 import { Twitter } from 'lucide-react'
-import { Instagram } from 'lucide-react'
+
 import { Facebook } from 'lucide-react'
 
 /**
