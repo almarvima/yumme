@@ -22,7 +22,13 @@ const SignUp = () => {
       <div className='w-full max-w-xl'>
         <form className='bg-white shadow-md rounded px-10 pt-6 pb-10 mb-8' onSubmit={handleSubmit}>
           <div className='mb-4'>
-            <h1 className='text-center md:text-6xl font-bold mb-8'>Sign Up</h1>
+            <h1 className='text-center md:text-6xl font-bold mb-8'>Sign In</h1>
+            <label className='block text-gray-700 text-lg font-bold mb-2 font-sans' htmlFor='username'>
+              User Name
+            </label>
+            <Input id='username' type='text' placeholder='User Name' className='w-full' />
+          </div>
+          <div className='mb-4'>
             <label className='block text-gray-700 text-lg font-bold mb-2 font-sans' htmlFor='firstName'>
               First Name
             </label>
