@@ -42,30 +42,3 @@ export const useRecipes = () => {
     createRecipe,
   };
 };
-
-export const useUser = () => {
-  const getUser = (id: string) => {
-    return useQuery({
-      queryKey: ["user", id],
-      queryFn: () =>
-        fetchData(`https://jsonplaceholder.typicode.com/users/${id}`),
-    });
-  };
-
-  const registerUser = (user) => {
-    console.log(user);
-
-    return useMutation({
-      mutationFn: () =>
-        axios.post("https://jsonplaceholder.typicode.com/users", user),
-      onSuccess: () => {
-        console.log("User registered");
-      },
-    });
-  };
-
-  return {
-    getUser,
-    registerUser,
-  };
-};

@@ -18,6 +18,9 @@ const Header = () => {
 
         <div className="gap-4 hidden w-full justify-between items-center md:flex">
           <div className="flex flex-col w-full  md:flex-row gap-8 md:justify-center md:text-lg">
+
+
+            {/* TODO: IMPLEMENTAR NAVLINK EN EL SPRINT 3 */}
             {menuItems.map((item, index) => (
               <Link
                 key={index}

@@ -9,7 +9,12 @@ import Contact from '../components/Contact'
 import { Routes } from '../constants'
 
 
-
+/**
+ * The router configuration for the application.
+ * @type {BrowserRouter}
+ 
+  * @see https://reactrouter.com/en/6.22.3/routers/create-browser-router
+ */
 export const router = createBrowserRouter([
   {
     path: Routes.HOME,
