@@ -8,6 +8,8 @@ import About from '../components/About'
 import Contact from '../components/Contact'
 import { Routes } from '../constants'
 
+
+
 export const router = createBrowserRouter([
   {
     path: Routes.HOME,

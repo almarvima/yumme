@@ -7,9 +7,9 @@ import React from 'react'
 const About = () => {
   return (
     <div className='container mx-auto px-4 py-8'>
-      <div className='flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0'>
+      <div className='flex flex-col md:flex-row items-center justify-between gap-8'>
         <div className='md:w-1/2'>
-          <img src='/yumMe_logo.webp' alt='About Us' className='rounded-full shadow-lg' />
+          <img src='/yumMe_logo.webp' alt='About Us' className='rounded-full shadow-lg size-96' />
         </div>
         <div className='md:w-1/2 md:pl-8'>
           <h1 className='text-3xl font-bold text-gray-800 mb-4'>About Us</h1>

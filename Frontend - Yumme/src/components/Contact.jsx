@@ -16,17 +16,17 @@ import { Facebook } from 'lucide-react'
  */
 const Contact = () => {
   return (
-    <div className='container mx-auto p-4'>
-      <div className='flex flex-wrap items-center justify-center'>
+    <>
+      <div className='flex flex-wrap lg:flex-nowrap items-center gap-8 justify-center'>
         {/* Contact Image */}
-        <div className='w-full sm:w-1/2 p-4'>
-          <img src='./contact_img.webp' alt='Contact' className='rounded-full shadow-md' />
+        <div className=''>
+          <img src='./contact_img.webp' alt='Contact' className='rounded-full object-cover shadow-md sm:size-96' />
         </div>
 
         {/* Contact Information */}
-        <div className='w-full sm:w-1/2 p-4'>
+        <div className='flex flex-col'>
           <h2 className='text-5xl font-bold mb-4'>Get in Touch</h2>
-          <p className='mb-4'>Whether you have a question about our services, pricing, or anything else, our team is ready to answer all your questions.</p>
+          <p className='mb-4 text-pretty'>Whether you have a question about our services, pricing, or anything else, our team is ready to answer all your questions.</p>
           <div className='space-y-3'>
             <div className='flex items-center'>
               <Phone height={'40'} width={'40'} />
@@ -63,7 +63,7 @@ const Contact = () => {
           </a>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

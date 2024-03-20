@@ -1,9 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
-import { menuItems } from '../../constants/index.jsx';
-import BurgerMenu from './BurgerMenu.jsx';
-import HeadersButtons from './HeaderButtons.jsx';
+import { menuItems } from "../../constants/";
+import BurgerMenu from "./BurgerMenu.jsx";
+import HeadersButtons from "./HeaderButtons.jsx";
 
 const Header = () => {
   // get from local storage token
@@ -12,9 +12,9 @@ const Header = () => {
   return (
     <header className="w-full  flex flex-col shadow-sm bg-teal-100 ">
       <div className=" flex justify-between gap-4  items-center p-8 container ">
-        <div className="">
+        <Link to={"/"}>
           <img src="/logo.png" className="w-32 rounded-xl" alt="app logo" />
-        </div>
+        </Link>
 
         <div className="gap-4 hidden w-full justify-between items-center md:flex">
           <div className="flex flex-col w-full  md:flex-row gap-8 md:justify-center md:text-lg">

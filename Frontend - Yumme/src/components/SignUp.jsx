@@ -1,14 +1,14 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Routes } from "../constants";
-
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
-import { Label } from "./ui/label";
+import { useToast } from "@/components/ui/use-toast";
+import { BadgeCheck } from "lucide-react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useUser } from "../api";
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+
+import { useAuth } from "../auth";
+import { Routes } from "../constants";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 
 /**
  * Renders the SignUp component
@@ -16,15 +16,20 @@ import axios from "axios";
  */
 const SignUp = () => {
   const navigate = useNavigate();
+ 
 
-  /* The `useForm` hook from the `react-hook-form` library is being used to create a form with the
+
+  const { userIsAuthenticated, useFormAuth } = useAuth();
+
+  useEffect(() => {
+    userIsAuthenticated() && navigate("/");
+  }, [navigate, userIsAuthenticated]);
+
+  /**
+   * The `useForm` hook from the `react-hook-form` library is being used to create a form with the
   following properties:
-  - `register` is a function that registers input fields to the form. It is used to collect the
-  values of the input fields when the form is submitted.
-  - `handleSubmit` is a function that is used to handle the form submission.
-  - `watch` is a function that watches the input fields and returns their values.
-  - `formState` is an object that contains the state of the form, including any errors. */
-
+    @see https://react-hook-form.com/docs
+   */
   const {
     register,
     handleSubmit,
@@ -35,18 +40,24 @@ const SignUp = () => {
   /* The `watch` function is used to watch the input fields and return their values. The `watch` function
   is used to get the values of the `password` and `confirmPassword` input fields. */
 
-  const password = watch("password");
+  const password = watch("pwd");
 
   /**
-   * Handles the form submission.
-   *
-   * @param {Object} data - The form data.
+   * Handles form submission for user registration.
+   * @see useFormAuth
+   * @param {function} onSubmit - The submit function provided by the useFormAuth hook.
+   * @returns {void}
    */
-
-  const { mutate: onSubmit } = useMutation({
-    mutationFn: (values) =>
-      axios.post("https://jsonplaceholder.typicode.com/users", values),
-    onSuccess: () => {},
+  const { mutate: onSubmit } = useFormAuth(Routes.REGISTER, {
+    successTitle: (
+      <div className="flex  items-center  gap-2">
+        <BadgeCheck color="#000000" />
+        <span className="">Welcome!</span>
+      </div>
+    ),
+    successDescription: "You signed in successfully!",
+    errorDescription:
+      "It seems there is already an account with this Username.",
   });
 
   return (
@@ -60,20 +71,20 @@ const SignUp = () => {
             <h1 className="text-center md:text-6xl font-bold mb-8">Sign In</h1>
             <Label
               className="block text-gray-700 text-lg font-bold mb-2 font-sans"
-              htmlFor="username"
+              htmlFor="userName"
             >
               User Name
             </Label>
             <Input
-              {...register("username", { required: true })}
-              aria-invalid={errors.username ? "true" : "false"}
-              id="username"
+              {...register("userName", { required: true })}
+              aria-invalid={errors.userName ? "true" : "false"}
+              id="userName"
               type="text"
               placeholder="joe_doe"
               className="w-full"
               defaultValue={"test"}
             />
-            {errors.username?.type === "required" && (
+            {errors.userName?.type === "required" && (
               <p role="alert" className="text-destructive">
                 The username is required
               </p>
@@ -82,15 +93,15 @@ const SignUp = () => {
           <div className="mb-4">
             <Label
               className="block text-gray-700 text-lg font-bold mb-2 font-sans"
-              htmlFor="firstName"
+              htmlFor="name"
             >
               First Name
             </Label>
             <Input
               defaultValue={"test"}
-              aria-invalid={errors.firstName ? "true" : "false"}
-              {...register("firstName", { required: true })}
-              id="firstName"
+              aria-invalid={errors.name ? "true" : "false"}
+              {...register("name", { required: true })}
+              id="name"
               type="text"
               placeholder="Joe"
               className="w-full"
@@ -155,8 +166,8 @@ const SignUp = () => {
             <Input
               defaultValue={"test"}
               aria-invalid={errors.password ? "true" : "false"}
-              {...register("password", { required: true })}
-              id="password"
+              {...register("pwd", { required: true })}
+              id="pwd"
               type="password"
               placeholder="*************"
               className="w-full"

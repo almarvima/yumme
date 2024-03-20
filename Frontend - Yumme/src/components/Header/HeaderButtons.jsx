@@ -1,24 +1,39 @@
-import { User } from "lucide-react";
+import { LogOut, User } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 import { Routes } from "../../constants";
 import { cn } from "../../lib/utils";
-import { buttonVariants } from "../ui/button";
+import { Button, buttonVariants } from "../ui/button";
+import { useAuth } from "../../auth";
 
 const HeaderButtons = () => {
+  const { userIsAuthenticated, logOut } = useAuth();
+  
+
   return (
-    <div className="flex py-4 md:py-0 flex-col md:flex-row gap-2 md:gap-4">
-      <Link
-        to={Routes.SIGN_IN}
-        className={cn(buttonVariants({ variant: "outline" }))}
-      >
-        <User height={"20"} />
-        Sign In
-      </Link>
-      <Link to={Routes.SIGN_UP} className={cn(buttonVariants())}>
-        Sign Up
-      </Link>
-    </div>
+    <>
+      {userIsAuthenticated() ? (
+        <div className="flex py-4 md:py-0 flex-col md:flex-row gap-2 md:gap-4">
+          <Button onClick={logOut} className="flex gap-2" variant={"outline"}>
+           Logout
+            <LogOut />
+          </Button>
+        </div>
+      ) : (
+        <div className="flex py-4 md:py-0 flex-col md:flex-row gap-2 md:gap-4">
+          <Link
+            to={Routes.SIGN_IN}
+            className={cn(buttonVariants({ variant: "outline" }))}
+          >
+            <User height={"20"} />
+            Sign In
+          </Link>
+          <Link to={Routes.SIGN_UP} className={cn(buttonVariants())}>
+            Sign Up
+          </Link>
+        </div>
+      )}
+    </>
   );
 };
 

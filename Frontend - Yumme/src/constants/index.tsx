@@ -24,7 +24,9 @@ export const Routes = {
   CONTACT: "/contact",
   SIGN_IN: "/sign-in",
   SIGN_UP: "/sign-up",
-  RECIPES: "/recipes", // ? Needed
+  RECIPES: "/recipes",
+  LOGIN: "/api/login",
+  REGISTER: "/api/register",
 };
 
 export const menuItems = [
