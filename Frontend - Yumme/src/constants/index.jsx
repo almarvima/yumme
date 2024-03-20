@@ -36,7 +36,7 @@ export const menuItems = [
   {
     icon: <Apple height={ICON_SIZE} />,
     label: "Recipes",
-    to: Routes.RECIPES,
+    to: Routes.RECIPE,
   },
   {
     icon: <MessageCircleQuestion height={ICON_SIZE} />,
