@@ -10,18 +10,18 @@ import {Badge} from "../ui/badge";
  */
 const RecipeCard = ({ id, image, title, description }) => {
   return (
-    <div key={id} className=" flex flex-col gap-2   rounded-md">
+    <article key={id} className=" flex flex-col gap-2 w-full  rounded-md">
       <img
-        src={image}
+        src={image || "https://via.placeholder.com/260"}
         alt={title}
-        className="w-full h-48 object-cover rounded-md"
+        className="w-full  object-cover rounded-md aspect-square"
       />
       <h2 className="text-lg border-none font-semibold">{title}</h2>
       <p>{description}</p>
       <Badge variant={"secondary"} className="w-min">
         Category
       </Badge>
-    </div>
+    </article>
   );
 };
 
