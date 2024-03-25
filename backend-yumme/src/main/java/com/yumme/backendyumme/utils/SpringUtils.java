@@ -26,6 +26,11 @@ public class SpringUtils {
         return new ResponseEntity<>(respuesta, HttpStatus.UNAUTHORIZED);
     }
 
+    public static ResponseEntity<JsonResponse> userAlreadyExist(){
+        JsonResponse response = new JsonResponse(HttpStatus.BAD_REQUEST.value(), "L'usuari ja esta registrat");
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
 
 
     public static class JsonResponse {

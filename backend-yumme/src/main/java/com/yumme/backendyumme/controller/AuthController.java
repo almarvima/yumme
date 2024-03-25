@@ -6,6 +6,7 @@ import com.yumme.backendyumme.auth.Response.AuthResponse;
 import com.yumme.backendyumme.domain.User;
 import com.yumme.backendyumme.repository.UserRepository;
 import com.yumme.backendyumme.service.UserService;
+import com.yumme.backendyumme.utils.SpringUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,7 +36,7 @@ public class AuthController {
         var test = userRepository.findByUsername(request.getUserName());
 
         if(test.isPresent()){
-            return ResponseEntity.notFound().build();
+            return SpringUtils.userAlreadyExist();
         }
 
         return ResponseEntity.ok(userService.addUser(request));
