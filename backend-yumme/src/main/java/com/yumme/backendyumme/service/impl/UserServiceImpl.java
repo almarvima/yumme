@@ -20,20 +20,18 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserRepository userRepository;
-
+    private final UserRepository userRepository;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
     @Override
-    public AuthResponse addUser(RegisterRequest request) {
+    public AuthResponse createUser(RegisterRequest request) {
 
         User user = User.builder()
                 .username(request.getUserName())
                 .name(request.getName())
-                .password(passwordEncoder.encode(request.getPwd()))
+                .password(passwordEncoder.encode(request.getPassword()))
                 .last_name(request.getLastName())
                 .email(request.getEmail())
                 .role(Role.USER)

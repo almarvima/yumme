@@ -48,7 +48,7 @@ public class User implements UserDetails {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "recipe_favorite", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "recipe_id"))
     private Set<Recipe> recipesSet = new HashSet<>();
-    @OneToMany( mappedBy ="owner_id" ,cascade = CascadeType.PERSIST)
+    @OneToMany( mappedBy = "ownerId",cascade = CascadeType.PERSIST)
     private List<Recipe> recipesList;
 
     @Temporal(TemporalType.TIMESTAMP)

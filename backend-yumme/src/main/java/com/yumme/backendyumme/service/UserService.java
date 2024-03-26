@@ -5,7 +5,7 @@ import com.yumme.backendyumme.auth.Request.RegisterRequest;
 import com.yumme.backendyumme.auth.Response.AuthResponse;
 
 public interface UserService {
-    AuthResponse addUser(RegisterRequest request);
+    AuthResponse createUser(RegisterRequest request);
 
     AuthResponse login(LoginRequest request);
 }

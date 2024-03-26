@@ -6,28 +6,29 @@ import org.springframework.http.ResponseEntity;
 
 public class SpringUtils {
 
-    public static ResponseEntity<JsonResponse> retornarRecetaCreada() {
-        JsonResponse respuesta = new JsonResponse(HttpStatus.OK.value(), "Receta creada correctamente");
-        return new ResponseEntity<>(respuesta, HttpStatus.OK);
+    public static ResponseEntity<JsonResponse> returnCreatedRecipe() {
+        JsonResponse response = new JsonResponse(HttpStatus.OK.value(), "RECIPE_CREATED");
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
-    public static ResponseEntity<JsonResponse> errorReceta(){
-        JsonResponse respuesta = new JsonResponse(HttpStatus.BAD_REQUEST.value(), "Error al crear receta");
-        return new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
+
+    public static ResponseEntity<JsonResponse> returnErrorRecipe(){
+        JsonResponse response = new JsonResponse(HttpStatus.BAD_REQUEST.value(), "RECIPE_CREATION_ERROR");
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
      //TODO: Falta afegir més respostes, es podría separar la clase JsonResponse
 
     public static ResponseEntity<JsonResponse> invalidToken(){
-        JsonResponse respuesta = new JsonResponse(HttpStatus.UNAUTHORIZED.value(), "Token no valid");
-        return new ResponseEntity<>(respuesta, HttpStatus.UNAUTHORIZED);
+        JsonResponse response = new JsonResponse(HttpStatus.UNAUTHORIZED.value(), "INVALID_TOKEN");
+        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
     }
 
-    public static ResponseEntity<JsonResponse> usuerNotExist(){
-        JsonResponse respuesta = new JsonResponse(HttpStatus.UNAUTHORIZED.value(), "L'usuari no existeix");
-        return new ResponseEntity<>(respuesta, HttpStatus.UNAUTHORIZED);
+    public static ResponseEntity<JsonResponse> userNotExist(){
+        JsonResponse response = new JsonResponse(HttpStatus.UNAUTHORIZED.value(), "USER_NOT_EXIST");
+        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
     }
 
     public static ResponseEntity<JsonResponse> userAlreadyExist(){
-        JsonResponse response = new JsonResponse(HttpStatus.BAD_REQUEST.value(), "L'usuari ja esta registrat");
+        JsonResponse response = new JsonResponse(HttpStatus.BAD_REQUEST.value(), "USER_ALREADY_EXIST");
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
@@ -35,11 +36,11 @@ public class SpringUtils {
 
     public static class JsonResponse {
         private int status;
-        private String mensaje;
+        private String code;
 
-        public JsonResponse(int status, String mensaje) {
+        public JsonResponse(int status, String code) {
             this.status = status;
-            this.mensaje = mensaje;
+            this.code = code;
         }
 
         public int getStatus() {
@@ -50,13 +51,14 @@ public class SpringUtils {
             this.status = status;
         }
 
-        public String getMensaje() {
-            return mensaje;
+        public String getCode() {
+            return code;
         }
 
-        public void setMensaje(String mensaje) {
-            this.mensaje = mensaje;
+        public void setCode(String code) {
+            this.code = code;
         }
     }
+
 }
 

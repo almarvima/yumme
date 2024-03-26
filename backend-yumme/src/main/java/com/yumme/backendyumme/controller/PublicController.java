@@ -13,16 +13,17 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/public/")
 @RequiredArgsConstructor
-public class HomeController {
+public class PublicController {
 
     @Autowired
     private RecipeService recipeService;
 
-    @GetMapping("home")
+    @GetMapping("recipes")
     public ResponseEntity<List<Recipe>> GetAllRecipe (){
         List<Recipe> recipes = recipeService.getAllRecipes();
         return ResponseEntity.ok(recipes);
     }
+
 }
