@@ -1,6 +1,5 @@
 package com.yumme.backendyumme.dto.request;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,10 +13,10 @@ public class RecipeRequest {
 
     private String title;
     private String description;
-    private Integer cooking_time;
-    private Integer per_person;
+    private Integer cookingTime;
+    private Integer perPerson;
     private String ingredients;
-    private String receipe_category;
+    private String recipeCategory;
 
 }
 

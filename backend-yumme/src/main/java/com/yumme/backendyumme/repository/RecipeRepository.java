@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface RecipeRepository extends JpaRepository<Recipe,Integer> {
 
-    @Query("SELECT r FROM Recipe r WHERE r.owner_id.id = :userId")
+    @Query("SELECT r FROM Recipe r WHERE r.ownerId.id = :userId")
     List<Recipe> findByOwnerId(Long userId);
 }

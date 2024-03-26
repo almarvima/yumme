@@ -15,27 +15,27 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RecipeServiceImpl implements RecipeService {
 
-    @Autowired
-    private RecipeRepository recipeRepository;
+    private final RecipeRepository recipeRepository;
+
     @Override
     public boolean createRecipe(RecipeRequest request, User user) {
 
-       Recipe recipe = Recipe.builder()
-               .title(request.getTitle())
-               .description(request.getDescription())
-               .owner_id(user)
-               .cooking_time(request.getCooking_time())
-               .per_person(request.getPer_person())
-               .ingredients(request.getIngredients())
-               .receipe_category(request.getReceipe_category())
-               .build();
+        Recipe recipe = Recipe.builder()
+                .title(request.getTitle())
+                .description(request.getDescription())
+                .ownerId(user)
+                .cookingTime(request.getCookingTime())
+                .perPerson(request.getPerPerson())
+                .ingredients(request.getIngredients())
+                .receipeCategory(request.getRecipeCategory())
+                .build();
 
-       recipe.onCreate();
-       recipe.onUpdate();
+        recipe.onCreate();
+        recipe.onUpdate();
 
         Recipe savedRecipe = recipeRepository.save(recipe);
 
-       return savedRecipe != null;
+        return savedRecipe != null;
     }
 
     @Override
