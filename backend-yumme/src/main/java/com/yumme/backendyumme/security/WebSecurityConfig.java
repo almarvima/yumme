@@ -28,6 +28,7 @@ public class WebSecurityConfig {
                         authRequest
                                 .requestMatchers("/auth/**").permitAll()
                                 .requestMatchers("/public/**").permitAll()
+                                .requestMatchers("/category/**").permitAll()
                                 .anyRequest().authenticated()
                 ).sessionManagement(sessionManager->
                         sessionManager

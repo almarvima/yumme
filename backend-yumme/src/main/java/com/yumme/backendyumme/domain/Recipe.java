@@ -46,14 +46,16 @@ public class Recipe {
     @Column(length = 1024, nullable = false)
     private String ingredients;
 
-    @Column(length = 100, nullable = false)
-    private String receipeCategory;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    @JsonIgnore
+    private Category receipeCategory;
 
     private Date created_at;
 
     private Date updated_at;
 
-    public Recipe(Long id, User ownerId, String title, String description, Integer cookingTime, Integer perPerson, String ingredients, String receipeCategory, Date created_at) {
+    public Recipe(Long id, User ownerId, String title, String description, Integer cookingTime, Integer perPerson, String ingredients, Category receipeCategory, Date created_at) {
         this.id = id;
         this.ownerId = ownerId;
         this.title = title;
