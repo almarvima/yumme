@@ -25,8 +25,8 @@ export const Routes = {
   SIGN_IN: "/sign-in",
   SIGN_UP: "/sign-up",
   RECIPES: "/recipes",
-  LOGIN: "/api/login",
-  REGISTER: "/api/register",
+  LOGIN: "/auth/login",
+  REGISTER: "/auth/register",
 };
 
 export const menuItems = [

@@ -38,7 +38,7 @@ const SignUp = () => {
   /* The `watch` function is used to watch the input fields and return their values. The `watch` function
   is used to get the values of the `password` and `confirmPassword` input fields. */
 
-  const password = watch("pwd");
+  const password = watch("password");
 
   /**
    * Handles form submission for user registration.
@@ -164,8 +164,8 @@ const SignUp = () => {
             <Input
               defaultValue={"test"}
               aria-invalid={errors.password ? "true" : "false"}
-              {...register("pwd", { required: true })}
-              id="pwd"
+              {...register("password", { required: true })}
+              id="password"
               type="password"
               placeholder="*************"
               className="w-full"

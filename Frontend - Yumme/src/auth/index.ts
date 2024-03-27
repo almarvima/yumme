@@ -1,9 +1,10 @@
 import { useToast } from "@/components/ui/use-toast";
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 
 import { Routes } from "../constants";
+import { SERVER_MESSAGES } from "@/config";
 
 /**
  * Custom hook to handle authentication
@@ -61,10 +62,14 @@ export const useAuth = () => {
           variant: "success",
         });
       },
-      onError: () => {
+      onError: (err: AxiosError) => {
+        const { code } = err.response?.data as {
+          code: keyof typeof SERVER_MESSAGES;
+        };
+
         toast({
           title: "Oh no!",
-          description: errorDescription,
+          description: SERVER_MESSAGES[code],
           variant: "destructive",
         });
       },

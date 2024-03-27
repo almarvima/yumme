@@ -86,7 +86,7 @@ const SignIn = () => {
               placeholder="*************"
               className="w-full"
             />
-            {errors.pwd?.type === "required" && (
+            {errors.password?.type === "required" && (
               <p role="alert" className="text-destructive">
                 Fill the password
               </p>
