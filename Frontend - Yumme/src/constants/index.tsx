@@ -27,6 +27,7 @@ export const Routes = {
   RECIPES: "/recipes",
   LOGIN: "/auth/login",
   REGISTER: "/auth/register",
+  CREATE_RECIPE: "/create-recipe",
 };
 
 export const menuItems = [
