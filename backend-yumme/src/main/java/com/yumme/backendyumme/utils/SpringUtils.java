@@ -32,6 +32,10 @@ public class SpringUtils {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
+    public static ResponseEntity<JsonResponse> wrongPassword() {
+        JsonResponse response = new JsonResponse(HttpStatus.UNAUTHORIZED.value(), "WRONG_PASSWORD");
+        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+    }
 
 
     public static class JsonResponse {
