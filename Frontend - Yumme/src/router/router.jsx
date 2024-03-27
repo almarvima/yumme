@@ -8,6 +8,7 @@ import About from "../components/About";
 import Contact from "../components/Contact";
 import { Routes } from "../constants";
 import ProtectedRoutes from "../components/ProtectedRoutes";
+import CreateRecipe from "../components/Recipes/CreateRecipe";
 
 /**
  * The router configuration for the application.
@@ -49,12 +50,11 @@ export const router = createBrowserRouter([
 
       // Protected routes
       {
-        
         element: <ProtectedRoutes />,
         children: [
           {
             path: Routes.CREATE_RECIPE,
-            element: <div>create recipe</div>,
+            element: <CreateRecipe />,
           },
         ],
       },
