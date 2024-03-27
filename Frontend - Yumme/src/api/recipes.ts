@@ -33,7 +33,16 @@ export const useRecipes = () => {
   };
 
   const createRecipe = (recipe: unknown) => {
-    return axios.post("https://jsonplaceholder.typicode.com/posts", recipe);
+    return useMutation({
+      mutationKey: ["createRecipe"],
+      mutationFn: async (recipe: unknown) => {
+        const { data } = await axios.post(
+          "https://jsonplaceholder.typicode.com/posts",
+          recipe
+        );
+        return data;
+      },
+    });
   };
 
   return {
