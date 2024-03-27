@@ -67,9 +67,10 @@ export const useAuth = () => {
           code: keyof typeof SERVER_MESSAGES;
         };
 
+
         toast({
           title: "Oh no!",
-          description: SERVER_MESSAGES[code],
+          description: SERVER_MESSAGES[code] || "An error occurred.",
           variant: "destructive",
         });
       },
