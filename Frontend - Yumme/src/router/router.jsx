@@ -7,7 +7,7 @@ import SignUp from "../components/SignUp";
 import About from "../components/About";
 import Contact from "../components/Contact";
 import { Routes } from "../constants";
-import ProtectedRoutes from "../components/ProtectedRoutes";
+import PrivateRoutes from "../components/PrivateRoutes";
 import CreateRecipe from "../components/Recipes/CreateRecipe";
 
 /**
@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
     path: Routes.HOME,
     element: <App />,
 
-    errorElement: <div>Not found</div>,
+    errorElement: <div>Not found </div>,
     children: [
       {
         index: true,
@@ -48,14 +48,15 @@ export const router = createBrowserRouter([
         element: <Contact />,
       },
 
-      // Protected routes
+      // Private routes
       {
-        element: <ProtectedRoutes />,
+        element: <PrivateRoutes />,
         children: [
           {
             path: Routes.CREATE_RECIPE,
             element: <CreateRecipe />,
           },
+          // More private routes can be added here
         ],
       },
     ],
