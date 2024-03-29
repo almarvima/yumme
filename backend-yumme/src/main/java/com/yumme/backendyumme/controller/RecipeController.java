@@ -9,6 +9,7 @@ import com.yumme.backendyumme.service.RecipeService;
 import com.yumme.backendyumme.utils.SpringUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -45,9 +46,9 @@ public class RecipeController {
         boolean isRecipeCreated = recipeService.createRecipe(request, user);
 
         if (isRecipeCreated) {
-            return SpringUtils.returnCreatedRecipe();
+            return SpringUtils.recipeCreated();
         } else {
-            return SpringUtils.returnErrorRecipe();
+            return SpringUtils.errorCreationRecipe();
         }
     }
 
@@ -79,6 +80,38 @@ public class RecipeController {
         }
 
     }
+
+    @DeleteMapping("recipe/{id}")
+    public ResponseEntity<?> deleteRecipe(
+            HttpServletRequest header,
+            @PathVariable int id
+    ) {
+        ValidationResponse validationResponse = validateTokenAndUser(header);
+        if (!validationResponse.isValid()) {
+            return SpringUtils.invalidToken();
+        }
+
+        String userName = validationResponse.getUserName();
+        Optional<User> userOptional = userRepository.findByUsername(userName);
+
+        if (userOptional.isEmpty()) {
+            return SpringUtils.userNotExist();
+        }
+
+        User user = userOptional.get();
+
+        ResponseEntity<?> response;
+
+        try {
+            response = recipeService.deleteRecipe(id, user);
+        } catch (Exception e) {
+            response = SpringUtils.errorRecipeDeleted();
+        }
+
+        return response;
+
+    }
+
 
     //TODO: Falta fer elDeleteRecipe i UpdateRecipe
     /*

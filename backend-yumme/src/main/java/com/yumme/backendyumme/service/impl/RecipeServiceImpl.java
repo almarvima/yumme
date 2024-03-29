@@ -7,8 +7,9 @@ import com.yumme.backendyumme.dto.request.RecipeRequest;
 import com.yumme.backendyumme.repository.CategoryRepository;
 import com.yumme.backendyumme.repository.RecipeRepository;
 import com.yumme.backendyumme.service.RecipeService;
+import com.yumme.backendyumme.utils.SpringUtils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -49,7 +50,6 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public List<Recipe> getAllRecipes() {
-
         return recipeRepository.findAll();
     }
 
@@ -57,4 +57,25 @@ public class RecipeServiceImpl implements RecipeService {
     public List<Recipe> getRecipesById(Long id) {
         return recipeRepository.findByOwnerId(id);
     }
+
+    @Override
+    public ResponseEntity<?> deleteRecipe(int recipeId, User user) {
+
+        Optional<Recipe> recipeOptional = recipeRepository.findById(recipeId);
+
+        if (recipeOptional.isEmpty()) {
+            return SpringUtils.recipeNotExist();
+        }
+
+        Recipe recipe = recipeOptional.get();
+
+        if (recipe.getOwnerId() != user) {
+            return SpringUtils.notOwnerRecipe();
+        } else {
+            recipeRepository.delete(recipe);
+            return SpringUtils.recipeDeleted();
+        }
+
+    }
+
 }
