@@ -16,9 +16,7 @@ public class ValidationResponse {
         return isValid;
     }
 
-    public String getUserName() {
-        return userName;
-    }
+    public String getUserName() { return userName; }
 
     public void setValid(boolean isValid) {
         this.isValid = isValid;
