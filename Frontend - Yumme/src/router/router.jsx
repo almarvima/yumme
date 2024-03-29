@@ -9,6 +9,9 @@ import Contact from "../components/Contact";
 import { Routes } from "../constants";
 import PrivateRoutes from "../components/PrivateRoutes";
 import CreateRecipe from "../components/Recipes/CreateRecipe";
+import UserProfile from "../components/User/UserProfile";
+import UserSettings from "../components/User/UserSettings";
+import UserRecipes from "../components/User/UserRecipes";
 
 /**
  * The router configuration for the application.
@@ -55,6 +58,26 @@ export const router = createBrowserRouter([
           {
             path: Routes.CREATE_RECIPE,
             element: <CreateRecipe />,
+          },
+          {
+            path: Routes.USER_PROFILE,
+            element: <UserProfile />,
+            children: [
+              {
+                index: true,
+                element: <UserRecipes />,
+              },
+
+              {
+                path: Routes.CREATE_RECIPE,
+                element: <CreateRecipe />,
+              },
+
+              {
+                path: Routes.USER_SETTINGS,
+                element: <UserSettings />,
+              },
+            ],
           },
           // More private routes can be added here
         ],

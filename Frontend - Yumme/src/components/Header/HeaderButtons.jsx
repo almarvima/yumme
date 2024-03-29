@@ -6,6 +6,7 @@ import { cn } from "../../lib/utils";
 import { Button, buttonVariants } from "../ui/button";
 import { useAuth } from "../../auth";
 import { Separator } from "../ui/separator";
+import UserDropdown from "./UserDropdown";
 
 const HeaderButtons = () => {
   const { userIsAuthenticated, logOut } = useAuth();
@@ -18,15 +19,7 @@ const HeaderButtons = () => {
         {userIsAuthenticated() ? (
           <>
           
-            <Link to={Routes.CREATE_RECIPE} className={cn(buttonVariants())}>
-              <Plus className="size-5" />
-              New recipe
-            </Link>
-
-            <Button onClick={logOut} className="flex gap-2" variant={"outline"}>
-              Logout
-              <LogOut />
-            </Button>
+            <UserDropdown />
           </>
         ) : (
           <>
