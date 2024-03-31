@@ -1,17 +1,18 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from 'react-router-dom'
 
-import App from "../App";
-import { Home } from "../components/Home";
-import SignIn from "../components/SignIn";
-import SignUp from "../components/SignUp";
-import About from "../components/About";
-import Contact from "../components/Contact";
-import { Routes } from "../constants";
-import PrivateRoutes from "../components/PrivateRoutes";
-import CreateRecipe from "../components/Recipes/CreateRecipe";
-import UserProfile from "../components/User/UserProfile";
-import UserSettings from "../components/User/UserSettings";
-import UserRecipes from "../components/User/UserRecipes";
+import App from '../App'
+import { Home } from '../components/Home'
+import SignIn from '../components/SignIn'
+import SignUp from '../components/SignUp'
+import About from '../components/About'
+import Contact from '../components/Contact'
+import { Routes } from '../constants'
+import PrivateRoutes from '../components/PrivateRoutes'
+import CreateRecipe from '../components/Recipes/CreateRecipe'
+import UserProfile from '../components/User/UserProfile'
+import UserSettings from '../components/User/UserSettings'
+import UserRecipes from '../components/User/UserRecipes'
+import NotFound from '../components/ErrorPages/NotFound'
 
 /**
  * The router configuration for the application.
@@ -28,27 +29,31 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        element: <Home />
       },
       {
         path: Routes.SIGN_IN,
-        element: <SignIn />,
+        element: <SignIn />
       },
       {
         path: Routes.SIGN_UP,
-        element: <SignUp />,
+        element: <SignUp />
       },
       {
         path: Routes.RECIPE,
-        element: <div>Recipe id</div>,
+        element: <div>Recipe id</div>
       },
       {
         path: Routes.ABOUT,
-        element: <About />,
+        element: <About />
       },
       {
         path: Routes.CONTACT,
-        element: <Contact />,
+        element: <Contact />
+      },
+      {
+        path: '*', // Esta ruta capturará cualquier URL que no coincida con las anteriores
+        element: <NotFound />
       },
 
       // Private routes
@@ -57,7 +62,7 @@ export const router = createBrowserRouter([
         children: [
           {
             path: Routes.CREATE_RECIPE,
-            element: <CreateRecipe />,
+            element: <CreateRecipe />
           },
           {
             path: Routes.USER_PROFILE,
@@ -65,23 +70,23 @@ export const router = createBrowserRouter([
             children: [
               {
                 index: true,
-                element: <UserRecipes />,
+                element: <UserRecipes />
               },
 
               {
                 path: Routes.CREATE_RECIPE,
-                element: <CreateRecipe />,
+                element: <CreateRecipe />
               },
 
               {
                 path: Routes.USER_SETTINGS,
-                element: <UserSettings />,
-              },
-            ],
-          },
+                element: <UserSettings />
+              }
+            ]
+          }
           // More private routes can be added here
-        ],
-      },
-    ],
-  },
-]);
+        ]
+      }
+    ]
+  }
+])
