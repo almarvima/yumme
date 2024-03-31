@@ -13,6 +13,8 @@ import UserProfile from '../components/User/UserProfile'
 import UserSettings from '../components/User/UserSettings'
 import UserRecipes from '../components/User/UserRecipes'
 import NotFound from '../components/ErrorPages/NotFound'
+import Forbidden from '../components/ErrorPages/Forbidden'
+import UnexpectedError from '../components/ErrorPages/UnexpectedError'
 
 /**
  * The router configuration for the application.
@@ -25,7 +27,7 @@ export const router = createBrowserRouter([
     path: Routes.HOME,
     element: <App />,
 
-    errorElement: <div>Not found </div>,
+    // errorElement: <div>Not found </div>,
     children: [
       {
         index: true,
@@ -52,10 +54,17 @@ export const router = createBrowserRouter([
         element: <Contact />
       },
       {
-        path: '*', // Esta ruta capturará cualquier URL que no coincida con las anteriores
+        path: Routes.FORBIDDEN,
+        element: <Forbidden />
+      },
+      {
+        path: Routes.ERROR,
+        element: <UnexpectedError />
+      },
+      {
+        path: '*',
         element: <NotFound />
       },
-
       // Private routes
       {
         element: <PrivateRoutes />,
