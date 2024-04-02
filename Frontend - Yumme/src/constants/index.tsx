@@ -29,7 +29,7 @@ export const Routes = {
   REGISTER: "/auth/register",
   CREATE_RECIPE: "create-recipe",
   USER_PROFILE: "/profile",
-  USER_SETTINGS: "settings",
+  USER_SETTINGS: "/profile/settings",
   USER_RECIPES: "my-recipes",
   FORBIDDEN: "/forbidden",
   ERROR: "/error",
