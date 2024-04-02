@@ -3,6 +3,7 @@ package com.yumme.backendyumme.service;
 import com.yumme.backendyumme.domain.Recipe;
 import com.yumme.backendyumme.domain.User;
 import com.yumme.backendyumme.dto.request.RecipeRequest;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -12,4 +13,6 @@ public interface RecipeService {
 
     List<Recipe> getAllRecipes();
     List<Recipe> getRecipesById(Long id);
+
+    ResponseEntity<?> deleteRecipe(int recipeId, User user);
 }

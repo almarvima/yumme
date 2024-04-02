@@ -1,5 +1,6 @@
 package com.yumme.backendyumme.dto.request;
 
+import com.yumme.backendyumme.domain.Category;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

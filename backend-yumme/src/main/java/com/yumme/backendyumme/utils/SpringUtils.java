@@ -6,15 +6,36 @@ import org.springframework.http.ResponseEntity;
 
 public class SpringUtils {
 
-    public static ResponseEntity<JsonResponse> returnCreatedRecipe() {
+    public static ResponseEntity<JsonResponse> recipeCreated() {
         JsonResponse response = new JsonResponse(HttpStatus.OK.value(), "RECIPE_CREATED");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    public static ResponseEntity<JsonResponse> returnErrorRecipe(){
+    public static ResponseEntity<JsonResponse> errorCreationRecipe(){
         JsonResponse response = new JsonResponse(HttpStatus.BAD_REQUEST.value(), "RECIPE_CREATION_ERROR");
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+
+    public static ResponseEntity<JsonResponse> notOwnerRecipe(){
+        JsonResponse response = new JsonResponse(HttpStatus.NOT_FOUND.value(), "NOT_OWNER_RECIPE");
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    public static ResponseEntity<JsonResponse> recipeNotExist(){
+        JsonResponse response = new JsonResponse(HttpStatus.NOT_FOUND.value(), "RECIPE_NOT_EXIST");
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    public static ResponseEntity<JsonResponse> recipeDeleted(){
+        JsonResponse response = new JsonResponse(HttpStatus.OK.value(), "RECIPE_DELETED");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    public static ResponseEntity<JsonResponse> errorRecipeDeleted(){
+        JsonResponse response = new JsonResponse(HttpStatus.OK.value(), "RECIPE_DELETED_ERROR");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
      //TODO: Falta afegir més respostes, es podría separar la clase JsonResponse
 
     public static ResponseEntity<JsonResponse> invalidToken(){
@@ -32,6 +53,10 @@ public class SpringUtils {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
+    public static ResponseEntity<JsonResponse> wrongPassword() {
+        JsonResponse response = new JsonResponse(HttpStatus.UNAUTHORIZED.value(), "WRONG_PASSWORD");
+        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+    }
 
 
     public static class JsonResponse {
