@@ -19,7 +19,7 @@ const ICON_SIZE = "20";
 
 export const Routes = {
   HOME: "/",
-  RECIPE: "/recipe/:id",
+  RECIPE: "/recipes",
   ABOUT: "/about",
   CONTACT: "/contact",
   SIGN_IN: "/sign-in",

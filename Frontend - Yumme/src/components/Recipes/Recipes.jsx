@@ -74,7 +74,9 @@ const Recipes = () => {
               id={recipe.id}
               title={recipe.title}
               description={recipe.description}
-              image={recipe.image}
+              image={recipe.imgUrl}
+              cookingTime={recipe.cookingTime}
+              perPerson={recipe.perPerson}
             />
           ))}
       </div>

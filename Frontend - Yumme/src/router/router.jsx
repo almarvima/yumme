@@ -35,7 +35,7 @@ export const router = createBrowserRouter([
         element: <SignUp />
       },
       {
-        path: Routes.RECIPE,
+        path: `${Routes.RECIPE}/:id`,
         element: <div>Recipe id</div>
       },
       {

@@ -20,7 +20,7 @@ export const useRecipes = () => {
   const getRecipes = () => {
     return useQuery({
       queryKey: ["recipes"],
-      queryFn: () => fetchData("https://jsonplaceholder.typicode.com/posts"),
+      queryFn: () => fetchData("/public/recipes"),
     });
   };
 
