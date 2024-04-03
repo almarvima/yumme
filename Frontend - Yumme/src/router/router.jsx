@@ -7,6 +7,7 @@ import SignUp from '../components/SignUp'
 import About from '../components/About'
 import Contact from '../components/Contact'
 import { Routes } from '../constants'
+import Recipe from '../components/Recipes/Recipe'
 
 
 /**
@@ -36,7 +37,7 @@ export const router = createBrowserRouter([
       },
       {
         path: `${Routes.RECIPE}/:id`,
-        element: <div>Recipe id</div>
+        element: <Recipe />
       },
       {
         path: Routes.ABOUT,
