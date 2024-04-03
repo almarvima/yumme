@@ -1,63 +1,64 @@
 import React from 'react'
 import { useRecipes } from '../../api/recipes'
 import { categories } from '../../constants' // Import the categories from the constants file
+import { useNavigate } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
 
 import { Button } from '../ui/button'
 import { Label } from '../ui/label'
 import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 
 const CreateRecipe = () => {
   const { createRecipe } = useRecipes()
+  const navigate = useNavigate()
+  const { mutate } = createRecipe()
 
-  //  Recoger estos datos de un formulario
-  const mockRecipe = {
-    title: 'Pasta a la bolonyesa',
-    description: '',
-    cookingTime: 20,
-    perPerson: 2,
-    ingredients: 'Macarrons, tomàquet, oli, sal, tomàquet, carn picada',
-    recipeCategory: 'Pasta'
-  }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset
+  } = useForm()
 
-  const { mutate, isSuccess } = createRecipe()
-
-  const handleCreateRecipe = (e) => {
-    e.preventDefault()
-    mutate(mockRecipe, {
-      onSuccess: (data) => {
-        console.log(data)
-      }
-    })
+  const onSubmit = (data) => {
+    mutate(data),
+    reset()
   }
 
   return (
     <section className=' '>
       <div className='bg-white  rounded py-8 flex flex-col gap-4 border-b-none  mb-4'>
         <h2 className=' font-bold text-left no-underline '>New Recipe</h2>
-        <form onSubmit={handleCreateRecipe} className='md:flex md:justify-between'>
+        <form onSubmit={handleSubmit(onSubmit)} className='md:flex md:justify-between'>
           <div className='md:w-1/2 md:pr-4'>
             <div className='mb-4'>
               <Label className='block text-gray-700 text-lg font-bold mb-2' htmlFor='title'>
                 Recipe Title
               </Label>
               <Input
+                {...register('title', { required: true })}
                 id='title'
                 name='title'
                 type='text'
                 // onChange={handleChange}
                 // value={recipe.title}
-                className='shadow appearance-none border rounded w-full mb-8 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                className='shadow appearance-none border rounded w-full  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                 placeholder='Title'
               />
+              {errors.title && (
+                <p role='alert' className='text-destructive'>
+                  Your recipe needs a title
+                </p>
+              )}
             </div>
-            <div className='mb-4'>
+            <div className='mb-4 mt-8'>
               <Label className='block text-gray-700 text-lg font-bold mb-2' htmlFor='description'>
                 Recipe Description
               </Label>
               <Textarea
+                {...register('description', { required: true })}
                 id='description'
                 name='description'
                 // onChange={handleChange}
@@ -65,18 +66,40 @@ const CreateRecipe = () => {
                 className='shadow appearance-none border rounded w-full h-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                 placeholder='Description'
               />
+              {errors.description && (
+                <p role='alert' className='text-destructive'>
+                  This field is required
+                </p>
+              )}
             </div>
             <div className='mb-8 mt-8'>
               <Label className='block text-gray-700 text-lg font-bold mb-2' htmlFor='imageUpload'>
                 Recipe Image
               </Label>
-              <Input
+              {/* <Input
                 id='imageUpload'
                 name='imageUpload'
                 type='file'
                 // onChange={handleImageChange}
                 className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+              /> */}
+              <Input
+                type='text'
+                // {...register('imageUrl', {
+                //   required: 'Image URL is required',
+                //   pattern: {
+                //     value: /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp|svg))/i,
+                //     message: 'Please enter a valid image URL'
+                //   }
+                // })}
+                placeholder='https://example.com/image.jpg'
               />
+              {errors.imageUrl && (
+                <p role='alert' className='text-destructive'>
+                  {errors.imageUrl.message}
+                </p>
+              )}
+              {/* TODO: Add validation for image URL format */}
             </div>
           </div>
           <div className='md:w-1/2 md:pl-4'>
@@ -85,16 +108,23 @@ const CreateRecipe = () => {
                 Cooking Time
               </Label>
               <Input
+                {...register('cookingTime', { pattern: /^[0-9]*$/ })}
                 id='cookingTime'
                 name='cookingTime'
                 type='text'
                 // onChange={handleChange}
                 // value={recipe.cookingTime}
-                className='shadow appearance-none border rounded w-full mb-8  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                 placeholder='Cooking Time'
               />
+              {errors.cookingTime && <p className='text-red-600'>Please enter a valid time in minutes</p>}
+              {errors.description && (
+                <p role='alert' className='text-destructive'>
+                  Please enter a valid time in minutes
+                </p>
+              )}
             </div>
-            <div className='grid auto-rows-max items-start mb-10 gap-4 lg:gap-8'>
+            <div className='grid auto-rows-max items-start mb-10 mt-8 gap-4 lg:gap-8'>
               <Card>
                 <CardHeader>
                   <CardTitle>Servings per person</CardTitle>
@@ -102,21 +132,17 @@ const CreateRecipe = () => {
                 <CardContent>
                   <div className='grid gap-6'>
                     <div className='grid gap-3'>
-                      <Label htmlFor='status'>Servings</Label>
-                      <Select>
-                        <SelectTrigger id='status' aria-label='Select status'>
-                          <SelectValue placeholder='per person' />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {/* Servings upto 6 we could add more if needed... */}
-                          <SelectItem value='1'>1</SelectItem>
-                          <SelectItem value='2'>2</SelectItem>
-                          <SelectItem value='3'>3</SelectItem>
-                          <SelectItem value='4'>4</SelectItem>
-                          <SelectItem value='5'>5</SelectItem>
-                          <SelectItem value='6'>6</SelectItem>
-                        </SelectContent>
-                      </Select>
+                      <Label htmlFor='perPerson'></Label>
+                      <select {...register('perPerson', { required: true })} id='perPerson' className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'>
+                        <option value=''>Select servings per person</option>
+                        <option value='1'>1</option>
+                        <option value='2'>2</option>
+                        <option value='3'>3</option>
+                        <option value='4'>4</option>
+                        <option value='5'>5</option>
+                        <option value='6'>6</option>
+                      </select>
+                      {errors.perPerson && <p className='text-destructive'> Please select a serving...</p>}
                     </div>
                   </div>
                 </CardContent>
@@ -127,6 +153,7 @@ const CreateRecipe = () => {
                 Ingredients Needed
               </Label>
               <Textarea
+                {...register('ingredients', { required: true })}
                 id='ingredients'
                 name='ingredients'
                 // onChange={handleChange}
@@ -134,6 +161,11 @@ const CreateRecipe = () => {
                 className='shadow appearance-none border rounded w-full h-48 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                 placeholder='Ingredients'
               />
+              {errors.ingredients && (
+                <p role='alert' className='text-destructive'>
+                  This field is required
+                </p>
+              )}
             </div>
             <div className='grid auto-rows-max items-start gap-4 lg:gap-8'>
               <Card>
@@ -143,20 +175,19 @@ const CreateRecipe = () => {
                 <CardContent>
                   <div className='grid gap-6'>
                     <div className='grid gap-3'>
-                      <Label htmlFor='recipeType'>Type</Label>
-                      <Select>
-                        <SelectTrigger id='recipeType' aria-label='Select recipe type'>
-                          <SelectValue placeholder='Select type' />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {/* Map categories to SelectItem */}
-                          {categories.map((category) => (
-                            <SelectItem key={category.to} value={category.to}>
-                              {category.label}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                      <Label htmlFor='recipeCategory'>Type</Label>
+                      <select
+                        {...register('recipeCategory', { required: 'You must select a recipe type.' })}
+                        id='recipeCategory'
+                        className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'>
+                        <option value=''>Select recipe type</option>
+                        {categories.map((category, index) => (
+                          <option key={index} value={category.to}>
+                            {category.label}
+                          </option>
+                        ))}
+                      </select>
+                      {errors.recipeCategory && <p className='text-destructive'>{errors.recipeCategory.message}</p>}
                     </div>
                   </div>
                 </CardContent>
@@ -166,7 +197,12 @@ const CreateRecipe = () => {
               <Button type='submit' className='w-full py-2 text-base'>
                 Create Recipe
               </Button>
-              <Button variant='outline' className='w-full py-2  text-base border border-gray-500 hover:border-teal-50 hover:bg-teal-900 hover:text-teal-50 bg-teal-100'>
+              <Button
+                variant='outline'
+                className='w-full py-2  text-base border border-gray-500 hover:border-teal-50 hover:bg-teal-900 hover:text-teal-50 bg-teal-100'
+                onClick={() => {
+                  navigate('/profile')
+                }}>
                 Cancel
               </Button>
             </div>

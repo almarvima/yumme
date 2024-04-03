@@ -1,4 +1,4 @@
-import { useToast } from "@/components/ui/use-toast";
+// import { useToast } from "@/components/ui/use-toast";
 import { BadgeCheck } from "lucide-react";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -19,7 +19,7 @@ const SignIn = () => {
 
   const navigate = useNavigate();
 
-  const [isVisble, setIsVisible] = React.useState(false);
+  // const [isVisble, setIsVisible] = React.useState(false);
 
   const {
     register,
