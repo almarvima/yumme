@@ -1,15 +1,8 @@
-import { Clock, Users2 } from "lucide-react";
-import { Badge } from "../ui/badge";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
-import { Link } from "react-router-dom";
-import { Routes } from "../../constants";
+import { Clock, Users2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+import { Routes } from '../../constants';
+import { Badge } from '../ui/badge';
 
 /**
  * Each RecipeCard component is a card that displays the recipe image, title, description, and category.
