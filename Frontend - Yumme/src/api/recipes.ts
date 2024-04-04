@@ -16,6 +16,17 @@ const fetchData = async (url: string) => {
   return data;
 };
 
+export const postData = async (url: string, data: unknown) => {
+  console.log(data);
+  const response = await axios.post(url, data, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("user-token")}`,
+    },
+  });
+  return response.data;
+};
+
 export const useRecipes = () => {
   const getRecipes = () => {
     return useQuery({
@@ -32,8 +43,13 @@ export const useRecipes = () => {
     });
   };
 
-  const createRecipe = (recipe: unknown) => {
-    return axios.post("https://jsonplaceholder.typicode.com/posts", recipe);
+  const createRecipe = () => {
+    return useMutation({
+      mutationKey: ["createRecipe"],
+      mutationFn: async (recipe) => postData("/api/recipe", recipe),
+      
+     
+    });
   };
 
   return {

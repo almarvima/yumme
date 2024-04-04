@@ -27,6 +27,12 @@ export const Routes = {
   RECIPES: "/recipes",
   LOGIN: "/auth/login",
   REGISTER: "/auth/register",
+  CREATE_RECIPE: "create-recipe",
+  USER_PROFILE: "/profile",
+  USER_SETTINGS: "/profile/settings",
+  USER_RECIPES: "my-recipes",
+  FORBIDDEN: "/forbidden",
+  ERROR: "/error",
 };
 
 export const menuItems = [
