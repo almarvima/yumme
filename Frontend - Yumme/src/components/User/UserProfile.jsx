@@ -17,7 +17,7 @@ const userProfileLink = [
 export function UserProfile() {
   return (
     <div className="flex min-h-screen w-full flex-col">
-      <section className="sticky top-0 flex h-16 px-0 items-center gap-4 border-b ">
+      <section className="sticky bg-white top-0 flex h-16 px-0 items-center gap-4 border-b ">
         <nav className="md:text-lg font-medium flex flex-row md:items-center gap-4 text-sm lg:gap-6">
           <Edit className="size-6 sr-only md:not-sr-only" />
           <span className="sr-only">Your Recipes</span>
