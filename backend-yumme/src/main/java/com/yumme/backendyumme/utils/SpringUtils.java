@@ -36,6 +36,16 @@ public class SpringUtils {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    public static ResponseEntity<JsonResponse> recipeUpdated(){
+        JsonResponse response = new JsonResponse(HttpStatus.OK.value(), "RECIPE_UPDATED");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    public static ResponseEntity<JsonResponse> errorRecipeUpdated(){
+        JsonResponse response = new JsonResponse(HttpStatus.OK.value(), "RECIPE_UPDATED_ERROR");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
      //TODO: Falta afegir més respostes, es podría separar la clase JsonResponse
 
     public static ResponseEntity<JsonResponse> invalidToken(){
