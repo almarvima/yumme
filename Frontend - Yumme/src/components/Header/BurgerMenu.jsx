@@ -20,12 +20,12 @@ import HeaderButtons from "./HeaderButtons";
  */
 const BurgerMenu = () => {
   return (
-    <DropdownMenu>
+    <DropdownMenu >
       <DropdownMenuTrigger>
         <Menu className="size-7" />
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className="w-[220px] space-y-4 md:hidden"
+        className="w-[220px] space-y-4 md:hidden py-4"
         align="end"
       >
         <DropdownMenuLabel>Yumme</DropdownMenuLabel>

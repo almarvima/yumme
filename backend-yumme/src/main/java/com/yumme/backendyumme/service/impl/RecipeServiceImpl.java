@@ -37,7 +37,7 @@ public class RecipeServiceImpl implements RecipeService {
                 .cookingTime(request.getCookingTime())
                 .perPerson(request.getPerPerson())
                 .ingredients(request.getIngredients())
-                .receipeCategory(category.get())
+                .recipeCategory(category.get())
                 .build();
 
         recipe.onCreate();
@@ -75,6 +75,38 @@ public class RecipeServiceImpl implements RecipeService {
             recipeRepository.delete(recipe);
             return SpringUtils.recipeDeleted();
         }
+
+    }
+
+    @Override
+    public ResponseEntity<?> updateRecipe(int recipeId, User user, RecipeRequest request) {
+
+        Optional<Recipe> recipeOptional = recipeRepository.findById(recipeId);
+
+        if (recipeOptional.isEmpty()) {
+            return SpringUtils.recipeNotExist();
+        }
+
+        Recipe recipe = recipeOptional.get();
+
+        if (recipe.getOwnerId() != user) {
+            return SpringUtils.notOwnerRecipe();
+        }
+
+        var categoryOptional = categoryRepository.findByCategory(request.getRecipeCategory());
+        var category = categoryOptional.get();
+
+        recipe.setTitle(request.getTitle());
+        recipe.setDescription(request.getDescription());
+        recipe.setCookingTime(request.getCookingTime());
+        recipe.setPerPerson(request.getPerPerson());
+        recipe.setIngredients(request.getIngredients());
+        recipe.setRecipeCategory(category);
+
+
+        recipeRepository.save(recipe);
+        return SpringUtils.recipeUpdated();
+
 
     }
 

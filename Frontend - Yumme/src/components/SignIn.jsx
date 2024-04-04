@@ -1,4 +1,4 @@
-import { useToast } from "@/components/ui/use-toast";
+// import { useToast } from "@/components/ui/use-toast";
 import { BadgeCheck } from "lucide-react";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -19,7 +19,7 @@ const SignIn = () => {
 
   const navigate = useNavigate();
 
-  const [isVisble, setIsVisible] = React.useState(false);
+  // const [isVisble, setIsVisible] = React.useState(false);
 
   const {
     register,
@@ -92,18 +92,18 @@ const SignIn = () => {
               </p>
             )}
           </div>
-          <div className="flex flex-col md:flex-row items-center justify-between space-y-2 md:space-y-0">
-            <Button type="submit" className="w-full py-2 text-base">
-              Sign In
-            </Button>
+          <div className="flex flex-col-reverse md:flex-row gap-4 items-center justify-between space-y-2 md:space-y-0">
             <Button
               variant="secondary"
-              className="w-full py-2 md:ml-4 text-base border border-gray-500 hover:border-teal-50 hover:bg-teal-900 hover:text-teal-50 bg-teal-100"
+              className="w-full py-2  text-base border border-gray-500 hover:border-teal-50 hover:bg-teal-900 hover:text-teal-50 bg-teal-100"
               onClick={() => {
                 navigate("/");
               }}
             >
               Cancel
+            </Button>
+            <Button type="submit" className="w-full py-2 text-base">
+              Sign In
             </Button>
           </div>
         </form>

@@ -6,7 +6,7 @@ import React from 'react'
  */
 const About = () => {
   return (
-    <div className='container mx-auto px-4 py-8'>
+    <div className='container mx-auto bg-cover px-4 '>
       <div className='flex flex-col md:flex-row items-center justify-between gap-8'>
         <div className='md:w-1/2'>
           <img src='/yumMe_logo.webp' alt='About Us' className='rounded-full shadow-lg size-96' />

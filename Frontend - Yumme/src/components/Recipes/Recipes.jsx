@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
-import { useRecipes } from "../../api";
+import { useRecipes } from "../../api/recipes";
 import RecipeCard from "./RecipeCard";
 
 const mockRecipes = [
