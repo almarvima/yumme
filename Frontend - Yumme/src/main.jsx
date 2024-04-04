@@ -10,13 +10,13 @@ import { router } from './router/router.jsx';
 
 
 // Client which allows us to use react-query
-const client = new QueryClient();
+export const queryClient = new QueryClient();
 
 
 // The entry point of the application
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <QueryClientProvider client={client}>
+    <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
       <ReactQueryDevtools />
     </QueryClientProvider>

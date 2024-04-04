@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
-import { useRecipes } from "../../api";
+import { useRecipes } from "../../api/recipes";
 import RecipeCard from "./RecipeCard";
 
 const mockRecipes = [
@@ -51,10 +51,24 @@ const mockRecipes = [
 const Recipes = () => {
   // Ejemplo de implementación de useQuery
   const { getRecipes } = useRecipes();
-  const { data: recipes, isLoading } = getRecipes();
+  const { data: recipes, isLoading, isError } = getRecipes();
 
   return (
     <section className="py-8">
+      {isError && (
+        <div className="flex flex-col gap-4 items-center w-full">
+          <img
+            src="/cartoon_avocado.png"
+            alt="error message"
+            className="w-72"
+          />
+          <div className="flex flex-col gap-2">
+            <h2 className="text-2xl font-bold text-center">Whoops!</h2>
+            <p className="text-muted-foreground">We're having some problems, try again later.</p>
+          </div>
+        </div>
+      )}
+
       <div className="grid grid-cols-1 justify-items-center gap-y-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-x-8 md:gap-y-16 gap-4">
         {isLoading &&
           Array(8)
@@ -74,7 +88,9 @@ const Recipes = () => {
               id={recipe.id}
               title={recipe.title}
               description={recipe.description}
-              image={recipe.image}
+              image={recipe.imgUrl}
+              cookingTime={recipe.cookingTime}
+              perPerson={recipe.perPerson}
             />
           ))}
       </div>

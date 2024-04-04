@@ -7,7 +7,14 @@ import SignUp from '../components/SignUp'
 import About from '../components/About'
 import Contact from '../components/Contact'
 import { Routes } from '../constants'
-
+import PrivateRoutes from '../components/PrivateRoutes'
+import CreateRecipe from '../components/Recipes/CreateRecipe'
+import UserProfile from '../components/User/UserProfile'
+import UserSettings from '../components/User/UserSettings'
+import UserRecipes from '../components/User/UserRecipes'
+import NotFound from '../components/ErrorPages/NotFound'
+import Forbidden from '../components/ErrorPages/Forbidden'
+import UnexpectedError from '../components/ErrorPages/UnexpectedError'
 
 /**
  * The router configuration for the application.
@@ -19,7 +26,8 @@ export const router = createBrowserRouter([
   {
     path: Routes.HOME,
     element: <App />,
-    errorElement: <div>Not found</div>,
+
+    // errorElement: <div>Not found </div>,
     children: [
       {
         index: true,
@@ -34,7 +42,7 @@ export const router = createBrowserRouter([
         element: <SignUp />
       },
       {
-        path: Routes.RECIPE,
+        path: `${Routes.RECIPE}/:id`,
         element: <div>Recipe id</div>
       },
       {
@@ -44,6 +52,49 @@ export const router = createBrowserRouter([
       {
         path: Routes.CONTACT,
         element: <Contact />
+      },
+      {
+        path: Routes.FORBIDDEN,
+        element: <Forbidden />
+      },
+      {
+        path: Routes.ERROR,
+        element: <UnexpectedError />
+      },
+      {
+        path: '*',
+        element: <NotFound />
+      },
+      // Private routes
+      {
+        element: <PrivateRoutes />,
+        children: [
+          {
+            path: Routes.CREATE_RECIPE,
+            element: <CreateRecipe />
+          },
+          {
+            path: Routes.USER_PROFILE,
+            element: <UserProfile />,
+            children: [
+              {
+                index: true,
+                element: <UserRecipes />
+              },
+
+              {
+                path: Routes.CREATE_RECIPE,
+                element: <CreateRecipe />
+              },
+
+              {
+                path: Routes.USER_SETTINGS,
+                element: <UserSettings />
+              }
+            ]
+          }
+          // More private routes can be added here
+        ]
       }
     ]
   }

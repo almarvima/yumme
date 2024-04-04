@@ -19,14 +19,20 @@ const ICON_SIZE = "20";
 
 export const Routes = {
   HOME: "/",
-  RECIPE: "/recipe/:id",
+  RECIPE: "/recipes",
   ABOUT: "/about",
   CONTACT: "/contact",
   SIGN_IN: "/sign-in",
   SIGN_UP: "/sign-up",
   RECIPES: "/recipes",
-  LOGIN: "/api/login",
-  REGISTER: "/api/register",
+  LOGIN: "/auth/login",
+  REGISTER: "/auth/register",
+  CREATE_RECIPE: "create-recipe",
+  USER_PROFILE: "/profile",
+  USER_SETTINGS: "/profile/settings",
+  USER_RECIPES: "my-recipes",
+  FORBIDDEN: "/forbidden",
+  ERROR: "/error",
 };
 
 export const menuItems = [
