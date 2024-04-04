@@ -112,6 +112,37 @@ public class RecipeController {
 
     }
 
+    @PutMapping("recipe/{id}")
+    public ResponseEntity<?> updateRecipe(
+            HttpServletRequest header,
+            @RequestBody RecipeRequest request,
+            @PathVariable int id
+    ) {
+        ValidationResponse validationResponse = validateTokenAndUser(header);
+        if (!validationResponse.isValid()) {
+            return SpringUtils.invalidToken();
+        }
+
+        String userName = validationResponse.getUserName();
+        Optional<User> userOptional = userRepository.findByUsername(userName);
+
+        if (userOptional.isEmpty()) {
+            return SpringUtils.userNotExist();
+        }
+
+        User user = userOptional.get();
+
+        ResponseEntity<?> response;
+
+        try {
+            response = recipeService.updateRecipe(id, user, request);
+        } catch (Exception e) {
+            response = SpringUtils.errorRecipeUpdated();
+        }
+
+        return response;
+    }
+
 
     //TODO: Falta fer elDeleteRecipe i UpdateRecipe
     /*

@@ -49,13 +49,13 @@ public class Recipe {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     @JsonIgnore
-    private Category receipeCategory;
+    private Category recipeCategory;
 
     private Date created_at;
 
     private Date updated_at;
 
-    public Recipe(Long id, User ownerId, String title, String description, Integer cookingTime, Integer perPerson, String ingredients, Category receipeCategory, Date created_at) {
+    public Recipe(Long id, User ownerId, String title, String description, Integer cookingTime, Integer perPerson, String ingredients, Category recipeCategory, Date created_at) {
         this.id = id;
         this.ownerId = ownerId;
         this.title = title;
@@ -63,7 +63,7 @@ public class Recipe {
         this.cookingTime = cookingTime;
         this.perPerson = perPerson;
         this.ingredients = ingredients;
-        this.receipeCategory = receipeCategory;
+        this.recipeCategory = recipeCategory;
         this.created_at = created_at;
     }
 
