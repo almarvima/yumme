@@ -10,5 +10,5 @@ import java.util.List;
 public interface CategoryService {
 
     List<Category> getAllCategories();
-    List<Recipe> GetRecipesByCategoryId(CategoryRequest request);
+    List<Recipe> GetRecipesByCategoryId(int id);
 }

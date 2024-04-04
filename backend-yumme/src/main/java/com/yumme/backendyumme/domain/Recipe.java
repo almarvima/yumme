@@ -1,6 +1,9 @@
 package com.yumme.backendyumme.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,7 +38,7 @@ public class Recipe {
     @Column(length = 4096, nullable = false)
     private String description;
 
-    @Column(length = 1024)
+    @Column(length = 4096)
     private String imgUrl;
 
     @Column(nullable = false)
@@ -48,7 +51,8 @@ public class Recipe {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
-    @JsonIgnore
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     private Category recipeCategory;
 
     private Date created_at;
