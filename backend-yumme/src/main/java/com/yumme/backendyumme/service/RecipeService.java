@@ -14,6 +14,8 @@ public interface RecipeService {
     List<Recipe> getAllRecipes();
     List<Recipe> getRecipesById(Long id);
 
+    Recipe getRecipeById (int id);
+
     ResponseEntity<?> deleteRecipe(int recipeId, User user);
 
     ResponseEntity<?> updateRecipe(int recipeId, User user, RecipeRequest request);

@@ -59,6 +59,17 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
+    public Recipe getRecipeById(int id) {
+
+        Optional<Recipe> recipeOptional = recipeRepository.findById(id);
+
+        if(!recipeOptional.isPresent())
+            return null;
+
+        return recipeOptional.get();
+    }
+
+    @Override
     public ResponseEntity<?> deleteRecipe(int recipeId, User user) {
 
         Optional<Recipe> recipeOptional = recipeRepository.findById(recipeId);
@@ -99,6 +110,7 @@ public class RecipeServiceImpl implements RecipeService {
         recipe.setTitle(request.getTitle());
         recipe.setDescription(request.getDescription());
         recipe.setCookingTime(request.getCookingTime());
+        recipe.setImgUrl(recipe.getImgUrl());
         recipe.setPerPerson(request.getPerPerson());
         recipe.setIngredients(request.getIngredients());
         recipe.setRecipeCategory(category);

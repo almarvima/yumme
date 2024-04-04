@@ -26,4 +26,5 @@ public class DataInitializer {
             }
         }
     }
+    //TODO: Fer lo mateix per receptes una per categoria
 }

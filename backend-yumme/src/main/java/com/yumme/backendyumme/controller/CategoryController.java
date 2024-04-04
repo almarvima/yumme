@@ -12,20 +12,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/category/")
+@RequestMapping("/api/category")
 @RequiredArgsConstructor
 public class CategoryController {
 
     private final CategoryService categoryService;
+
     @GetMapping("getAllCategories")
-    public ResponseEntity<List<Category>> GetAllCategories(){
+    public ResponseEntity<List<Category>> GetAllCategories() {
         List<Category> categories = categoryService.getAllCategories();
         return ResponseEntity.ok(categories);
     }
-
-    @GetMapping("getRecipesByCategoryId")
-    public ResponseEntity<List<Recipe>> GetRecipesByCategoryId(@RequestBody CategoryRequest categoryRequest){
-        List<Recipe> recipes = categoryService.GetRecipesByCategoryId(categoryRequest);
-        return ResponseEntity.ok(recipes);
-    }
 }
+
+

@@ -52,7 +52,7 @@ public class RecipeController {
         }
     }
 
-
+    //todo: mirar de canviar url
     @GetMapping("recipe")
     public ResponseEntity<?> getRecipesByUsername(HttpServletRequest header) {
         List recipesById;
@@ -143,11 +143,6 @@ public class RecipeController {
         return response;
     }
 
-
-    //TODO: Falta fer elDeleteRecipe i UpdateRecipe
-    /*
-     *
-     * */
     private ValidationResponse validateTokenAndUser(HttpServletRequest header) {
         String jwtToken = jwtService.parseJwt(header);
         boolean isValid = false;
