@@ -43,17 +43,17 @@ public class RecipeController {
         }
 
         User user = userOptional.get();
-        boolean isRecipeCreated = recipeService.createRecipe(request, user);
+        long idRecipe = recipeService.createRecipe(request, user);
 
-        if (isRecipeCreated) {
-            return SpringUtils.recipeCreated();
+        if (idRecipe > 0) {
+            return SpringUtils.recipeCreated(idRecipe);
         } else {
             return SpringUtils.errorCreationRecipe();
         }
     }
 
-    //todo: mirar de canviar url
-    @GetMapping("recipe")
+    //TODO: mirar de canviar url
+    @GetMapping("recipe/user")
     public ResponseEntity<?> getRecipesByUsername(HttpServletRequest header) {
         List recipesById;
 

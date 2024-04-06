@@ -1,5 +1,6 @@
 package com.yumme.backendyumme.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,6 +26,7 @@ public class Category {
     private String category;
 
     @OneToMany(mappedBy = "recipeCategory")
+    @JsonIgnore
     private List<Recipe> recipes = new ArrayList<>();
 
     @Temporal(TemporalType.TIMESTAMP)

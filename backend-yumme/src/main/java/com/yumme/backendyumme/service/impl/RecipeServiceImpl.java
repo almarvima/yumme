@@ -24,7 +24,7 @@ public class RecipeServiceImpl implements RecipeService {
 
 
     @Override
-    public boolean createRecipe(RecipeRequest request, User user) {
+    public Long createRecipe(RecipeRequest request, User user) {
 
         String categoryName = request.getRecipeCategory();
 
@@ -45,7 +45,7 @@ public class RecipeServiceImpl implements RecipeService {
 
         Recipe savedRecipe = recipeRepository.save(recipe);
 
-        return savedRecipe != null;
+        return savedRecipe.getId();
     }
 
     @Override
