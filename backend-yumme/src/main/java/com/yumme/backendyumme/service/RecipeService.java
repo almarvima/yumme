@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface RecipeService {
 
-    boolean createRecipe(RecipeRequest request, User user);
+    Long createRecipe(RecipeRequest request, User user);
 
     List<Recipe> getAllRecipes();
     List<Recipe> getRecipesById(Long id);

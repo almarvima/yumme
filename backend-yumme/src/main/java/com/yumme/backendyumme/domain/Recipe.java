@@ -1,9 +1,6 @@
 package com.yumme.backendyumme.domain;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -58,6 +55,11 @@ public class Recipe {
     private Date created_at;
 
     private Date updated_at;
+
+    @JsonProperty("category_name")
+    public String getCategoryName() {
+        return recipeCategory != null ? recipeCategory.getCategory() : null;
+    }
 
     public Recipe(Long id, User ownerId, String title, String description, Integer cookingTime, Integer perPerson, String ingredients, Category recipeCategory, Date created_at) {
         this.id = id;
