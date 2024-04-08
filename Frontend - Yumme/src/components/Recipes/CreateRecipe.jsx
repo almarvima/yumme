@@ -9,11 +9,14 @@ import { Label } from '../ui/label'
 import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+import { useToast } from '../ui/use-toast'
 
 const CreateRecipe = () => {
   const { createRecipe } = useRecipes()
   const navigate = useNavigate()
   const { mutate } = createRecipe()
+
+  const { toast } = useToast()
 
   const {
     register,
@@ -23,8 +26,27 @@ const CreateRecipe = () => {
   } = useForm()
 
   const onSubmit = (data) => {
-    mutate(data),
-    reset()
+    mutate(data, {
+      onSuccess: () => {
+        toast({
+          title: 'Success',
+          description: 'Your recipe has been created!',
+          status: 'success',
+          duration: 5000,
+          isClosable: true
+        })
+        reset()
+      },
+      onError: () => {
+        toast({
+          title: 'Uh oh! Something went wrong.',
+          description: 'There was a problem with your request.',
+          status: 'error',
+          duration: 5000,
+          isClosable: true
+        })
+      }
+    })
   }
 
   return (
@@ -42,8 +64,6 @@ const CreateRecipe = () => {
                 id='title'
                 name='title'
                 type='text'
-                // onChange={handleChange}
-                // value={recipe.title}
                 className='shadow appearance-none border rounded w-full  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                 placeholder='Title'
               />
@@ -61,8 +81,6 @@ const CreateRecipe = () => {
                 {...register('description', { required: true })}
                 id='description'
                 name='description'
-                // onChange={handleChange}
-                // value={recipe.description}
                 className='shadow appearance-none border rounded w-full h-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                 placeholder='Description'
               />
@@ -85,13 +103,13 @@ const CreateRecipe = () => {
               /> */}
               <Input
                 type='text'
-                // {...register('imageUrl', {
-                //   required: 'Image URL is required',
-                //   pattern: {
-                //     value: /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp|svg))/i,
-                //     message: 'Please enter a valid image URL'
-                //   }
-                // })}
+                {...register('imageUrl', {
+                  required: 'Image URL is required',
+                  pattern: {
+                    value: /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp|svg))/i,
+                    message: 'Please enter a valid image URL'
+                  }
+                })}
                 placeholder='https://example.com/image.jpg'
               />
               {errors.imageUrl && (
@@ -99,7 +117,6 @@ const CreateRecipe = () => {
                   {errors.imageUrl.message}
                 </p>
               )}
-              {/* TODO: Add validation for image URL format */}
             </div>
           </div>
           <div className='md:w-1/2 md:pl-4'>
@@ -112,8 +129,6 @@ const CreateRecipe = () => {
                 id='cookingTime'
                 name='cookingTime'
                 type='text'
-                // onChange={handleChange}
-                // value={recipe.cookingTime}
                 className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                 placeholder='Cooking Time'
               />
@@ -156,8 +171,6 @@ const CreateRecipe = () => {
                 {...register('ingredients', { required: true })}
                 id='ingredients'
                 name='ingredients'
-                // onChange={handleChange}
-                // value={recipe.ingredients}
                 className='shadow appearance-none border rounded w-full h-48 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                 placeholder='Ingredients'
               />
