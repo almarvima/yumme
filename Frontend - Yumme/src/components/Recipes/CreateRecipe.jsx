@@ -1,222 +1,303 @@
-import React from 'react'
-import { useRecipes } from '../../api/recipes'
-import { categories } from '../../constants' // Import the categories from the constants file
-import { useNavigate } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
+import React from "react";
+import { useRecipes } from "../../api/recipes";
+import { Routes } from "../../constants"; // Import the categories from the constants file
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
-import { Button } from '@/components/ui/button'
-import { Label } from '../ui/label'
-import { Input } from '../ui/input'
-import { Textarea } from '../ui/textarea'
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
-import { useToast } from '../ui/use-toast'
-
+import { Button } from "../ui/button";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
+import { Textarea } from "../ui/textarea";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { useToast } from "@/components/ui/use-toast";
+import { SERVER_MESSAGES } from "../../config/index";
+import { useCategories } from "../../api/categories";
+import { Skeleton } from "../../components/ui/skeleton";
 
 const CreateRecipe = () => {
-  const { createRecipe } = useRecipes()
-  const navigate = useNavigate()
-  const { mutate } = createRecipe()
+  const { createRecipe } = useRecipes();
+  const navigate = useNavigate();
+  const { mutate } = createRecipe();
 
-  const { toast } = useToast()
+  const { toast } = useToast();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset
-  } = useForm()
+    reset,
+  } = useForm({
+    // Testing purposes
+    defaultValues: {
+      title: "test",
+      description: "test",
+      imageUrl:
+        "https://imgs.search.brave.com/Fxs4yAOAMdYgXnodFXlHqRkqQEMSpNMfNuJSCrnWGQ8/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/cGVxdWVyZWNldGFz/LmNvbS93cC1jb250/ZW50L3VwbG9hZHMv/MjAwOS8wNi9wYXN0/YS1hLWxhLWJvbG9u/ZXNhLWNvbi1jYXJu/ZS1waWNhZGEuanBn",
+      cookingTime: "24",
+      perPerson: "2",
+      ingredients: "pepe",
+    },
+  });
+
+  const { getCategories } = useCategories();
+
+  const { data: categories, isLoading } = getCategories();
+  console.log("🚀 ~ CreateRecipe ~ categories:", categories);
 
   const onSubmit = (data) => {
-    mutate(data, {
-      onSuccess: () => {
-        toast({
-          title: 'Success',
-          description: 'Your recipe has been created!',
-          status: 'success',
-          duration: 5000,
-          isClosable: true
-        })
-        reset()
+    const { recipeCategory } = data;
+    const recipeData = {
+      ...data,
+      recipeCategory:
+        recipeCategory.charAt(0).toUpperCase() + recipeCategory.slice(1),
+    };
+
+    mutate(recipeData, {
+      onSuccess: (res) => {
+        if (res.code === "RECIPE_CREATED") {
+          navigate(`${Routes.RECIPE}/:id`);
+
+          toast({
+            title: "Yay! 🎉",
+            description:
+              SERVER_MESSAGES[res.code] || "Recipe created successfully",
+            variant: "success",
+          });
+        }
       },
-      onError: () => {
-        toast({
-          title: 'Uh oh! Something went wrong.',
-          description: 'There was a problem with your request.',
-          status: 'error',
-          duration: 5000,
-          isClosable: true
-        })
-      }
-    })
-  }
+    }),
+      reset();
+  };
 
   return (
-    <section className=' '>
-      <div className='bg-white  rounded py-8 flex flex-col gap-4 border-b-none  mb-4'>
-        <h2 className=' font-bold text-left no-underline '>New Recipe</h2>
-        <form onSubmit={handleSubmit(onSubmit)} className='md:flex md:justify-between'>
-          <div className='md:w-1/2 md:pr-4'>
-            <div className='mb-4'>
-              <Label className='block text-gray-700 text-lg font-bold mb-2' htmlFor='title'>
+    <section className=" ">
+      <div className="bg-white  rounded py-8 flex flex-col gap-4 border-b-none  mb-4">
+        <h2 className=" font-bold text-left no-underline ">New Recipe</h2>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="md:flex md:justify-between"
+        >
+          <div className="md:w-1/2 md:pr-4">
+            <div className="mb-4">
+              <Label
+                className="block text-gray-700 text-lg font-bold mb-2"
+                htmlFor="title"
+              >
                 Recipe Title
               </Label>
               <Input
-                {...register('title', { required: true })}
-                id='title'
-                name='title'
-                type='text'
-                className='shadow appearance-none border rounded w-full  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-                placeholder='Title'
+                {...register("title", { required: true })}
+                id="title"
+                name="title"
+                type="text"
+                // onChange={handleChange}
+                // value={recipe.title}
+                className="shadow appearance-none border rounded w-full  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                placeholder="Title"
               />
               {errors.title && (
-                <p role='alert' className='text-destructive'>
+                <p role="alert" className="text-destructive">
                   Your recipe needs a title
                 </p>
               )}
             </div>
-            <div className='mb-4 mt-8'>
-              <Label className='block text-gray-700 text-lg font-bold mb-2' htmlFor='description'>
+            <div className="mb-4 mt-8">
+              <Label
+                className="block text-gray-700 text-lg font-bold mb-2"
+                htmlFor="description"
+              >
                 Recipe Description
               </Label>
               <Textarea
-                {...register('description', { required: true })}
-                id='description'
-                name='description'
-                className='shadow appearance-none border rounded w-full h-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-                placeholder='Description'
+                {...register("description", { required: true })}
+                id="description"
+                name="description"
+                // onChange={handleChange}
+                // value={recipe.description}
+                className="shadow appearance-none border rounded w-full h-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                placeholder="Description"
               />
               {errors.description && (
-                <p role='alert' className='text-destructive'>
+                <p role="alert" className="text-destructive">
                   This field is required
                 </p>
               )}
             </div>
-            <div className='mb-8 mt-8'>
-              <Label className='block text-gray-700 text-lg font-bold mb-2' htmlFor='imageUpload'>
+            <div className="mb-8 mt-8">
+              <Label
+                className="block text-gray-700 text-lg font-bold mb-2"
+                htmlFor="imgUrl"
+              >
                 Recipe Image
               </Label>
-              {/* <Input
-                id='imageUpload'
-                name='imageUpload'
-                type='file'
-                // onChange={handleImageChange}
-                className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-              /> */}
+
               <Input
-                type='text'
-                {...register('imageUrl', {
-                  required: 'Image URL is required',
+                type="text"
+                id="imageUrl"
+                name="imageUrl"
+                className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                {...register("imageUrl", {
+                  required: "Image URL is required",
                   pattern: {
-                    value: /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp|svg))/i,
-                    message: 'Please enter a valid image URL'
-                  }
+                    // value: /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp|svg))/i,
+                    message: "Please enter a valid image URL",
+                  },
                 })}
-                placeholder='https://example.com/image.jpg'
+                placeholder="https://example.com/image.jpg"
               />
               {errors.imageUrl && (
-                <p role='alert' className='text-destructive'>
+                <p role="alert" className="text-destructive">
                   {errors.imageUrl.message}
                 </p>
               )}
             </div>
           </div>
-          <div className='md:w-1/2 md:pl-4'>
-            <div className='mt-8 md:mt-0 '>
-              <Label className='block text-gray-700 text-lg font-bold mb-2' htmlFor='cookingTime'>
+          <div className="md:w-1/2 md:pl-4">
+            <div className="mt-8 md:mt-0 ">
+              <Label
+                className="flex text-gray-700 text-lg font-bold mb-2"
+                htmlFor="cookingTime"
+              >
                 Cooking Time
               </Label>
               <Input
-                {...register('cookingTime', { pattern: /^[0-9]*$/ })}
-                id='cookingTime'
-                name='cookingTime'
-                type='text'
-                className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-                placeholder='Cooking Time'
+                {...register("cookingTime", {
+                  required: true,
+                  pattern: {
+                    value: /^[0-9]*$/,
+                    message: "Please enter a valid time in minutes",
+                  },
+                })}
+                id="cookingTime"
+                name="cookingTime"
+                type="number"
+                // onChange={handleChange}
+                // value={recipe.cookingTime}
+                className="shadow  border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                placeholder="Time in minutes"
               />
-              {errors.cookingTime && <p className='text-red-600'>Please enter a valid time in minutes</p>}
+
+              {errors.cookingTime && (
+                <p className="text-red-600">
+                  Please enter a valid time in minutes
+                </p>
+              )}
               {errors.description && (
-                <p role='alert' className='text-destructive'>
+                <p role="alert" className="text-destructive">
                   Please enter a valid time in minutes
                 </p>
               )}
             </div>
-            <div className='grid auto-rows-max items-start mb-10 mt-8 gap-4 lg:gap-8'>
+            <div className="grid auto-rows-max items-start mb-10 mt-8 gap-4 lg:gap-8">
               <Card>
                 <CardHeader>
                   <CardTitle>Servings per person</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className='grid gap-6'>
-                    <div className='grid gap-3'>
-                      <Label htmlFor='perPerson'></Label>
-                      <select {...register('perPerson', { required: true })} id='perPerson' className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'>
-                        <option value=''>Select servings per person</option>
-                        <option value='1'>1</option>
-                        <option value='2'>2</option>
-                        <option value='3'>3</option>
-                        <option value='4'>4</option>
-                        <option value='5'>5</option>
-                        <option value='6'>6</option>
+                  <div className="grid gap-6">
+                    <div className="grid gap-3">
+                      <Label htmlFor="perPerson"></Label>
+                      <select
+                        {...register("perPerson", { required: true })}
+                        id="perPerson"
+                        title="perPerson"
+                        className="shadow  border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      >
+                        <option value="">Select servings per person</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
                       </select>
-                      {errors.perPerson && <p className='text-destructive'> Please select a serving...</p>}
+                      {errors.perPerson && (
+                        <p className="text-destructive">
+                          {" "}
+                          Please select a serving...
+                        </p>
+                      )}
                     </div>
                   </div>
                 </CardContent>
               </Card>
             </div>
-            <div className='mb-10'>
-              <Label className='block text-gray-700 text-lg font-bold mb-2' htmlFor='ingredients'>
+            <div className="mb-10">
+              <Label
+                className="block text-gray-700 text-lg font-bold mb-2"
+                htmlFor="ingredients"
+              >
                 Ingredients Needed
               </Label>
               <Textarea
-                {...register('ingredients', { required: true })}
-                id='ingredients'
-                name='ingredients'
-                className='shadow appearance-none border rounded w-full h-48 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-                placeholder='Ingredients'
+                {...register("ingredients", { required: true })}
+                id="ingredients"
+                name="ingredients"
+                // onChange={handleChange}
+                // value={recipe.ingredients}
+                className="shadow appearance-none border rounded w-full h-48 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                placeholder="Ingredients"
               />
               {errors.ingredients && (
-                <p role='alert' className='text-destructive'>
+                <p role="alert" className="text-destructive">
                   This field is required
                 </p>
               )}
             </div>
-            <div className='grid auto-rows-max items-start gap-4 lg:gap-8'>
-              <Card>
-                <CardHeader>
-                  <CardTitle>Recipe Type</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className='grid gap-6'>
-                    <div className='grid gap-3'>
-                      <Label htmlFor='recipeCategory'>Type</Label>
-                      <select
-                        {...register('recipeCategory', { required: 'You must select a recipe type.' })}
-                        id='recipeCategory'
-                        className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'>
-                        <option value=''>Select recipe type</option>
-                        {categories.map((category, index) => (
-                          <option key={index} value={category.to}>
-                            {category.label}
-                          </option>
-                        ))}
-                      </select>
-                      {errors.recipeCategory && <p className='text-destructive'>{errors.recipeCategory.message}</p>}
+            <div className="grid auto-rows-max items-start gap-4 lg:gap-8">
+              {isLoading ? (
+                <Skeleton className="w-full h-40" />
+              ) : (
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Recipe category</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid gap-6">
+                      <div className="grid gap-3">
+                        <Label htmlFor="recipeCategory">Type</Label>
+                        <select
+                          {...register("recipeCategory", {
+                            required: "You must select a recipe type.",
+                          })}
+                          id="recipeCategory"
+                          title="recipeCategory"
+                          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        >
+                          <option value="">Select recipe category</option>
+
+                          {categories &&
+                            categories.map((category) => (
+                              <option
+                                key={category.id}
+                                value={category.category}
+                              >
+                                {category.category}
+                              </option>
+                            ))}
+                        </select>
+                        {errors.recipeCategory && (
+                          <p className="text-destructive">
+                            {errors.recipeCategory.message}
+                          </p>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              )}
             </div>
-            <div className='flex flex-col md:flex-row-reverse items-center mt-20 justify-between  gap-4 md:gap-4'>
-              <Button type='submit' className='w-full py-2 text-base'>
+            <div className="flex flex-col md:flex-row-reverse items-center mt-20 justify-between  gap-4 md:gap-4">
+              <Button type="submit" className="w-full py-2 text-base">
                 Create Recipe
               </Button>
               <Button
-                variant='outline'
-                className='w-full py-2  text-base border border-gray-500 hover:border-teal-50 hover:bg-teal-900 hover:text-teal-50 bg-teal-100'
+                variant="outline"
+                className="w-full py-2  text-base border border-gray-500 hover:border-teal-50 hover:bg-teal-900 hover:text-teal-50 bg-teal-100"
                 onClick={() => {
-                  navigate('/profile')
-                }}>
+                  navigate("/profile");
+                }}
+              >
                 Cancel
               </Button>
             </div>
@@ -224,7 +305,7 @@ const CreateRecipe = () => {
         </form>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default CreateRecipe
+export default CreateRecipe;

@@ -26,10 +26,9 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Recipe> GetRecipesByCategoryId(CategoryRequest request) {
+    public List<Recipe> GetRecipesByCategoryId(int id) {
 
-        String categoryName = request.getCategoryName();
-        Optional<Category> optionalCategory = categoryRepository.findByCategory(categoryName);
+        Optional<Category> optionalCategory = categoryRepository.findById((long) id);
         Category category = optionalCategory.get();
         List recipes = recipeRepository.findRecipesByCategory(category.getId());
 

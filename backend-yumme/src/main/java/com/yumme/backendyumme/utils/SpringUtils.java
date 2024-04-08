@@ -6,8 +6,8 @@ import org.springframework.http.ResponseEntity;
 
 public class SpringUtils {
 
-    public static ResponseEntity<JsonResponse> recipeCreated() {
-        JsonResponse response = new JsonResponse(HttpStatus.OK.value(), "RECIPE_CREATED");
+    public static ResponseEntity<JsonResponse> recipeCreated(long id) {
+        JsonResponse response = new JsonResponse(id ,HttpStatus.OK.value(), "RECIPE_CREATED");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -46,8 +46,6 @@ public class SpringUtils {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-     //TODO: Falta afegir més respostes, es podría separar la clase JsonResponse
-
     public static ResponseEntity<JsonResponse> invalidToken(){
         JsonResponse response = new JsonResponse(HttpStatus.UNAUTHORIZED.value(), "INVALID_TOKEN");
         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
@@ -71,9 +69,15 @@ public class SpringUtils {
 
     public static class JsonResponse {
         private int status;
+        private long id;
         private String code;
 
         public JsonResponse(int status, String code) {
+            this.status = status;
+            this.code = code;
+        }
+        public JsonResponse(long id, int status, String code) {
+            this.id = id;
             this.status = status;
             this.code = code;
         }
@@ -93,6 +97,10 @@ public class SpringUtils {
         public void setCode(String code) {
             this.code = code;
         }
+
+        public long getId() {return id;}
+
+        public void setId(long id) {this.id = id;}
     }
 
 }

@@ -1,6 +1,6 @@
 package com.yumme.backendyumme.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,7 +35,7 @@ public class Recipe {
     @Column(length = 4096, nullable = false)
     private String description;
 
-    @Column(length = 1024)
+    @Column(length = 4096)
     private String imgUrl;
 
     @Column(nullable = false)
@@ -48,12 +48,18 @@ public class Recipe {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
-    @JsonIgnore
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     private Category recipeCategory;
 
     private Date created_at;
 
     private Date updated_at;
+
+    @JsonProperty("categoryName")
+    public String getCategoryName() {
+        return recipeCategory != null ? recipeCategory.getCategory() : null;
+    }
 
     public Recipe(Long id, User ownerId, String title, String description, Integer cookingTime, Integer perPerson, String ingredients, Category recipeCategory, Date created_at) {
         this.id = id;

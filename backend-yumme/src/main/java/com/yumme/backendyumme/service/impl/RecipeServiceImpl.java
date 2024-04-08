@@ -24,7 +24,7 @@ public class RecipeServiceImpl implements RecipeService {
 
 
     @Override
-    public boolean createRecipe(RecipeRequest request, User user) {
+    public Long createRecipe(RecipeRequest request, User user) {
 
         String categoryName = request.getRecipeCategory();
 
@@ -34,6 +34,7 @@ public class RecipeServiceImpl implements RecipeService {
                 .title(request.getTitle())
                 .description(request.getDescription())
                 .ownerId(user)
+                .imgUrl(request.getImgUrl())
                 .cookingTime(request.getCookingTime())
                 .perPerson(request.getPerPerson())
                 .ingredients(request.getIngredients())
@@ -45,7 +46,7 @@ public class RecipeServiceImpl implements RecipeService {
 
         Recipe savedRecipe = recipeRepository.save(recipe);
 
-        return savedRecipe != null;
+        return savedRecipe.getId();
     }
 
     @Override
@@ -56,6 +57,17 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public List<Recipe> getRecipesById(Long id) {
         return recipeRepository.findByOwnerId(id);
+    }
+
+    @Override
+    public Recipe getRecipeById(int id) {
+
+        Optional<Recipe> recipeOptional = recipeRepository.findById(id);
+
+        if(!recipeOptional.isPresent())
+            return null;
+
+        return recipeOptional.get();
     }
 
     @Override
@@ -99,6 +111,7 @@ public class RecipeServiceImpl implements RecipeService {
         recipe.setTitle(request.getTitle());
         recipe.setDescription(request.getDescription());
         recipe.setCookingTime(request.getCookingTime());
+        recipe.setImgUrl(recipe.getImgUrl());
         recipe.setPerPerson(request.getPerPerson());
         recipe.setIngredients(request.getIngredients());
         recipe.setRecipeCategory(category);
