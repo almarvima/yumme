@@ -134,14 +134,24 @@ const CreateRecipe = () => {
                 Cooking Time
               </Label>
               <Input
-                {...register('cookingTime', { required: true }, { pattern: /^[0-9]*$/ })}
+                {...register('cookingTime', {
+                  required: 'Cooking time is required',
+                  pattern: {
+                    value: /^[1-9][0-9]*$/,
+                    message: 'Please enter a valid time in minutes'
+                  }
+                })}
                 id='cookingTime'
                 name='cookingTime'
                 type='text'
                 className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                 placeholder='Cooking Time'
               />
-              {errors.cookingTime && <p className='text-red-600'>Please enter a valid time in minutes</p>}
+              {errors.cookingTime && (
+                <p role='alert' className='text-destructive'>
+                  {errors.cookingTime.message}
+                </p>
+              )}
             </div>
             <div className='grid auto-rows-max items-start mb-10 mt-8 gap-4 lg:gap-8'>
               <Card>
