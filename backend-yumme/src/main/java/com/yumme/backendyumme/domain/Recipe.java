@@ -56,7 +56,7 @@ public class Recipe {
 
     private Date updated_at;
 
-    @JsonProperty("category_name")
+    @JsonProperty("categoryName")
     public String getCategoryName() {
         return recipeCategory != null ? recipeCategory.getCategory() : null;
     }
