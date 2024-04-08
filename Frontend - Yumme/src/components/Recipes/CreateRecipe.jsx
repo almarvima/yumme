@@ -4,12 +4,13 @@ import { categories } from '../../constants' // Import the categories from the c
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 
-import { Button } from '../ui/button'
+import { Button } from '@/components/ui/button'
 import { Label } from '../ui/label'
 import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { useToast } from '../ui/use-toast'
+
 
 const CreateRecipe = () => {
   const { createRecipe } = useRecipes()
