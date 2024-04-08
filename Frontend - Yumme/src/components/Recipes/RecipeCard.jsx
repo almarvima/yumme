@@ -19,6 +19,7 @@ const RecipeCard = ({
   description,
   cookingTime,
   perPerson,
+  category,
 }) => {
   return (
     <Link
@@ -48,7 +49,7 @@ const RecipeCard = ({
         </div>
 
         <Badge variant={"secondary"} className="w-min">
-          Category
+          {category}
         </Badge>
       </div>
     </Link>
