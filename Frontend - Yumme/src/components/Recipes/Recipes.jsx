@@ -91,7 +91,7 @@ const Recipes = () => {
               image={recipe.imgUrl}
               cookingTime={recipe.cookingTime}
               perPerson={recipe.perPerson}
-              category={recipe.category_name}
+              category={recipe.categoryName}
             />
           ))}
       </div>

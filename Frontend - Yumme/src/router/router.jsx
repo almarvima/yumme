@@ -17,7 +17,6 @@ import Forbidden from '../components/ErrorPages/Forbidden'
 import UnexpectedError from '../components/ErrorPages/UnexpectedError'
 import Recipe from '../components/Recipes/Recipe'
 
-
 /**
  * The router configuration for the application.
  * @type {BrowserRouter}

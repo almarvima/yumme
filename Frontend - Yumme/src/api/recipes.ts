@@ -6,15 +6,16 @@ export const useRecipes = () => {
   const getRecipes = () => {
     return useQuery({
       queryKey: ["recipes"],
-      queryFn: () => fetchData("/public/recipe"),
+      queryFn: async () => fetchData("/public/recipe"),
     });
   };
 
-  const getRecipe = (id: string) => {
+  const getRecipe = (id: number) => {
+    console.log(id);
     return useQuery({
       queryKey: ["recipe", id],
-      queryFn: () =>
-        fetchData(`https://jsonplaceholder.typicode.com/posts/${id}`),
+      queryFn: async () =>
+        fetchData(`/public/recipe/${id}`)
     });
   };
 
