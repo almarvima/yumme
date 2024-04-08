@@ -45,7 +45,8 @@ public class PublicController {
         List<Category> categories = categoryService.getAllCategories();
         return ResponseEntity.ok(categories);
     }
-
+    
+    //TODO: Cambiar Path a string
     @GetMapping("recipe/category/{id}")
     public ResponseEntity<List<Recipe>> GetRecipesByCategoryId(@PathVariable int id ){
         List<Recipe> recipes = categoryService.GetRecipesByCategoryId(id);
