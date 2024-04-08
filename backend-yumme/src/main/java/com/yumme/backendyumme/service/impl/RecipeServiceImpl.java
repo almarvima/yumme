@@ -34,6 +34,7 @@ public class RecipeServiceImpl implements RecipeService {
                 .title(request.getTitle())
                 .description(request.getDescription())
                 .ownerId(user)
+                .imgUrl(request.getImgUrl())
                 .cookingTime(request.getCookingTime())
                 .perPerson(request.getPerPerson())
                 .ingredients(request.getIngredients())

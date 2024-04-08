@@ -46,8 +46,6 @@ public class SpringUtils {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-     //TODO: Falta afegir més respostes, es podría separar la clase JsonResponse
-
     public static ResponseEntity<JsonResponse> invalidToken(){
         JsonResponse response = new JsonResponse(HttpStatus.UNAUTHORIZED.value(), "INVALID_TOKEN");
         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
