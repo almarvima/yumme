@@ -61,6 +61,11 @@ public class SpringUtils {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
+    public static ResponseEntity<JsonResponse> userDeleted(){
+        JsonResponse response = new JsonResponse(HttpStatus.UNAUTHORIZED.value(), "USER_DELETED");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
     public static ResponseEntity<JsonResponse> wrongPassword() {
         JsonResponse response = new JsonResponse(HttpStatus.UNAUTHORIZED.value(), "WRONG_PASSWORD");
         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);

@@ -30,7 +30,7 @@ public class RecipeController {
     public ResponseEntity<?> createRecipe(
             @RequestBody RecipeRequest request,
             HttpServletRequest header) {
-        ValidationResponse validationResponse = validateTokenAndUser(header);
+        ValidationResponse validationResponse = jwtService.validateTokenAndUser(header);
 
         if (!validationResponse.isValid()) {
             return SpringUtils.invalidToken();
@@ -57,7 +57,7 @@ public class RecipeController {
     public ResponseEntity<?> getRecipesByUsername(HttpServletRequest header) {
         List recipesById;
 
-        ValidationResponse validationResponse = validateTokenAndUser(header);
+        ValidationResponse validationResponse = jwtService.validateTokenAndUser(header);
 
         if (!validationResponse.isValid()) {
             return SpringUtils.invalidToken();
@@ -86,7 +86,7 @@ public class RecipeController {
             HttpServletRequest header,
             @PathVariable int id
     ) {
-        ValidationResponse validationResponse = validateTokenAndUser(header);
+        ValidationResponse validationResponse = jwtService.validateTokenAndUser(header);
         if (!validationResponse.isValid()) {
             return SpringUtils.invalidToken();
         }
@@ -118,7 +118,7 @@ public class RecipeController {
             @RequestBody RecipeRequest request,
             @PathVariable int id
     ) {
-        ValidationResponse validationResponse = validateTokenAndUser(header);
+        ValidationResponse validationResponse = jwtService.validateTokenAndUser(header);
         if (!validationResponse.isValid()) {
             return SpringUtils.invalidToken();
         }
@@ -143,18 +143,4 @@ public class RecipeController {
         return response;
     }
 
-    private ValidationResponse validateTokenAndUser(HttpServletRequest header) {
-        String jwtToken = jwtService.parseJwt(header);
-        boolean isValid = false;
-        User user = null;
-
-        if (jwtToken != null) {
-            String userName = jwtService.getUsernameFromToken(jwtToken);
-            UserDetails userDetails = userRepository.findByUsername(userName).orElse(null);
-            isValid = jwtService.isTokenValid(jwtToken, userDetails);
-
-            return new ValidationResponse(isValid, userName);
-        }
-        return null;
-    }
 }
