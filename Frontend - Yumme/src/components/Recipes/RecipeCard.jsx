@@ -25,12 +25,12 @@ const RecipeCard = ({
     <Link
       to={`${Routes.RECIPE}/${id}`}
       key={id}
-      className="border bg-card text-card-foreground shadow-sm flex flex-col w-full rounded-md"
+      className="border group bg-card text-card-foreground hover:scale-105 transition-transform shadow-sm flex flex-col w-full rounded-md"
     >
       <img
         src={image || "https://via.placeholder.com/260"}
         alt={title}
-        className="w-full  object-cover rounded-t-md aspect-square"
+        className="w-full object-cover rounded-t-md aspect-square"
       />
       <div className="px-6 py-4 flex flex-col gap-4">
         <div className="space-y-2">

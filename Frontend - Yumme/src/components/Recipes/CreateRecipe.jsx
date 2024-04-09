@@ -42,7 +42,6 @@ const CreateRecipe = () => {
   const { getCategories } = useCategories();
 
   const { data: categories, isLoading } = getCategories();
-  console.log("🚀 ~ CreateRecipe ~ categories:", categories);
 
   const onSubmit = (data) => {
     const { recipeCategory } = data;
@@ -55,7 +54,7 @@ const CreateRecipe = () => {
     mutate(recipeData, {
       onSuccess: (res) => {
         if (res.code === "RECIPE_CREATED") {
-          navigate(`${Routes.RECIPE}/:id`);
+          navigate(`/profile`);
 
           toast({
             title: "Yay! 🎉",
