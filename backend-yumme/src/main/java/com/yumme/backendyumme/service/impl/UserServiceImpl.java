@@ -8,6 +8,9 @@ import com.yumme.backendyumme.domain.User;
 import com.yumme.backendyumme.repository.UserRepository;
 import com.yumme.backendyumme.security.jwt.JwtService;
 import com.yumme.backendyumme.service.UserService;
+import com.yumme.backendyumme.utils.SpringUtils;
+import jakarta.transaction.Transactional;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -56,5 +59,12 @@ public class UserServiceImpl implements UserService {
         return AuthResponse.builder()
                 .token(token)
                 .build();
+    }
+
+    @Override
+    @Transactional
+    public ResponseEntity<?> deleteUser(Long id) {
+        userRepository.deleteUser(id);
+        return SpringUtils.userDeleted();
     }
 }

@@ -120,7 +120,6 @@ public class RecipeServiceImpl implements RecipeService {
         recipeRepository.save(recipe);
         return SpringUtils.recipeUpdated();
 
-
     }
 
 }

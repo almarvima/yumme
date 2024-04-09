@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import com.yumme.backendyumme.domain.User;
+import com.yumme.backendyumme.dto.response.ValidationResponse;
+import com.yumme.backendyumme.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -20,7 +23,12 @@ import org.springframework.util.StringUtils;
 @Service
 public class JwtService {
 
+    private final UserRepository userRepository;
     private static final String SECRET_KEY="586E3272357538782F413F4428472B4B6250655368566B597033733676397924";
+
+    public JwtService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public String getToken(UserDetails user) {
         return getToken(new HashMap<>(), user);
@@ -83,6 +91,21 @@ public class JwtService {
     private boolean isTokenExpired(String token)
     {
         return getExpiration(token).before(new Date());
+    }
+
+    public ValidationResponse validateTokenAndUser(HttpServletRequest header) {
+        String jwtToken = parseJwt(header);
+        boolean isValid = false;
+        User user = null;
+
+        if (jwtToken != null) {
+            String userName = getUsernameFromToken(jwtToken);
+            UserDetails userDetails = userRepository.findByUsername(userName).orElse(null);
+            isValid = isTokenValid(jwtToken, userDetails);
+
+            return new ValidationResponse(isValid, userName);
+        }
+        return null;
     }
 
 }
