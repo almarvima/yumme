@@ -71,6 +71,15 @@ public class SpringUtils {
         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
     }
 
+    public static ResponseEntity<?> suggestionCreated() {
+        JsonResponse response = new JsonResponse(HttpStatus.OK.value(), "SUGGESTION_CREATED");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+    public static ResponseEntity<?> wrongSuggestion() {
+        JsonResponse response = new JsonResponse(HttpStatus.BAD_REQUEST.value(), "WRONG_SUGGESTION");
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
 
     public static class JsonResponse {
         private int status;

@@ -3,16 +3,15 @@ package com.yumme.backendyumme.controller;
 
 import com.yumme.backendyumme.domain.Category;
 import com.yumme.backendyumme.domain.Recipe;
+import com.yumme.backendyumme.domain.Suggestion;
 import com.yumme.backendyumme.service.CategoryService;
 import com.yumme.backendyumme.service.RecipeService;
+import com.yumme.backendyumme.service.SuggestionService;
 import com.yumme.backendyumme.utils.SpringUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,6 +24,8 @@ public class PublicController {
     private RecipeService recipeService;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private SuggestionService suggestionService;
 
     @GetMapping("recipe")
     public ResponseEntity<List<Recipe>> GetAllRecipe (){
@@ -51,6 +52,15 @@ public class PublicController {
     public ResponseEntity<List<Recipe>> GetRecipesByCategoryId(@PathVariable int id ){
         List<Recipe> recipes = categoryService.GetRecipesByCategoryId(id);
         return ResponseEntity.ok(recipes);
+    }
+
+    @PostMapping("suggestion")
+    public ResponseEntity<?> SendSuggestion (@RequestBody Suggestion request){
+        boolean doIt = suggestionService.createSuggestion(request);
+        if(doIt)
+            return SpringUtils.suggestionCreated();
+
+        return SpringUtils.wrongSuggestion();
     }
 
 }

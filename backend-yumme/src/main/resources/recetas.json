@@ -2,7 +2,7 @@
   {
     "title": "Revuelto de Tofu",
     "description": "Una deliciosa opción vegana para el desayuno, hecho con tofu sazonado, verduras y especias.",
-    "imgUrl": "https://www.istockphoto.com/es/foto/plato-de-salteados-tofu-calabac%C3%ADn-con-aceitunas-y-albahaca-gomashio-gm471839273-26637066",
+    "imgUrl": "https://images.pexels.com/photos/1211887/pexels-photo-1211887.jpeg?auto=compress&cs=tinysrgb&w=600",
     "cookingTime": 20,
     "perPerson": 1,
     "ingredients": "200g de tofu firme, 1/2 pimiento, 1/4 de cebolla, 1/2 cucharadita de cúrcuma, sal y pimienta al gusto",
@@ -30,7 +30,7 @@
   {
     "title": "Filete a la Parrilla",
     "description": "Un clásico plato de carne que presenta un filete tierno a la parrilla sazonado con hierbas y especias.",
-    "imgUrl": "https://www.istockphoto.com/es/foto/filetes-de-solomillo-barbacoa-con-tomillo-fresco-gm972852490-264781545",
+    "imgUrl": "https://images.pexels.com/photos/1251208/pexels-photo-1251208.jpeg?auto=compress&cs=tinysrgb&w=600",
     "cookingTime": 30,
     "perPerson": 1,
     "ingredients": "200g de filete, 1 cucharada de aceite de oliva, 1 cucharadita de sal, 1/2 cucharadita de pimienta negra",
@@ -44,7 +44,7 @@
   {
     "title": "Salmón a la Sartén",
     "description": "Un sabroso plato de pescado que presenta filetes de salmón con piel crujiente sazonados con limón y hierbas.",
-    "imgUrl": "https://www.istockphoto.com/es/foto/salm%C3%B3n-a-la-plancha-sobre-verduras-frescas-sobre-mesa-de-madera-gm1174643774-326772695",
+    "imgUrl": "https://images.pexels.com/photos/6984182/pexels-photo-6984182.jpeg?auto=compress&cs=tinysrgb&w=600",
     "cookingTime": 25,
     "perPerson": 1,
     "ingredients": "2 filetes de salmón, 1 limón, 2 cucharadas de aceite de oliva, sal y pimienta al gusto",
@@ -58,7 +58,7 @@
   {
     "title": "Espaguetis Aglio e Olio",
     "description": "Un plato de pasta simple pero delicioso hecho con espaguetis, ajo, aceite de oliva y copos de chile.",
-    "imgUrl": "https://www.istockphoto.com/es/foto/espaguetis-italianos-caseros-algio-e-olio-gm1388417471-446066411",
+    "imgUrl": "https://images.pexels.com/photos/11654236/pexels-photo-11654236.jpeg?auto=compress&cs=tinysrgb&w=600",
     "cookingTime": 12,
     "perPerson": 2,
     "ingredients": "200g de espaguetis, 3 dientes de ajo, 2 cucharadas de aceite de oliva, 1/2 cucharadita de copos de chile, perejil para decorar",
@@ -72,7 +72,7 @@
   {
     "title": "Pizza Margarita",
     "description": "Una clásica pizza italiana cubierta con salsa de tomate, queso mozzarella y hojas de albahaca fresca.",
-    "imgUrl": "https://www.istockphoto.com/es/foto/una-deliciosa-y-sabrosa-pizza-italiana-margherita-con-tomates-y-mozzarella-de-b%C3%BAfala-gm1414575281-463252983",
+    "imgUrl": "https://images.pexels.com/photos/6605218/pexels-photo-6605218.jpeg?auto=compress&cs=tinysrgb&w=600",
     "cookingTime": 15,
     "perPerson": 1,
     "ingredients": "1 base de pizza, 1/2 taza de salsa de tomate, 1 taza de queso mozzarella, hojas de albahaca fresca",
@@ -86,7 +86,7 @@
   {
     "title": "Ensalada Griega",
     "description": "Una ensalada refrescante con lechuga crujiente, tomates, pepinos, aceitunas y queso feta, aliñada con un aderezo agridulce.",
-    "imgUrl": "https://www.istockphoto.com/es/foto/ensalada-griega-verduras-frescas-queso-feta-y-aceitunas-negras-vista-superior-gm1206377459-347909795",
+    "imgUrl": "https://images.pexels.com/photos/1211887/pexels-photo-1211887.jpeg?auto=compress&cs=tinysrgb&w=600",
     "cookingTime": 10,
     "perPerson": 1,
     "ingredients": "2 tazas de lechuga, 1 tomate, 1 pepino, 1/4 taza de aceitunas, 50g de queso feta, 2 cucharadas de aceite de oliva, 1 cucharada de jugo de limón",
@@ -100,7 +100,7 @@
   {
     "title": "Brownies de Chocolate",
     "description": "Barritas de postre decadentes hechas con chocolate rico y cubiertas con un glaseado cremoso.",
-    "imgUrl": "https://www.istockphoto.com/es/foto/casero-fresco-brownie-de-chocolate-gm168731372-23782924",
+    "imgUrl": "https://images.pexels.com/photos/18523013/pexels-photo-18523013/free-photo-of-frambuesas-chocolate-bombon-dulce.jpeg?auto=compress&cs=tinysrgb&w=600",
     "cookingTime": 40,
     "perPerson": 6,
     "ingredients": "100g de mantequilla, 200g de chocolate negro, 1 taza de azúcar, 2 huevos, 1 cucharadita de extracto de vainilla, 1/2 taza de harina",
@@ -114,7 +114,7 @@
   {
     "title": "Cóctel Mojito",
     "description": "Un cóctel refrescante a base de ron con menta, lima y agua con gas.",
-    "imgUrl": "https://www.istockphoto.com/es/foto/mojito-gm471447415-21073021",
+    "imgUrl": "https://images.pexels.com/photos/4021983/pexels-photo-4021983.jpeg?auto=compress&cs=tinysrgb&w=600",
     "cookingTime": 5,
     "perPerson": 1,
     "ingredients": "50ml de ron blanco, 1 lima, 10 hojas de menta fresca, 2 cucharaditas de azúcar, agua con gas, cubitos de hielo",
@@ -128,7 +128,7 @@
   {
     "title": "Tostada de Aguacate",
     "description": "Una opción de desayuno simple y nutritiva que presenta aguacate machacado sobre pan tostado.",
-    "imgUrl": "https://www.istockphoto.com/es/foto/sandwich-vegano-pan-de-centeno-tostado-aguacate-salsa-de-vegenaise-y-r%C3%BAcula-cruda-gm949515328-259203026",
+    "imgUrl": "https://images.pexels.com/photos/1351238/pexels-photo-1351238.jpeg?auto=compress&cs=tinysrgb&w=600",
     "cookingTime": 10,
     "perPerson": 1,
     "ingredients": "1 aguacate maduro, 2 rebanadas de pan integral, sal y pimienta al gusto",
@@ -142,7 +142,7 @@
   {
     "title": "Sopa de Tomate y Albahaca",
     "description": "Una sopa reconfortante hecha con tomates maduros, albahaca fresca y un toque de crema.",
-    "imgUrl": "https://www.istockphoto.com/es/foto/vegetarianas-caseras-tomate-sopa-de-crema-gm481330422-69309511",
+    "imgUrl": "https://images.pexels.com/photos/1618943/pexels-photo-1618943.jpeg?auto=compress&cs=tinysrgb&w=600",
     "cookingTime": 25,
     "perPerson": 2,
     "ingredients": "4 tomates grandes, 1 cebolla, 2 dientes de ajo, 1 taza de caldo de verduras, 1/4 taza de crema, hojas de albahaca fresca",
