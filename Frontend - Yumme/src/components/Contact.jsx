@@ -82,7 +82,7 @@ const Contact = () => {
               {...register('email', {
                 required: true,
                 pattern: {
-                  value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                  value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
                   message: 'Please enter a valid email address'
                 }
               })}

@@ -17,14 +17,14 @@ const Recipe = () => {
 
   if (isLoading) {
     return (
-      <div className='flex flex-col space-y-3'>
-        <Skeleton className='h-[125px] w-[250px] rounded-xl' />
-        <div className='space-y-2'>
-          <Skeleton className='h-10 w-3/4' />
-          <Skeleton className='h-6 w-5/6' />
-          <Skeleton className='h-44' />
-          <Skeleton className='h-6 w-1/2' />
-          <Skeleton className='h-6 w-1/4' />
+      <div className='flex flex-col md:flex-row md:items-start gap-8 border border-teal-400 shadow-lg p-4 rounded-lg'>
+        <Skeleton className='h-[250px] w-[250px] rounded-xl' />
+        <div className='space-y-4 w-full md:w-1/2'>
+          <Skeleton className='h-14 w-3/4' />
+          <Skeleton className='h-5 w-full' count={4} />
+          <Skeleton className='h-5 w-1/2' />
+          <Skeleton className='h-5 w-1/2' />
+          <Skeleton className='h-5 w-1/2' />
         </div>
       </div>
     )
