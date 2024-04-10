@@ -59,7 +59,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
-
+      {/* Feedback Form */}
       <div className='max-w-xxl mx-auto p-6 border-2 mt-24 mb-28'>
         <h2 className='text-5xl font-bold mb-4'>Feedback Form</h2>
         <h3 className='text-xl font-semibold mb-8'>We'd love to hear from you!</h3>
@@ -76,7 +76,19 @@ const Contact = () => {
             <Label htmlFor='email' className='block text-sm font-medium text-gray-700'>
               Email Address
             </Label>
-            <Input id='email' type='email' {...register('email', { required: true })} className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm' placeholder='you@example.com' />
+            <Input
+              id='email'
+              type='email'
+              {...register('email', {
+                required: true,
+                pattern: {
+                  value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                  message: 'Please enter a valid email address'
+                }
+              })}
+              className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+              placeholder='you@email.com'
+            />
             {errors.email && <span className='text-red-500'>This field is required</span>}
           </div>
 
@@ -101,7 +113,7 @@ const Contact = () => {
           </div>
         </form>
       </div>
-
+      {/* Social Media Links */}
       <div className='text-center mt-8'>
         <h3 className='text-4xl font-semibold mb-4'>Follow us on Social Media</h3>
         <div className='flex justify-center space-x-4'>
