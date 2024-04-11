@@ -21,6 +21,7 @@ module.exports = {
         xs: '375px'
       },
       colors: {
+        'custom-green': '#0c2626',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
