@@ -4,6 +4,7 @@ package com.yumme.backendyumme.controller;
 import com.yumme.backendyumme.domain.Category;
 import com.yumme.backendyumme.domain.Recipe;
 import com.yumme.backendyumme.domain.Suggestion;
+import com.yumme.backendyumme.repository.CategoryRepository;
 import com.yumme.backendyumme.service.CategoryService;
 import com.yumme.backendyumme.service.RecipeService;
 import com.yumme.backendyumme.service.SuggestionService;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/public/")
@@ -26,6 +28,8 @@ public class PublicController {
     private CategoryService categoryService;
     @Autowired
     private SuggestionService suggestionService;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @GetMapping("recipe")
     public ResponseEntity<List<Recipe>> GetAllRecipe (){
@@ -46,11 +50,21 @@ public class PublicController {
         List<Category> categories = categoryService.getAllCategories();
         return ResponseEntity.ok(categories);
     }
-    
-    //TODO: Cambiar Path a string
-    @GetMapping("recipe/category/{id}")
-    public ResponseEntity<List<Recipe>> GetRecipesByCategoryId(@PathVariable int id ){
-        List<Recipe> recipes = categoryService.GetRecipesByCategoryId(id);
+
+    @GetMapping("recipe/category/{categoryName}")
+    public ResponseEntity<?> GetRecipesByCategoryName(@PathVariable String categoryName){
+
+        Optional<Category> optionalCategory = categoryRepository.findByCategory(categoryName);
+        if (!optionalCategory.isPresent())
+            return SpringUtils.wrongCategory();
+
+        Category category = optionalCategory.get();
+
+
+        List<Recipe> recipes = categoryService.GetRecipesByCategoryName(category);
+        if(recipes.isEmpty())
+            return SpringUtils.noRecipesCategory();
+
         return ResponseEntity.ok(recipes);
     }
 

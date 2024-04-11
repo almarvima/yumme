@@ -80,6 +80,16 @@ public class SpringUtils {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
+    public static ResponseEntity<?> noRecipesCategory() {
+        JsonResponse response = new JsonResponse(HttpStatus.NOT_FOUND.value(), "NO_RECIPES_CATEGORY");
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
+    public static ResponseEntity<?> wrongCategory() {
+        JsonResponse response = new JsonResponse(HttpStatus.NOT_FOUND.value(), "WRONG_CATEGORY");
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
 
     public static class JsonResponse {
         private int status;
