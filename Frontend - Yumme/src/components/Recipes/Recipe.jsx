@@ -38,8 +38,8 @@ const Recipe = () => {
 
           <div className='border-t md:border-t-0 md:border-l border-teal-500 pt-4 md:pt-0 md:pl-4 space-y-4 w-full md:w-1/2'>
             <h1 className='text-5xl font-bold pb-4'>{recipe.title}</h1>
-            <p className='text-lg text-teal-900 tracking-wide pb-4'>{recipe.description}</p>
-            <div className='text-lg text-teal-900 font-light space-y-2'>
+            <p className='text-lg text-teal-900 tracking-wide pb-4 dark:text-white'>{recipe.description}</p>
+            <div className='text-lg text-teal-900 font-light space-y-2 dark:text-white'>
               <p className='mb-6'>
                 <span className='font-semibold'> Ingredients: </span> {recipe.ingredients}
               </p>
