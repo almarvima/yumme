@@ -63,7 +63,7 @@ const SignUp = () => {
       <div className="w-full max-w-xl">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="bg-white shadow-md rounded px-10 pt-6 pb-10 mb-8"
+          className="bg-background shadow-md rounded px-10 pt-6 pb-10 mb-8"
         >
           <div className="mb-4">
             <h1 className="text-center md:text-6xl font-bold mb-8">Sign Up</h1>

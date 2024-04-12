@@ -57,7 +57,7 @@ const CreateRecipe = () => {
 
   return (
     <section className=' '>
-      <div className='bg-white  rounded py-8 flex flex-col gap-4 border-b-none  mb-4'>
+      <div className='bg-background  rounded py-8 flex flex-col gap-4 border-b-none  mb-4'>
         <h2 className=' font-bold text-left no-underline '>New Recipe</h2>
         <form onSubmit={handleSubmit(onSubmit)} className='md:flex md:justify-between'>
           <div className='md:w-1/2 md:pr-4'>

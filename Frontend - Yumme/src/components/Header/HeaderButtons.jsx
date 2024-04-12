@@ -9,16 +9,14 @@ import { Separator } from "../ui/separator";
 import UserDropdown from "./UserDropdown";
 
 const HeaderButtons = () => {
-  const { userIsAuthenticated, logOut } = useAuth();
+  const { userIsAuthenticated } = useAuth();
 
   return (
     <>
-    <Separator className="block md:hidden" />
+      <Separator className="block md:hidden" />
       <div className="flex  w-10/12 md:w-auto mx-auto md:py-0 flex-col md:flex-row gap-4 md:gap-4">
-      
-        {userIsAuthenticated() ? (
+        {userIsAuthenticated() && window.innerWidth >= 768 ? (
           <>
-          
             <UserDropdown />
           </>
         ) : (
