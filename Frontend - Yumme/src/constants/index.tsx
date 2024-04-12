@@ -33,6 +33,7 @@ export const Routes = {
   USER_RECIPES: "my-recipes",
   FORBIDDEN: "/forbidden",
   ERROR: "/error",
+  APPEARANCE: "appearance",
 };
 
 export const menuItems = [

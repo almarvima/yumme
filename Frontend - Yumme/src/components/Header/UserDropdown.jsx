@@ -31,13 +31,13 @@ const UserDropdown = () => {
         <DropdownMenuSeparator />
 
         <DropdownMenuItem>
-          <Link to={`${Routes.USER_PROFILE}`}>
+          <Link className="text-primary" to={`${Routes.USER_PROFILE}`}>
             My recipes
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
           {" "}
-          <Link to={`${Routes.USER_SETTINGS}`}>
+          <Link className="text-primary" to={`${Routes.USER_SETTINGS}`}>
             Settings
           </Link>
         </DropdownMenuItem>
