@@ -1,19 +1,12 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
 
-import { Link } from 'react-router-dom'
-
-import { menuItems } from '../../constants/'
-import BurgerMenu from './BurgerMenu.jsx'
-import HeadersButtons from './HeaderButtons.jsx'
-
-import { useTheme } from '../../contexts/ThemeContext.tsx'
-import ThemeToggleButton from './ThemeToggleButton.jsx'
+import { menuItems } from '../../constants/';
+import BurgerMenu from './BurgerMenu.jsx';
+import HeadersButtons from './HeaderButtons.jsx';
 
 const Header = () => {
-  const { theme, setTheme } = useTheme()
-  // get from local storage token
-  // const token = localStorage.getItem('token')
+
 
   return (
     <header className='w-full  flex flex-col shadow-sm bg-teal-100 '>
@@ -39,7 +32,7 @@ const Header = () => {
           <BurgerMenu />
         </div>
 
-        <ThemeToggleButton />
+ 
       </div>
     </header>
   )
