@@ -1,18 +1,10 @@
-import React from "react";
-import { CircleUser, Menu, Package2, Search } from "lucide-react";
-import { Button } from "../ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
-import { Checkbox } from "../ui/checkbox";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import { Input } from "../ui/input";
-import { Link } from "react-router-dom";
+import { Button } from '../ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card';
+import { Checkbox } from '../ui/checkbox';
+import { Input } from '../ui/input';
 
 const UserSettings = () => {
   return (
