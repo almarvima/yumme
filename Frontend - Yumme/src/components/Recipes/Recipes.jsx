@@ -2,7 +2,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 import RecipeCard from "./RecipeCard";
 import { useRecipes } from "../../api/recipes";
-import RecipeCard from "./RecipeCard";
 import { useSearchParams } from "react-router-dom";
 
 
