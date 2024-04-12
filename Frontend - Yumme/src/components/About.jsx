@@ -6,21 +6,21 @@ import React from 'react'
  */
 const About = () => {
   return (
-    <div className='container mx-auto bg-cover px-4 '>
+    <div className='container mx-auto bg-cover px-4'>
       <div className='flex flex-col md:flex-row items-center justify-between gap-8'>
         <div className='md:w-1/2'>
           <img src='/yumMe_logo.webp' alt='About Us' className='rounded-full shadow-lg size-96' />
         </div>
         <div className='md:w-1/2 md:pl-8'>
-          <h1 className='text-3xl font-bold text-gray-800 mb-4'>About Us</h1>
-          <p className='text-gray-600 mb-4'>
+          <h1 className='text-3xl font-bold text-gray-800 mb-4 dark:text-white'>About Us</h1>
+          <p className='text-gray-600 mb-4 dark:text-white'>
             Welcome to YumMe, your ultimate source for delicious and reliable recipe ideas! Whether you're a beginner or a seasoned chef, our site is designed to inspire your culinary journey and enhance your cooking skills.
           </p>
-          <p className='text-gray-600 mb-4'>
+          <p className='text-gray-600 mb-4 dark:text-white'>
             Our journey began a few years ago, with a passion for cooking and a desire to share our favorite recipes with food lovers worldwide. We believe that cooking should be accessible to everyone, and through our website, we aim to provide
             easy-to-follow recipes that yield consistent results.
           </p>
-          <p className='text-gray-600'>
+          <p className='text-gray-600 dark:text-white'>
             From hearty meals to quick snacks, our carefully curated recipes are tested in our kitchen to ensure they're perfect before reaching your table. Join us as we explore the world of flavors, celebrate the joy of cooking, and bring
             deliciousness right into your kitchen.
           </p>

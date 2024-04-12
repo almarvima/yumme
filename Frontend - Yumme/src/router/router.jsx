@@ -16,6 +16,7 @@ import NotFound from '../components/ErrorPages/NotFound'
 import Forbidden from '../components/ErrorPages/Forbidden'
 import UnexpectedError from '../components/ErrorPages/UnexpectedError'
 import Recipe from '../components/Recipes/Recipe'
+import AppearanceSettings from '../components/Settings/AppearanceSettings'
 
 /**
  * The router configuration for the application.
@@ -90,7 +91,17 @@ export const router = createBrowserRouter([
 
               {
                 path: Routes.USER_SETTINGS,
-                element: <UserSettings />
+                element: <UserSettings />,
+                children: [
+                  {
+                    index: true,
+                    element: <div>general settings</div>
+                  },
+                  {
+                    path: 'appearance',
+                    element: <AppearanceSettings />
+                  }
+                ]
               }
             ]
           }

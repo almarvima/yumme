@@ -17,7 +17,7 @@ const userProfileLink = [
 export function UserProfile() {
   return (
     <div className="flex min-h-screen w-full flex-col">
-      <section className="sticky bg-white top-0 flex h-16 px-0 items-center gap-4 border-b ">
+      <section className="sticky bg-transparent top-0 flex h-16 px-0 items-center gap-4 border-b ">
         <nav className="md:text-lg font-medium flex flex-row md:items-center gap-4 text-sm lg:gap-6">
           <Edit className="size-6 sr-only md:not-sr-only" />
           <span className="sr-only">Your Recipes</span>
@@ -29,8 +29,8 @@ export function UserProfile() {
               end
               className={({ isActive }) =>
                 isActive
-                  ? "text-gray-900 border-b-2 pb-1 border-teal-500 transition-all"
-                  : "text-gray-900 hover:text-teal-500"
+                  ? "text-primary border-b-2 pb-1 border-teal-500 transition-all"
+                  : "text-primary hover:text-teal-500"
               }
             >
               {link.name}

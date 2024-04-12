@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { Link } from "react-router-dom";
 import { cn } from "../../lib/utils";
 import { Routes } from "../../constants";
+import UploadedRecipes from "./UploadedRecipes";
 
 const UserRecipes = () => {
   return (
@@ -29,7 +30,7 @@ const UserRecipes = () => {
             </Link>
           </div>
         </div>
-        <TabsContent value="all">your uploads</TabsContent>
+        <TabsContent value="all"><UploadedRecipes /></TabsContent>
         <TabsContent value="saved">your saved recipes</TabsContent>
       </Tabs>
     </section>

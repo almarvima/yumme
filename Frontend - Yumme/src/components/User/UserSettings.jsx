@@ -1,18 +1,18 @@
 import React from "react";
-import { CircleUser, Menu, Package2, Search } from "lucide-react";
-import { Button } from "../ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
-import { Checkbox } from "../ui/checkbox";
+import { Link, NavLink, Outlet } from "react-router-dom";
+import { Routes } from "../../constants";
+import { Dot } from "lucide-react";
 
-import { Input } from "../ui/input";
-import { Link } from "react-router-dom";
+const userSettingsLink = [
+  {
+    name: "General",
+    to: Routes.USER_SETTINGS,
+  },
+  {
+    name: "Appearance",
+    to: Routes.APPEARANCE,
+  },
+];
 
 const UserSettings = () => {
   return (
@@ -22,57 +22,25 @@ const UserSettings = () => {
       </div>
       <div className="mx-auto grid w-full max-w-7xl items-start gap-6 md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr]">
         <nav className="grid gap-4 text-sm text-muted-foreground">
-          <Link href="#" className="font-semibold text-primary">
-            General
-          </Link>
-          <Link href="#">Appearance</Link>
+          {userSettingsLink.map((link, index) => (
+            <NavLink
+              key={index}
+              to={link.to}
+              end
+              className={({ isActive }) =>
+                isActive
+                  ? "text-primary w-full bg-primary/10 font-bold transition-colors p-2 rounded-lg "
+                  : "text-primary p-2 hover:font-semibold hover:bg-primary/5 transition-colors rounded-lg"
+              }
+            >
+              {link.name}
+              
+            </NavLink>
+          ))}
         </nav>
+
         <div className="grid gap-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Store Name</CardTitle>
-              <CardDescription>
-                Used to identify your store in the marketplace.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form>
-                <Input placeholder="Store Name" />
-              </form>
-            </CardContent>
-            <CardFooter className="border-t px-6 py-4">
-              <Button>Save</Button>
-            </CardFooter>
-          </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle>Plugins Directory</CardTitle>
-              <CardDescription>
-                The directory within your project, in which your plugins are
-                located.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form className="flex flex-col gap-4">
-                <Input
-                  placeholder="Project Name"
-                  defaultValue="/content/plugins"
-                />
-                <div className="flex items-center space-x-2">
-                  <Checkbox id="include" defaultChecked />
-                  <label
-                    htmlFor="include"
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                  >
-                    Allow administrators to change the directory.
-                  </label>
-                </div>
-              </form>
-            </CardContent>
-            <CardFooter className="border-t px-6 py-4">
-              <Button>Save</Button>
-            </CardFooter>
-          </Card>
+          <Outlet />
         </div>
       </div>
     </section>

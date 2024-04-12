@@ -10,7 +10,7 @@ const CategoryBox = ({ category }) => {
   return (
     <div className="flex cursor-pointer pb-2    flex-col items-center justify-center gap-2">
       {category.icon}
-      <span className="text-gray-900 text-sm truncate">{category.label}</span>
+      <span className="text-gray-900 text-sm truncate dark:text-white">{category.label}</span>
     </div>
   );
 };

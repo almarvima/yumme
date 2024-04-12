@@ -1,22 +1,15 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
-import RecipeCard from "./RecipeCard";
 import { useRecipes } from "../../api/recipes";
-import { useSearchParams } from "react-router-dom";
+import RecipeCard from "../Recipes/RecipeCard";
+import UploadedRecipe from "./UploadedRecipe";
 
+const UploadedRecipes = () => {
 
+    const { getRecipesPerUser } = useRecipes();
+    const { data: recipes, isLoading, isError } = getRecipesPerUser();
+    console.log("🚀 ~ UploadedRecipes ~ recipes:", recipes)
 
-const Recipes = () => {
-  // Ejemplo de implementación de useQuery
-  const { getRecipes, getRecipeByCategory } = useRecipes();
-  // const { data: recipes, isLoading, isError } = getRecipes();
-  const [searchParams] = useSearchParams({ q: "" });
-  const categoryParams = searchParams.get("q");
-  const {
-    data: recipes,
-    isLoading,
-    isError,
-  } = categoryParams ? getRecipeByCategory(categoryParams) : getRecipes();
 
   return (
     <section className="py-8">
@@ -50,7 +43,8 @@ const Recipes = () => {
 
         {recipes &&
           recipes.map((recipe) => (
-            <RecipeCard
+            <UploadedRecipe
+                isUserRecipe
               key={recipe.id}
               id={recipe.id}
               title={recipe.title}
@@ -66,4 +60,4 @@ const Recipes = () => {
   );
 };
 
-export default Recipes;
+export default UploadedRecipes;

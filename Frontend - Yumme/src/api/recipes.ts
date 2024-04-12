@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { fetchData, postData } from ".";
+import { deleteData, fetchData, postData } from ".";
+import { queryClient } from "@/config";
 
 export const useRecipes = () => {
   const getRecipes = () => {
@@ -11,11 +12,9 @@ export const useRecipes = () => {
   };
 
   const getRecipe = (id: number) => {
-    console.log(id);
     return useQuery({
       queryKey: ["recipe", id],
-      queryFn: async () =>
-        fetchData(`/public/recipe/${id}`)
+      queryFn: async () => fetchData(`/public/recipe/${id}`),
     });
   };
 
@@ -26,9 +25,42 @@ export const useRecipes = () => {
     });
   };
 
+  // Fake API call to get recipes by category while waiting for the real API
+  const getRecipeByCategory = (category: string) => {
+    return useQuery({
+      queryKey: ["recipes"],
+      queryFn: async () => fetchData("/public/recipe"),
+      select: (data) => {
+        return data.filter((recipe) => recipe.categoryName === category);
+      },
+    });
+  };
+
+  const getRecipesPerUser = () => {
+    return useQuery({
+      queryKey: ["recipes", "user"],
+      queryFn: async () => fetchData("/api/recipe/user", true),
+    });
+  };
+
+  const deleteRecipe = () => {
+    return useMutation({
+      mutationKey: ["deleteRecipe"],
+      mutationFn: async (id: number) => deleteData(`/api/recipe/${id}`, true),
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ["recipes"],
+        });
+      },
+    });
+  };
+
   return {
     getRecipes,
     getRecipe,
     createRecipe,
+    getRecipeByCategory,
+    getRecipesPerUser,
+    deleteRecipe,
   };
 };

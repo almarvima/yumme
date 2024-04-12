@@ -1,5 +1,5 @@
 import React from 'react'
-import myImage from '../../images/pageNotFound_404_error.png'
+import myImage from '../../images/404.png'
 
 const NotFound = () => {
   return (
