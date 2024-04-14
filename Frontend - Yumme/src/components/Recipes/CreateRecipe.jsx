@@ -4,7 +4,7 @@ import { Routes } from '../../constants' // Import the categories from the const
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 
-import { Button } from '../ui/button'
+import { Button } from '@/components/ui/button'
 import { Label } from '../ui/label'
 import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
@@ -230,12 +230,12 @@ const CreateRecipe = () => {
               )}
             </div>
             <div className='flex flex-col md:flex-row-reverse items-center mt-20 justify-between  gap-4 md:gap-4'>
-              <Button type='submit' className='w-full py-2 text-base'>
+              <Button type='submit' className='w-full py-2 text-base dark:text-teal-900 dark:hover:text-teal-50 dark:hover:bg-teal-800'>
                 Create Recipe
               </Button>
               <Button
                 variant='outline'
-                className='w-full py-2  text-base border border-gray-500 hover:border-teal-50 hover:bg-teal-900 hover:text-teal-50 bg-teal-100'
+                className='w-full py-2  text-base dark:text-teal-900 dark:hover:text-teal-50 border border-gray-500 hover:border-teal-50 hover:bg-teal-900 hover:text-teal-50 bg-teal-100'
                 onClick={() => {
                   navigate('/profile')
                 }}>

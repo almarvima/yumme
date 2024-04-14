@@ -107,7 +107,7 @@ const Contact = () => {
           </div>
 
           <div className='flex justify-end'>
-            <Button type='submit' className='w-full py-2 text-base'>
+            <Button type='submit' className='w-full py-2 text-base dark:text-teal-900 dark:hover:bg-teal-800 dark:hover:text-teal-50'>
               Send Feedback
             </Button>
           </div>
