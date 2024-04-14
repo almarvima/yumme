@@ -11,7 +11,7 @@ function ThemeToggleButton() {
   }
 
   return (
-    <Button className='border-2 max-w-max border-black' variant={theme === 'dark' ? 'secondary' : 'primary'} onClick={toggleTheme}>
+    <Button className='border-2 max-w-max border-grey hover:bg-teal-500 dark:hover:bg-teal-800' variant={theme === 'dark' ? 'secondary' : 'primary'} onClick={toggleTheme}>
       {theme === 'dark' ? <Sun className='mr-1' /> : <Moon className='mr-1' />} Switch to {theme === 'dark' ? 'light' : 'dark'} mode
     </Button>
   )
