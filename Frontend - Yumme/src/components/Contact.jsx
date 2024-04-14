@@ -38,7 +38,7 @@ const Contact = () => {
 
     mutate(data, {
       onSuccess: (res) => {
-        if (res.code === 'SUGGESTION_CREATED') {
+        if (res.status === 200) {
           toast({
             title: 'Feedback Submitted!',
             description: 'Your feedback has been submitted successfully! We will get back to you soon.'
