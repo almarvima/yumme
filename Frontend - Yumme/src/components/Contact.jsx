@@ -1,5 +1,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { useSuggestions } from '../api/suggestions'
+import { useNavigate } from 'react-router-dom'
 
 import { Instagram, Phone } from 'lucide-react'
 import { Mail } from 'lucide-react'
@@ -12,12 +14,18 @@ import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { useToast } from '@/components/ui/use-toast'
 
 /**
  * Renders the Contact component with an image and contact information
  * @return {JSX.Element}
  */
 const Contact = () => {
+  const { addSuggestion } = useSuggestions()
+  const { mutate } = addSuggestion()
+  const { navigate } = useNavigate()
+  const { toast } = useToast()
+
   const {
     register,
     handleSubmit,
@@ -27,8 +35,22 @@ const Contact = () => {
 
   const onSubmit = (data) => {
     // Lógica para enviar los datos del formulario a un servidor o API.
-    console.log(data)
-    reset() // resetear el formulario después del envío
+
+    mutate(data, {
+      onSuccess: (res) => {
+        if (res.code === 'SUGGESTION_CREATED') {
+          toast({
+            title: 'Feedback Submitted!',
+            description: 'Your feedback has been submitted successfully! We will get back to you soon.'
+          })
+          reset()
+        }
+      },
+      onError: (error) => {
+        console.error('Error submitting feedback:', error)
+        navigate('/error')
+      }
+    })
   }
 
   return (
@@ -65,15 +87,15 @@ const Contact = () => {
         <h3 className='text-xl font-semibold mb-8'>We'd love to hear from you!</h3>
         <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
           <div>
-            <Label htmlFor='fullName' className='block text-sm font-medium text-gray-700'>
+            <Label htmlFor='name' className='block text-sm font-medium text-gray-700 dark:text-teal-50'>
               Full Name
             </Label>
-            <Input id='fullName' type='text' {...register('fullName', { required: true })} className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm' placeholder='Your full name' />
+            <Input id='name' type='text' {...register('name', { required: true })} className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm' placeholder='Your full name' />
             {errors.fullName && <span className='text-red-500'>This field is required</span>}
           </div>
 
           <div>
-            <Label htmlFor='email' className='block text-sm font-medium text-gray-700'>
+            <Label htmlFor='email' className='block text-sm font-medium text-gray-700 dark:text-teal-50'>
               Email Address
             </Label>
             <Input
@@ -93,7 +115,7 @@ const Contact = () => {
           </div>
 
           <div>
-            <Label htmlFor='feedback' className='block text-sm font-medium text-gray-700'>
+            <Label htmlFor='feedback' className='block text-sm font-medium text-gray-700 dark:text-teal-50'>
               Your Feedback
             </Label>
             <Textarea

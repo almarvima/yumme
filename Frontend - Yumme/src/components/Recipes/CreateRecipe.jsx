@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRecipes } from '../../api/recipes'
-import { Routes } from '../../constants' // Import the categories from the constants file
+// import { Routes } from '../../constants' // Import the categories from the constants file
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 
