@@ -70,7 +70,7 @@ const CreateRecipe = () => {
                 id='title'
                 name='title'
                 type='text'
-                className='shadow appearance-none border rounded w-full  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                className='shadow appearance-none border rounded w-full  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:text-teal-50'
                 placeholder='Title'
               />
               {errors.title && (
@@ -87,7 +87,7 @@ const CreateRecipe = () => {
                 {...register('description', { required: true })}
                 id='description'
                 name='description'
-                className='shadow appearance-none border rounded w-full h-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                className='shadow appearance-none border rounded w-full h-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:text-teal-50'
                 placeholder='Description'
               />
               {errors.description && (
@@ -144,7 +144,7 @@ const CreateRecipe = () => {
                 id='cookingTime'
                 name='cookingTime'
                 type='text'
-                className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:text-teal-50'
                 placeholder='Cooking Time'
               />
               {errors.cookingTime && (
@@ -185,7 +185,7 @@ const CreateRecipe = () => {
                 {...register('ingredients', { required: true })}
                 id='ingredients'
                 name='ingredients'
-                className='shadow appearance-none border rounded w-full h-48 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                className='shadow appearance-none border rounded w-full h-48 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:text-teal-50'
                 placeholder='Ingredients'
               />
               {errors.ingredients && (
