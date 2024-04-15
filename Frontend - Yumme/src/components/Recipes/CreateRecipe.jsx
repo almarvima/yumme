@@ -62,7 +62,7 @@ const CreateRecipe = () => {
         <form onSubmit={handleSubmit(onSubmit)} className='md:flex md:justify-between'>
           <div className='md:w-1/2 md:pr-4'>
             <div className='mb-4'>
-              <Label className='block text-gray-700 text-lg font-bold mb-2' htmlFor='title'>
+              <Label className='block text-gray-700 text-lg font-bold mb-2 dark:text-teal-50' htmlFor='title'>
                 Recipe Title
               </Label>
               <Input
@@ -80,7 +80,7 @@ const CreateRecipe = () => {
               )}
             </div>
             <div className='mb-4 mt-8'>
-              <Label className='block text-gray-700 text-lg font-bold mb-2' htmlFor='description'>
+              <Label className='block text-gray-700 text-lg font-bold mb-2 dark:text-teal-50' htmlFor='description'>
                 Recipe Description
               </Label>
               <Textarea
@@ -97,7 +97,7 @@ const CreateRecipe = () => {
               )}
             </div>
             <div className='mb-8 mt-8'>
-              <Label className='block text-gray-700 text-lg font-bold mb-2' htmlFor='imgUrl'>
+              <Label className='block text-gray-700 text-lg font-bold mb-2 dark:text-teal-50' htmlFor='imgUrl'>
                 Recipe Image
               </Label>
               {/* <Input
@@ -130,7 +130,7 @@ const CreateRecipe = () => {
           </div>
           <div className='md:w-1/2 md:pl-4'>
             <div className='mt-8 md:mt-0 '>
-              <Label className='block text-gray-700 text-lg font-bold mb-2' htmlFor='cookingTime'>
+              <Label className='block text-gray-700 text-lg font-bold mb-2 dark:text-teal-50' htmlFor='cookingTime'>
                 Cooking Time
               </Label>
               <Input
@@ -178,7 +178,7 @@ const CreateRecipe = () => {
               </Card>
             </div>
             <div className='mb-10'>
-              <Label className='block text-gray-700 text-lg font-bold mb-2' htmlFor='ingredients'>
+              <Label className='block text-gray-700 text-lg font-bold mb-2 dark:text-teal-50' htmlFor='ingredients'>
                 Ingredients Needed
               </Label>
               <Textarea
