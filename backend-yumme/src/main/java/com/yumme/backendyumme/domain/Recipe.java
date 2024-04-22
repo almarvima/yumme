@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -51,6 +52,11 @@ public class Recipe {
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JsonIdentityReference(alwaysAsId = true)
     private Category recipeCategory;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe")
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "comment")
+    @JsonIdentityReference(alwaysAsId = true)
+    private List<Comment> comment;
 
     private Date created_at;
 

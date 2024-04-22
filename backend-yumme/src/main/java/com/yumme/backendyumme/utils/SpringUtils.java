@@ -90,9 +90,14 @@ public class SpringUtils {
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
+    public static ResponseEntity<?> commentCreate(String username, long id) {
+        JsonResponse response = new JsonResponse(username,id,HttpStatus.OK.value(), "COMMENT_CREATED");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
     public static class JsonResponse {
         private int status;
+        private String username;
         private long id;
         private String code;
 
@@ -101,6 +106,12 @@ public class SpringUtils {
             this.code = code;
         }
         public JsonResponse(long id, int status, String code) {
+            this.id = id;
+            this.status = status;
+            this.code = code;
+        }
+        public JsonResponse(String username, long id, int status, String code) {
+            this.username = username;
             this.id = id;
             this.status = status;
             this.code = code;
@@ -124,7 +135,11 @@ public class SpringUtils {
 
         public long getId() {return id;}
 
-        public void setId(long id) {this.id = id;}
+        public void setId(long id) { this.id = id;}
+
+        public String getUsername() {return username;}
+
+        public void setUsername(String username) {this.username = username;}
     }
 
 }

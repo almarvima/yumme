@@ -42,14 +42,20 @@ public class User implements UserDetails {
     
     @Column(length = 50)
     private String status;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Roles> rolesSet = new HashSet<>();
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "recipe_favorite", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "recipe_id"))
     private Set<Recipe> recipesSet = new HashSet<>();
+
     @OneToMany( mappedBy = "ownerId",cascade = CascadeType.PERSIST)
     private List<Recipe> recipesList;
+
+    @OneToMany(mappedBy ="user", cascade = CascadeType.PERSIST )
+    private List<Comment> commentsList;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date created_at;
