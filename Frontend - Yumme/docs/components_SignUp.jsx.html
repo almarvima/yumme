@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/SignUp.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/SignUp.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// import { useToast } from "@/components/ui/use-toast";
+import { BadgeCheck } from "lucide-react";
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+
+import { useAuth } from "../auth";
+import { Routes } from "../constants";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
+
+/**
+ * Renders the SignUp component
+ * @return {JSX.Element}
+ */
+const SignUp = () => {
+  const navigate = useNavigate();
+
+  const { userIsAuthenticated, useFormAuth } = useAuth();
+
+  useEffect(() => {
+    userIsAuthenticated() &amp;&amp; navigate("/");
+  }, [navigate, userIsAuthenticated]);
+
+  /**
+   * The `useForm` hook from the `react-hook-form` library is being used to create a form with the
+  following properties:
+    @see https://react-hook-form.com/docs
+   */
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  /* The `watch` function is used to watch the input fields and return their values. The `watch` function
+  is used to get the values of the `password` and `confirmPassword` input fields. */
+
+  const password = watch("password");
+
+  /**
+   * Handles form submission for user registration.
+   * @see useFormAuth
+   * @param {function} onSubmit - The submit function provided by the useFormAuth hook.
+   * @returns {void}
+   */
+  const { mutate: onSubmit } = useFormAuth(Routes.REGISTER, {
+    successTitle: (
+      &lt;div className="flex  items-center  gap-2">
+        &lt;BadgeCheck color="#000000" />
+        &lt;span className="">Welcome!&lt;/span>
+      &lt;/div>
+    ),
+    successDescription: "You signed in successfully!",
+    errorDescription:
+      "It seems there is already an account with this Username.",
+  });
+
+  return (
+    &lt;div className="min-h-screen flex flex-col items-center pt-8 sm:pt-16">
+      &lt;div className="w-full max-w-xl">
+        &lt;form
+          onSubmit={handleSubmit(onSubmit)}
+          className="bg-background shadow-md rounded px-10 pt-6 pb-10 mb-8"
+        >
+          &lt;div className="mb-4">
+            &lt;h1 className="text-center md:text-6xl font-bold mb-8">Sign Up&lt;/h1>
+            &lt;Label
+              className="block text-gray-700 text-lg font-bold mb-2 font-sans"
+              htmlFor="userName"
+            >
+              User Name
+            &lt;/Label>
+            &lt;Input
+              {...register("userName", { required: true })}
+              aria-invalid={errors.userName ? "true" : "false"}
+              id="userName"
+              type="text"
+              placeholder="joe_doe"
+              className="w-full"
+              defaultValue={"test"}
+            />
+            {errors.userName?.type === "required" &amp;&amp; (
+              &lt;p role="alert" className="text-destructive">
+                The username is required
+              &lt;/p>
+            )}
+          &lt;/div>
+          &lt;div className="mb-4">
+            &lt;Label
+              className="block text-gray-700 text-lg font-bold mb-2 font-sans"
+              htmlFor="name"
+            >
+              First Name
+            &lt;/Label>
+            &lt;Input
+              defaultValue={"test"}
+              aria-invalid={errors.name ? "true" : "false"}
+              {...register("name", { required: true })}
+              id="name"
+              type="text"
+              placeholder="Joe"
+              className="w-full"
+            />
+            {errors.firstName?.type === "required" &amp;&amp; (
+              &lt;p role="alert" className="text-destructive">
+                The first name is required
+              &lt;/p>
+            )}
+          &lt;/div>
+          &lt;div className="mb-4">
+            &lt;Label
+              className="block text-gray-700 text-lg font-bold mb-2 font-sans"
+              htmlFor="lastName"
+            >
+              Last Name
+            &lt;/Label>
+            &lt;Input
+              defaultValue={"test"}
+              aria-invalid={errors.lastName ? "true" : "false"}
+              {...register("lastName", { required: true })}
+              id="lastName"
+              type="text"
+              placeholder="Doe"
+              className="w-full"
+            />
+            {errors.lastName?.type === "required" &amp;&amp; (
+              &lt;p role="alert" className="text-destructive">
+                The last name is required
+              &lt;/p>
+            )}
+          &lt;/div>
+          &lt;div className="mb-4">
+            &lt;Label
+              className="block text-gray-700 text-lg font-bold mb-2 font-sans"
+              htmlFor="email"
+            >
+              Email Address
+            &lt;/Label>
+            &lt;Input
+              defaultValue={"test@test.com"}
+              aria-invalid={errors.email ? "true" : "false"}
+              {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
+              id="email"
+              type="email"
+              placeholder="example@example.com"
+              className="w-full"
+            />
+            {errors.email?.type === "required" &amp;&amp; (
+              &lt;p role="alert" className="text-destructive">
+                The email is required
+              &lt;/p>
+            )}
+          &lt;/div>
+          &lt;div className="mb-6">
+            &lt;Label
+              className="block text-gray-700 text-lg font-bold mb-2 font-sans"
+              htmlFor="password"
+            >
+              Password
+            &lt;/Label>
+            &lt;Input
+              defaultValue={"test"}
+              aria-invalid={errors.password ? "true" : "false"}
+              {...register("password", { required: true })}
+              id="password"
+              type="password"
+              placeholder="*************"
+              className="w-full"
+            />
+            {errors.password?.type === "required" &amp;&amp; (
+              &lt;p role="alert" className="text-destructive">
+                Please enter a password
+              &lt;/p>
+            )}
+          &lt;/div>
+          &lt;div className="mb-6">
+            &lt;Label
+              className="block text-gray-700 text-lg font-bold mb-2 font-sans"
+              htmlFor="confirmPassword"
+            >
+              Confirm Password
+            &lt;/Label>
+            &lt;Input
+              aria-invalid={errors.confirmPassword ? "true" : "false"}
+              {...register("confirmPassword", {
+                required: true,
+                validate: (value) =>
+                  value === password || "Passwords do not match",
+              })}
+              id="confirmPassword"
+              type="password"
+              placeholder="*************"
+              className="w-full"
+            />
+            {errors.confirmPassword &amp;&amp; (
+              &lt;p role="alert" className="text-destructive">
+                {errors.confirmPassword.message}
+              &lt;/p>
+            )}
+          &lt;/div>
+          &lt;div className="flex flex-col md:flex-row-reverse items-center justify-between  gap-4 md:gap-4">
+            &lt;Button type="submit" className="w-full py-2 text-base">
+              Sign Up
+            &lt;/Button>
+            &lt;Button
+              variant="outline"
+              className="w-full py-2  text-base border border-gray-500 hover:border-teal-50 hover:bg-teal-900 hover:text-teal-50 bg-teal-100"
+              onClick={() => {
+                navigate(Routes.HOME);
+              }}
+            >
+              Cancel
+            &lt;/Button>
+          &lt;/div>
+        &lt;/form>
+        &lt;p className="text-center text-gray-500 text-xs md:text-lg">
+          Already have a user account?{" "}
+          &lt;Link
+            to={Routes.SIGN_IN}
+            className="text-purple-500 hover:text-purple-600"
+          >
+            Click here to sign in!
+          &lt;/Link>
+        &lt;/p>
+      &lt;/div>
+    &lt;/div>
+  );
+};
+
+export default SignUp;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#About">About</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#BurgerMenu">BurgerMenu</a></li><li><a href="global.html#Categories">Categories</a></li><li><a href="global.html#CategoryBox">CategoryBox</a></li><li><a href="global.html#Contact">Contact</a></li><li><a href="global.html#HeroSection">HeroSection</a></li><li><a href="global.html#Layout">Layout</a></li><li><a href="global.html#RecipeCard">RecipeCard</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SignUp">SignUp</a></li><li><a href="global.html#UploadedRecipe">UploadedRecipe</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Apr 19 2024 18:56:58 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

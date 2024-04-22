@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Contact.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Contact.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react'
+import { useForm } from 'react-hook-form'
+
+import { Instagram, Phone } from 'lucide-react'
+import { Mail } from 'lucide-react'
+import { MapPin } from 'lucide-react'
+import { Linkedin } from 'lucide-react'
+import { Youtube } from 'lucide-react'
+import { Twitter } from 'lucide-react'
+import { Facebook } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Label } from '@/components/ui/label'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+
+/**
+ * Renders the Contact component with an image and contact information
+ * @return {JSX.Element}
+ */
+const Contact = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset
+  } = useForm()
+
+  const onSubmit = (data) => {
+    // Lógica para enviar los datos del formulario a un servidor o API.
+    console.log(data)
+    reset() // resetear el formulario después del envío
+  }
+
+  return (
+    &lt;div className='container mx-auto p-4 md:p-8'>
+      &lt;div className='flex flex-wrap lg:flex-nowrap items-center gap-8 justify-center'>
+        {/* Contact Image */}
+        &lt;div className=''>
+          &lt;img src='./contact_img.webp' alt='Contact' className='rounded-full object-cover shadow-md sm:size-96' />
+        &lt;/div>
+
+        {/* Contact Information */}
+        &lt;div className='flex flex-col'>
+          &lt;h2 className='text-5xl font-bold mb-4'>Get in Touch&lt;/h2>
+          &lt;p className='mb-4 text-pretty'>Whether you have a question about our services, pricing, or anything else, our team is ready to answer all your questions.&lt;/p>
+          &lt;div className='space-y-3'>
+            &lt;div className='flex items-center'>
+              &lt;Phone height={'40'} width={'40'} />
+              &lt;span className='ml-2'>+123 456 7890&lt;/span>
+            &lt;/div>
+            &lt;div className='flex items-center'>
+              &lt;Mail height={'40'} width={'40'} />
+              &lt;span className='ml-3'>contact@yumme.com&lt;/span>
+            &lt;/div>
+            &lt;div className='flex items-center'>
+              &lt;MapPin height={'40'} width={'40'} />
+              &lt;span className='ml-2'>123 Business Avenue, Barcelona, Spain&lt;/span>
+            &lt;/div>
+          &lt;/div>
+        &lt;/div>
+      &lt;/div>
+      {/* Feedback Form */}
+      &lt;div className='max-w-xxl mx-auto p-6 border-2 mt-24 mb-28'>
+        &lt;h2 className='text-5xl font-bold mb-4'>Feedback Form&lt;/h2>
+        &lt;h3 className='text-xl font-semibold mb-8'>We'd love to hear from you!&lt;/h3>
+        &lt;form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
+          &lt;div>
+            &lt;Label htmlFor='fullName' className='block text-sm font-medium text-gray-700'>
+              Full Name
+            &lt;/Label>
+            &lt;Input id='fullName' type='text' {...register('fullName', { required: true })} className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm' placeholder='Your full name' />
+            {errors.fullName &amp;&amp; &lt;span className='text-red-500'>This field is required&lt;/span>}
+          &lt;/div>
+
+          &lt;div>
+            &lt;Label htmlFor='email' className='block text-sm font-medium text-gray-700'>
+              Email Address
+            &lt;/Label>
+            &lt;Input
+              id='email'
+              type='email'
+              {...register('email', {
+                required: true,
+                pattern: {
+                  value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                  message: 'Please enter a valid email address'
+                }
+              })}
+              className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+              placeholder='you@email.com'
+            />
+            {errors.email &amp;&amp; &lt;span className='text-red-500'>This field is required&lt;/span>}
+          &lt;/div>
+
+          &lt;div>
+            &lt;Label htmlFor='feedback' className='block text-sm font-medium text-gray-700'>
+              Your Feedback
+            &lt;/Label>
+            &lt;Textarea
+              id='feedback'
+              {...register('feedback', { required: true })}
+              className='mt-1 block w-full h-48 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+              rows='5'
+              placeholder='Please enter your suggestions or complaints here...'
+            />
+            {errors.feedback &amp;&amp; &lt;span className='text-red-500'>This field is required&lt;/span>}
+          &lt;/div>
+
+          &lt;div className='flex justify-end'>
+            &lt;Button type='submit' className='w-full py-2 text-base'>
+              Send Feedback
+            &lt;/Button>
+          &lt;/div>
+        &lt;/form>
+      &lt;/div>
+      {/* Social Media Links */}
+      &lt;div className='text-center mt-8'>
+        &lt;h3 className='text-4xl font-semibold mb-4'>Follow us on Social Media&lt;/h3>
+        &lt;div className='flex justify-center space-x-4'>
+          &lt;a href='https://facebook.com' target='_blank' rel='noopener noreferrer' className='text-blue-600 hover:text-blue-800'>
+            &lt;Facebook size={40} />
+          &lt;/a>
+          &lt;a href='https://twitter.com' target='_blank' rel='noopener noreferrer' className='text-blue-400 hover:text-blue-600'>
+            &lt;Twitter size={40} />
+          &lt;/a>
+          &lt;a href='https://instagram.com' target='_blank' rel='noopener noreferrer' className='text-pink-600 hover:text-pink-800'>
+            &lt;Instagram size={40} />
+          &lt;/a>
+          &lt;a href='https://linkedin.com' target='_blank' rel='noopener noreferrer' className='text-blue-700 hover:text-blue-900'>
+            &lt;Linkedin size={40} />
+          &lt;/a>
+          &lt;a href='https://youtube.com' target='_blank' rel='noopener noreferrer' className='text-red-600 hover:text-red-800'>
+            &lt;Youtube size={40} />
+          &lt;/a>
+        &lt;/div>
+      &lt;/div>
+    &lt;/div>
+  )
+}
+
+export default Contact
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#About">About</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#BurgerMenu">BurgerMenu</a></li><li><a href="global.html#Categories">Categories</a></li><li><a href="global.html#CategoryBox">CategoryBox</a></li><li><a href="global.html#Contact">Contact</a></li><li><a href="global.html#HeroSection">HeroSection</a></li><li><a href="global.html#Layout">Layout</a></li><li><a href="global.html#RecipeCard">RecipeCard</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SignUp">SignUp</a></li><li><a href="global.html#UploadedRecipe">UploadedRecipe</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Apr 19 2024 18:56:58 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

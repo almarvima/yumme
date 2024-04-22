@@ -14,7 +14,7 @@ const AppearanceSettings = () => {
     <>
       <Card className="flex flex-col">
         <CardHeader className="space-y-2">
-          <CardTitle className="flex gap-2 items-center"><Palette /> Theme</CardTitle>
+          <CardTitle className="flex gap-2 items-center"><Palette />Theme</CardTitle>
           <CardDescription>
             Change the appearance of the app
           </CardDescription>
