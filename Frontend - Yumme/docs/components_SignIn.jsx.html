@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/SignIn.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/SignIn.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// import { useToast } from "@/components/ui/use-toast";
+import { BadgeCheck } from "lucide-react";
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+
+import { useAuth } from "../auth";
+import { Routes } from "../constants";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
+
+/**
+ * Renders the SignIn component
+ * @return {JSX.Element}
+ */
+const SignIn = () => {
+  const { userIsAuthenticated, useFormAuth } = useAuth();
+
+  const navigate = useNavigate();
+
+  // const [isVisble, setIsVisible] = React.useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  useEffect(() => {
+    userIsAuthenticated() &amp;&amp; navigate("/");
+  }, [navigate, userIsAuthenticated]);
+
+  const { mutate: onSubmit } = useFormAuth(Routes.LOGIN, {
+    successTitle: (
+      &lt;div className="flex  items-center  gap-2">
+        &lt;BadgeCheck color="#000000" />
+        &lt;span className="">Welcome back!&lt;/span>
+      &lt;/div>
+    ),
+    successDescription: "You logged in successfully!",
+    errorDescription:
+      "The user name or password is incorrect. Please try again.",
+  });
+
+  return (
+    &lt;div className="min-h-screen flex flex-col items-center pt-8 sm:pt-16">
+      &lt;div className="w-full max-w-xl">
+        &lt;form
+          className="bg-white shadow-md rounded px-10 pt-6 pb-10 mb-8"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          &lt;div className="mb-4">
+            &lt;h1 className="text-center md:text-6xl font-bold mb-8">Sign In&lt;/h1>
+            &lt;Label
+              className="block text-gray-700 text-lg font-bold mb-2 font-sans"
+              htmlFor="userName"
+            >
+              User Name
+            &lt;/Label>
+            &lt;Input
+              {...register("userName", { required: true })}
+              type="text"
+              defaultValue={"test"}
+              placeholder="User Name"
+              className="w-full"
+            />
+            {errors.userName?.type === "required" &amp;&amp; (
+              &lt;p role="alert" className="text-destructive">
+                This field is required
+              &lt;/p>
+            )}
+          &lt;/div>
+
+          &lt;div className="mb-6">
+            &lt;Label
+              className="block text-gray-700 text-lg font-bold mb-2 font-sans"
+              htmlFor="password"
+            >
+              Password
+            &lt;/Label>
+            &lt;Input
+              {...register("password", { required: true })}
+              id="password"
+              type="password"
+              placeholder="*************"
+              className="w-full"
+            />
+            {errors.password?.type === "required" &amp;&amp; (
+              &lt;p role="alert" className="text-destructive">
+                Fill the password
+              &lt;/p>
+            )}
+          &lt;/div>
+          &lt;div className="flex flex-col-reverse md:flex-row gap-4 items-center justify-between space-y-2 md:space-y-0">
+            &lt;Button
+              variant="secondary"
+              className="w-full py-2  text-base border border-gray-500 hover:border-teal-50 hover:bg-teal-900 hover:text-teal-50 bg-teal-100"
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              Cancel
+            &lt;/Button>
+            &lt;Button type="submit" className="w-full py-2 text-base">
+              Sign In
+            &lt;/Button>
+          &lt;/div>
+        &lt;/form>
+        &lt;p className="text-center text-gray-500 text-xs md:text-lg">
+          Don't have a user account?{" "}
+          &lt;Link
+            to={Routes.SIGN_UP}
+            className="text-purple-500 hover:text-teal-900"
+          >
+            Click here to sign up!
+          &lt;/Link>
+        &lt;/p>
+      &lt;/div>
+    &lt;/div>
+  );
+};
+
+export default SignIn;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#About">About</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#BurgerMenu">BurgerMenu</a></li><li><a href="global.html#Categories">Categories</a></li><li><a href="global.html#CategoryBox">CategoryBox</a></li><li><a href="global.html#Contact">Contact</a></li><li><a href="global.html#HeroSection">HeroSection</a></li><li><a href="global.html#Layout">Layout</a></li><li><a href="global.html#RecipeCard">RecipeCard</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SignUp">SignUp</a></li><li><a href="global.html#UploadedRecipe">UploadedRecipe</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Apr 19 2024 18:56:58 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
