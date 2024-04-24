@@ -9,9 +9,7 @@ import com.yumme.backendyumme.service.RecipeService;
 import com.yumme.backendyumme.utils.SpringUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -142,5 +140,20 @@ public class RecipeController {
 
         return response;
     }
+
+    @PostMapping("recipe/favourite")
+    public ResponseEntity<?> saveFavouriteRecipe(
+            HttpServletRequest header
+
+    ) {
+        var recipeId = header.getParameter("Recipe-Id");
+        System.out.println("Recepta: " + recipeId);
+        ResponseEntity<?> response;
+
+        response = SpringUtils.recipeFavouriteSaved();
+
+        return response;
+    }
+
 
 }

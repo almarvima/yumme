@@ -4,7 +4,6 @@ import com.yumme.backendyumme.domain.Recipe;
 import com.yumme.backendyumme.domain.User;
 import com.yumme.backendyumme.dto.request.RecipeRequest;
 import org.springframework.http.ResponseEntity;
-
 import java.util.List;
 
 public interface RecipeService {
