@@ -52,6 +52,9 @@ public class Recipe {
     @JsonIdentityReference(alwaysAsId = true)
     private Category recipeCategory;
 
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.PERSIST)
+    Set<Score> score;
+
     private Date created_at;
 
     private Date updated_at;
