@@ -57,7 +57,6 @@ public class Recipe {
     Set<Score> score;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe")
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "comment")
     @JsonIdentityReference(alwaysAsId = true)
     private List<Comment> comment;
 

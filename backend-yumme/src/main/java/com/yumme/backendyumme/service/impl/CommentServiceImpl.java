@@ -22,6 +22,7 @@ public class CommentServiceImpl implements CommentService {
 
         Comment comment = Comment.builder()
                 .comment(commentRequest.getComment())
+                .author(user.getUsername())
                 .user(user)
                 .recipe(recipe)
                 .build();
