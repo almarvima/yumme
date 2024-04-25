@@ -46,6 +46,11 @@ public class SpringUtils {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    public static ResponseEntity<JsonResponse> recipeFavouriteSaved(){
+        JsonResponse response = new JsonResponse(HttpStatus.OK.value(), "RECIPE_FAVOURITE_SAVED");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
     public static ResponseEntity<JsonResponse> invalidToken(){
         JsonResponse response = new JsonResponse(HttpStatus.UNAUTHORIZED.value(), "INVALID_TOKEN");
         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
@@ -94,6 +99,16 @@ public class SpringUtils {
         JsonResponse response = new JsonResponse(username,id,HttpStatus.OK.value(), "COMMENT_CREATED");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+    public static ResponseEntity<JsonResponse> scoreSaved(){
+        JsonResponse response = new JsonResponse(HttpStatus.OK.value(), "SCORE_SAVED");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    public static ResponseEntity<JsonResponse> errorSavingScore(){
+        JsonResponse response = new JsonResponse(HttpStatus.BAD_REQUEST.value(), "SAVING_SCORE_ERROR");
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
 
     public static class JsonResponse {
         private int status;

@@ -2,7 +2,15 @@ package com.yumme.backendyumme.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name="score")
 public class Score {
@@ -18,6 +26,8 @@ public class Score {
     @ManyToOne
     @JoinColumn(name = "recipe_id")
     private Recipe recipe;
+
     @Column(nullable = false)
     private int score;
+
 }

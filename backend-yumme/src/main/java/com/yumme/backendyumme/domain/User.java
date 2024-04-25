@@ -51,11 +51,14 @@ public class User implements UserDetails {
     @JoinTable(name = "recipe_favorite", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "recipe_id"))
     private Set<Recipe> recipesSet = new HashSet<>();
 
-    @OneToMany( mappedBy = "ownerId",cascade = CascadeType.PERSIST)
+    @OneToMany( mappedBy = "ownerId", cascade = CascadeType.PERSIST)
     private List<Recipe> recipesList;
 
     @OneToMany(mappedBy ="user", cascade = CascadeType.PERSIST )
     private List<Comment> commentsList;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
+    Set<Score> score;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date created_at;

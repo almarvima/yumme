@@ -53,6 +53,9 @@ public class Recipe {
     @JsonIdentityReference(alwaysAsId = true)
     private Category recipeCategory;
 
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.PERSIST)
+    Set<Score> score;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe")
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "comment")
     @JsonIdentityReference(alwaysAsId = true)
