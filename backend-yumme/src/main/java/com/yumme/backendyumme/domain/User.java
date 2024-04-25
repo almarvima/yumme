@@ -54,6 +54,9 @@ public class User implements UserDetails {
     @OneToMany( mappedBy = "ownerId", cascade = CascadeType.PERSIST)
     private List<Recipe> recipesList;
 
+    @OneToMany(mappedBy ="user", cascade = CascadeType.PERSIST )
+    private List<Comment> commentsList;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
     Set<Score> score;
 
