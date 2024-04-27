@@ -10,7 +10,6 @@
 import axios from "axios";
 
 export const fetchData = async (url: string, isPrivate?: boolean) => {
-  console.log("🚀 ~ fetchData ~ isPrivate:", isPrivate);
   const { data } = await axios.get(
     url,
     isPrivate
@@ -25,7 +24,6 @@ export const fetchData = async (url: string, isPrivate?: boolean) => {
 };
 
 export const postData = async (url: string, data: unknown) => {
-  console.log(data);
   const response = await axios.post(url, data, {
     headers: {
       "Content-Type": "application/json",

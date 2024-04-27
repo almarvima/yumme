@@ -44,7 +44,11 @@ const Categories = () => {
                 "  border-b border-primary": category.label === categoryParams,
               }
             )}
-            onClick={() => setSearchParams({ q: category.label })}
+            onClick={() =>
+              categoryParams
+                ? setSearchParams({})
+                : setSearchParams({ q: category.label })
+            }
           >
             <CategoryBox key={i} category={category} />
           </CarouselItem>
