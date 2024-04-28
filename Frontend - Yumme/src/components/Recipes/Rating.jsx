@@ -2,17 +2,32 @@ import React from "react";
 
 const MAX_STAR_RATING = 5;
 
-const Rating = () => {
+const Rating = ({ small }) => {
   const [hoveredIndex, setHoveredIndex] = React.useState(-1);
 
-  return (
+  const score = 2;
+
+  return small ? (
+    <section className="flex flex-col items-start justify-center gap-6">
+      <div className="flex items-center gap-2">
+        {[...Array(MAX_STAR_RATING)].map((_, index) => (
+          <StarIcon
+            key={index}
+            className={`size-4 text-yellow-400 ${
+              index < score ? "fill-yellow-400" : ""
+            }`}
+          />
+        ))}
+      </div>
+    </section>
+  ) : (
     <section className="flex flex-col items-start justify-center gap-6 py-12 md:py-24">
       <div className="flex items-center gap-2">
         {[...Array(MAX_STAR_RATING)].map((_, index) => (
           <StarIcon
             key={index}
             className={`w-8 h-8 text-yellow-400 ${
-              index <= (hoveredIndex) ? "fill-yellow-400" : ""
+              index <= hoveredIndex ? "fill-yellow-400" : ""
             } cursor-pointer`}
             onMouseEnter={() => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(-1)}

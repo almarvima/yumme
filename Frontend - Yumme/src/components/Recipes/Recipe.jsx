@@ -5,13 +5,21 @@ import CommentSection from "./CommentSection";
 
 import { Skeleton } from "@/components/ui/skeleton";
 import StarRating from "./Rating";
+import { useAuth } from "@/auth";
 
 const Recipe = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
   const { getRecipe } = useRecipes();
-  const { data: recipe, isLoading, isError } = getRecipe(id);
+
+  const { userIsAuthenticated } = useAuth();
+
+  const {
+    data: recipe,
+    isLoading,
+    isError,
+  } = getRecipe(id, userIsAuthenticated());
 
   if (isError) {
     navigate("/error");

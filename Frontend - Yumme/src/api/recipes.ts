@@ -11,10 +11,10 @@ export const useRecipes = () => {
     });
   };
 
-  const getRecipe = (id: number) => {
+  const getRecipe = (id: number, isPrivate = false) => {
     return useQuery({
       queryKey: ["recipe", id],
-      queryFn: async () => fetchData(`/public/recipe/${id}`),
+      queryFn: async () => fetchData(`/public/recipe/${id}`, isPrivate),
     });
   };
 

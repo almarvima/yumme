@@ -36,7 +36,7 @@ const Recipes = () => {
         </div>
       )}
 
-      <div className="grid grid-cols-1 justify-items-center gap-y-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-x-8 md:gap-y-16 gap-4">
+      <div className="grid  grid-cols-1 justify-items-center gap-y-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-x-8 md:gap-y-16 gap-4">
         {isLoading &&
           Array(8)
             .fill()

@@ -1,8 +1,10 @@
-import { Clock, Users2 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Clock, Heart, Users2 } from "lucide-react";
+import { Link } from "react-router-dom";
 
-import { Routes } from '../../constants';
-import { Badge } from '../ui/badge';
+import { Routes } from "../../constants";
+import { Badge } from "../ui/badge";
+import { Button } from "../ui/button";
+import StarRating from "./Rating";
 
 /**
  * Each RecipeCard component is a card that displays the recipe image, title, description, and category.
@@ -20,39 +22,56 @@ const RecipeCard = ({
   cookingTime,
   perPerson,
   category,
+  isFavorite,
 }) => {
   return (
-    <Link
-      to={`${Routes.RECIPE}/${id}`}
-      key={id}
-      className="border group bg-card text-card-foreground hover:scale-105 transition-transform shadow-sm flex flex-col w-full rounded-md"
-    >
-      <img
-        src={image || "https://via.placeholder.com/260"}
-        alt={title}
-        className="w-full object-cover rounded-t-md aspect-square"
-      />
-      <div className="px-6 py-4 flex flex-col gap-4">
-        <div className="space-y-2">
-          <h2 className="text-lg border-none font-semibold">{title}</h2>
-          <p className="line-clamp-3 max-w-[80ch] text-xs text-muted-foreground">
-            {description} 
-          </p>
-        </div>
-        <div className="flex gap-4">
-          <Badge variant={"outline"} className="flex gap-2 py-1 max-w-max">
-            <Clock className="size-4" /> {cookingTime} min
-          </Badge>
-          <Badge variant={"outline"} className="flex gap-2 py-1 max-w-max">
-            <Users2 className="size-4" /> {perPerson}
-          </Badge>
-        </div>
+    <div className="relative group">
+      <Button
+        onClick={() => console.log("test")}
+        className="absolute top-2 z-50 right-2 rounded-full  group-hover:scale-125 transition-transform p-2 hover:bg-gray-50/20"
+        variant={"ghost"}
+        size={"icon"}
+      >
+        <Heart
+          className={`size-8`}
+          fill={`${false ? "red" : "transparent"} `}
+          color="red"
+        />
+      </Button>
+      <Link
+        key={id}
+        className="border cursor-pointer  relative bg-card text-card-foreground hover:scale-105 transition-transform shadow-sm flex flex-col w-full rounded-md"
+        to={`${Routes.RECIPE}/${id}`}
+      >
+        <img
+          src={image || "https://via.placeholder.com/260"}
+          alt={title}
+          className="w-full object-cover rounded-t-md aspect-square"
+        />
+        <div className="px-6 py-4 flex flex-col gap-4">
+          <div className="space-y-2">
+            <h2 className="text-lg border-none font-semibold">{title}</h2>
+            <p className="line-clamp-3 max-w-[80ch] text-xs text-muted-foreground">
+              {description}
+            </p>
+          </div>
 
-        <Badge variant={"secondary"} className="w-min">
-          {category}
-        </Badge>
-      </div>
-    </Link>
+          <StarRating small />
+          <div className="flex gap-4">
+            <Badge variant={"outline"} className="flex gap-2 py-1 max-w-max">
+              <Clock className="size-4" /> {cookingTime} min
+            </Badge>
+            <Badge variant={"outline"} className="flex gap-2 py-1 max-w-max">
+              <Users2 className="size-4" /> {perPerson}
+            </Badge>
+          </div>
+
+          <Badge variant={"secondary"} className="w-min">
+            {category}
+          </Badge>
+        </div>
+      </Link>
+    </div>
   );
 };
 
