@@ -171,7 +171,7 @@ public class RecipeController {
             HttpServletRequest header
 
     ) {
-        var recipeId = header.getParameter("Recipe-Id");
+        var recipeId = header.getHeader("Recipe-Id");
         System.out.println("Recepta: " + recipeId);
         ResponseEntity<?> response;
 
