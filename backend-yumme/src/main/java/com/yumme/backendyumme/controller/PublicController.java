@@ -60,7 +60,6 @@ public class PublicController {
 
         Category category = optionalCategory.get();
 
-
         List<Recipe> recipes = categoryService.GetRecipesByCategoryName(category);
         if(recipes.isEmpty())
             return SpringUtils.noRecipesCategory();

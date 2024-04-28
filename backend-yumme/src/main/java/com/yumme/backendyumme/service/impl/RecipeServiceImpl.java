@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -120,6 +121,28 @@ public class RecipeServiceImpl implements RecipeService {
         recipeRepository.save(recipe);
         return SpringUtils.recipeUpdated();
 
+    }
+
+    @Override
+    public List<Recipe> GetSuggestedRecipes(List<String> categories, Long id) {
+
+        var randomListRecipes = new ArrayList<Recipe>();
+
+        for (String category : categories) {
+
+            List<Recipe> r;
+            r = recipeRepository.findRecipesByCategoryName(category);
+            for (Recipe recipe : r) {
+                if(recipe.getOwnerId() == null){
+                    randomListRecipes.add(recipe);
+                }else{
+                    Long userIdRecipe = recipe.getOwnerId().getId();
+                    if(!userIdRecipe.equals(id))
+                        randomListRecipes.add(recipe);
+                }
+            }
+        }
+        return randomListRecipes;
     }
 
 }

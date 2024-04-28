@@ -18,4 +18,6 @@ public interface RecipeService {
     ResponseEntity<?> deleteRecipe(int recipeId, User user);
 
     ResponseEntity<?> updateRecipe(int recipeId, User user, RecipeRequest request);
+
+    List<Recipe> GetSuggestedRecipes(List<String> categories, Long id);
 }
