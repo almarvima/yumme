@@ -14,6 +14,10 @@ import { Mail } from "lucide-react";
 import ThemeToggleButton from "../Header/ThemeToggleButton";
 import { useAuth } from "../../auth";
 
+/**
+ * Footer component - A component that displays the footer of the website
+ * @returns {JSX.Element} Footer component
+ */
 const Footer = () => {
   const { userIsAuthenticated } = useAuth();
 

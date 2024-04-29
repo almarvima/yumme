@@ -4,13 +4,16 @@ import RecipeCard from "./RecipeCard";
 import { useRecipes } from "../../api/recipes";
 import { useSearchParams } from "react-router-dom";
 
-
-
+/**
+ * Recipes component.
+ * @returns {JSX.Element} The rendered Recipes component.
+ */
 const Recipes = () => {
-  // Ejemplo de implementación de useQuery
   const { getRecipes, getRecipeByCategory } = useRecipes();
-  // const { data: recipes, isLoading, isError } = getRecipes();
+
   const [searchParams] = useSearchParams({ q: "" });
+
+  // We are using the searchParams to get the category if it exists
   const categoryParams = searchParams.get("q");
   const {
     data: recipes,

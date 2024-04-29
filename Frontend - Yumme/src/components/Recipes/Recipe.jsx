@@ -7,6 +7,10 @@ import { Skeleton } from "@/components/ui/skeleton";
 import StarRating from "./Rating";
 import { useAuth } from "@/auth";
 
+/**
+ * Recipe component - A component that displays a single recipe
+ * @returns {JSX.Element} Recipe component
+ */
 const Recipe = () => {
   const { id } = useParams();
   const navigate = useNavigate();

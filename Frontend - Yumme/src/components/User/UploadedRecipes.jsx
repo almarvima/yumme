@@ -4,12 +4,14 @@ import { useRecipes } from "../../api/recipes";
 import RecipeCard from "../Recipes/RecipeCard";
 import UploadedRecipe from "./UploadedRecipe";
 
+/**
+ * UploadedRecipes component.
+ * @returns {JSX.Element} The rendered UploadedRecipes component.
+ */
 const UploadedRecipes = () => {
-
-    const { getRecipesPerUser } = useRecipes();
-    const { data: recipes, isLoading, isError } = getRecipesPerUser();
-    console.log("🚀 ~ UploadedRecipes ~ recipes:", recipes)
-
+  const { getRecipesPerUser } = useRecipes();
+  const { data: recipes, isLoading, isError } = getRecipesPerUser();
+  console.log("🚀 ~ UploadedRecipes ~ recipes:", recipes);
 
   return (
     <section className="py-8">
@@ -44,7 +46,7 @@ const UploadedRecipes = () => {
         {recipes &&
           recipes.map((recipe) => (
             <UploadedRecipe
-                isUserRecipe
+              isUserRecipe
               key={recipe.id}
               id={recipe.id}
               title={recipe.title}

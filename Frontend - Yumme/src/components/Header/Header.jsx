@@ -7,6 +7,11 @@ import HeadersButtons from "./HeaderButtons.jsx";
 import { useAuth } from "../../auth/index";
 import UserDropdown from "./UserDropdown.jsx";
 
+
+/**
+ * Header component - A component that displays the header of the website
+ * @returns {JSX.Element} Header component
+ */
 const Header = () => {
   const { userIsAuthenticated } = useAuth();
 
@@ -19,7 +24,6 @@ const Header = () => {
 
         <div className="gap-4 hidden w-full justify-between items-center md:flex">
           <div className="flex flex-col w-full  md:flex-row gap-8 md:justify-center md:text-lg">
-            {/* TODO: IMPLEMENTAR NAVLINK EN EL SPRINT 3 */}
             {menuItems.map((item, index) => (
               <NavLink
                 key={index}

@@ -2,6 +2,11 @@ import React from "react";
 
 const MAX_STAR_RATING = 5;
 
+/**
+ * Rating component - A component that displays the rating of a recipe
+ * @param {boolean} small - If the rating is small, it will be displayed in a smaller size, it suits good on the recipe card
+ * @returns {JSX.Element} Rating component
+ */
 const Rating = ({ small }) => {
   const [hoveredIndex, setHoveredIndex] = React.useState(-1);
 

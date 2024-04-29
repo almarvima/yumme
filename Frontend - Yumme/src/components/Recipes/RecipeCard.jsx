@@ -12,6 +12,10 @@ import StarRating from "./Rating";
  * @param {string} image - The image of the recipe.
  * @param {string} title - The title of the recipe.
  * @param {string} description - The description of the recipe.
+ * @param {number} cookingTime - The cooking time of the recipe.
+ * @param {number} perPerson - The number of people the recipe serves.
+ * @param {string} category - The category of the recipe.
+ * @param {boolean} isFavorite - The favorite status of the recipe.
  * @returns {JSX.Element} - The RecipeCard component.
  */
 const RecipeCard = ({

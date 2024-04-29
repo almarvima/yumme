@@ -9,6 +9,12 @@
 
 import axios from "axios";
 
+/**
+ * Fetches data from the specified URL.
+ * @param url - The URL to fetch data from.
+ * @param isPrivate - Optional parameter indicating whether the request requires authentication.
+ * @returns A Promise that resolves to the fetched data.
+ */
 export const fetchData = async (url: string, isPrivate?: boolean) => {
   const { data } = await axios.get(
     url,
@@ -23,6 +29,12 @@ export const fetchData = async (url: string, isPrivate?: boolean) => {
   return data;
 };
 
+/**
+ * Sends a POST request to the specified URL.
+ * @param url - The URL to send the POST request to.
+ * @param data - The data to send in the POST request.
+ * @returns A Promise that resolves to the response data.
+ */
 export const postData = async (url: string, data: unknown) => {
   const response = await axios.post(url, data, {
     headers: {
@@ -33,6 +45,12 @@ export const postData = async (url: string, data: unknown) => {
   return response.data;
 };
 
+/**
+ * Sends a DELETE request to the specified URL.
+ * @param url - The URL to send the DELETE request to.
+ * @param data - The data to send in the DELETE request.
+ * @returns A Promise that resolves to the response data.
+ */
 export const deleteData = async (url: string, isPrivate?: boolean) => {
   const response = await axios.delete(
     url,

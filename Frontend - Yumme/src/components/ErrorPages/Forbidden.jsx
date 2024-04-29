@@ -1,6 +1,11 @@
 import React from 'react'
 import myImage from '../../images/403.png'
 
+
+/**
+ * Forbidden component - A component that displays the forbidden page of the website
+ * @returns {JSX.Element} Forbidden component
+ */
 const Forbidden = () => {
   return (
     <div className='flex flex-col items-center justify-center my-4 p-4 md:pt-10'>
