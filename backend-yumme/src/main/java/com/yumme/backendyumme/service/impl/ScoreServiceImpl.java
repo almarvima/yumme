@@ -29,8 +29,8 @@ public class ScoreServiceImpl implements ScoreService {
 
         Score score = Score.builder()
                 .score(request.getScore())
-                .recipe(recipe)
-                .user(user)
+                .recipeId((long) recipeId)
+                .userName(user.getUsername())
                 .build();
 
         scoreRepository.save(score);

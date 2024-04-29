@@ -1,7 +1,6 @@
 package com.yumme.backendyumme.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,15 +18,28 @@ public class Score {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "user_name")
+    private String userName;
 
-    @ManyToOne
-    @JoinColumn(name = "recipe_id")
-    private Recipe recipe;
+    @Column(name = "recipe_id") // Columna para almacenar el ID de la receta
+    private Long recipeId;
 
     @Column(nullable = false)
     private int score;
 
+    // Constructor, getters y setters
+
+    // Setter personalizado para establecer solo el userName
+    public void setUser(User user) {
+        if (user != null) {
+            this.userName = user.getUsername();
+        }
+    }
+
+    // Setter personalizado para establecer solo el ID de la receta
+    public void setRecipe(Recipe recipe) {
+        if (recipe != null) {
+            this.recipeId = recipe.getId();
+        }
+    }
 }
