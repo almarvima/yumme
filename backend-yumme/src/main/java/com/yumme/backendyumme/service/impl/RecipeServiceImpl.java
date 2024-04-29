@@ -2,10 +2,14 @@ package com.yumme.backendyumme.service.impl;
 
 import com.yumme.backendyumme.domain.Category;
 import com.yumme.backendyumme.domain.Recipe;
+import com.yumme.backendyumme.domain.Score;
 import com.yumme.backendyumme.domain.User;
 import com.yumme.backendyumme.dto.request.RecipeRequest;
+import com.yumme.backendyumme.dto.response.RecipeResponse;
+import com.yumme.backendyumme.dto.response.ScoreResponse;
 import com.yumme.backendyumme.repository.CategoryRepository;
 import com.yumme.backendyumme.repository.RecipeRepository;
+import com.yumme.backendyumme.repository.ScoreRepository;
 import com.yumme.backendyumme.service.RecipeService;
 import com.yumme.backendyumme.utils.SpringUtils;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +26,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     private final RecipeRepository recipeRepository;
     private final CategoryRepository categoryRepository;
+    private final ScoreRepository scoreRepository;
 
 
     @Override
@@ -67,8 +72,48 @@ public class RecipeServiceImpl implements RecipeService {
 
         if(!recipeOptional.isPresent())
             return null;
-
         return recipeOptional.get();
+    }
+
+    @Override
+    public RecipeResponse getRecipeResponseById(int id, User user) {
+        Optional<Recipe> recipeOptional = recipeRepository.findById(id);
+        if(!recipeOptional.isPresent())
+            return null;
+        Recipe recipe = recipeOptional.get();
+
+        Optional<Category> category = categoryRepository.findByCategory(recipe.getCategoryName());
+
+        List<Score> scoresByRecipeId = scoreRepository.findScoresByRecipeId(recipe.getId());
+
+        Long userId = user.getId();
+
+        int hasVoted = 0;
+        int totalScored = scoresByRecipeId.size();
+        int averageScored = 0;
+
+        for(Score score : scoresByRecipeId) {
+            if(score.getUser().getId() == userId){
+                hasVoted = score.getScore();
+            }
+            averageScored += score.getScore();
+        }
+
+        averageScored = averageScored/totalScored;
+
+
+        ScoreResponse scoreResponse = ScoreResponse.builder()
+                .totalScored(totalScored)
+                .averageScored(averageScored)
+                .build();
+
+
+        RecipeResponse recipeResponse =   makeRecipeResponse(recipe, category.get());
+        recipeResponse.setScore(scoreResponse);
+        recipeResponse.setUserVote(hasVoted);
+        recipeResponse.setFavorite(true);
+
+        return recipeResponse;
     }
 
     @Override
@@ -145,4 +190,21 @@ public class RecipeServiceImpl implements RecipeService {
         return randomListRecipes;
     }
 
+
+    public RecipeResponse makeRecipeResponse(Recipe recipe, Category category) {
+
+
+        RecipeResponse recipeResponse =   RecipeResponse.builder()
+                .title(recipe.getTitle())
+                .description(recipe.getDescription())
+                .image(recipe.getImgUrl())
+                .ingredients(recipe.getIngredients())
+                .perPerson(recipe.getPerPerson())
+                .cookingTime(recipe.getCookingTime())
+                .recipeCategory(category)
+                .comment(recipe.getComment())
+                .build();
+
+        return recipeResponse;
+    }
 }
