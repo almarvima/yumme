@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { cn } from "../../lib/utils";
 import { Routes } from "../../constants";
 import UploadedRecipes from "./UploadedRecipes";
+import FavoriteRecipes from "./FavoriteRecipes";
 
 /**
  * UserRecipes component - A component that displays the user recipes
@@ -37,7 +38,11 @@ const UserRecipes = () => {
         <TabsContent value="all">
           <UploadedRecipes />
         </TabsContent>
-        <TabsContent value="saved">your saved recipes</TabsContent>
+        <TabsContent value="saved">
+          <FavoriteRecipes />
+
+
+        </TabsContent>
       </Tabs>
     </section>
   );

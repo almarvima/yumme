@@ -55,9 +55,6 @@ export const useAuth = () => {
       },
       onSuccess: ({ data }) => {
         localStorage.setItem("user-token", data.token);
-        console.log(data);
-        
-        localStorage.setItem("userName", data.userName); // Problems with decoding the token, this is a bad solution, don't have time to fix it
 
         toast({
           title: successTitle,

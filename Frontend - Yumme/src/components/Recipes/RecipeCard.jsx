@@ -5,6 +5,8 @@ import { Routes } from "../../constants";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import StarRating from "./Rating";
+import { useRecipes } from "@/api/recipes";
+import { queryClient } from "@/config";
 
 /**
  * Each RecipeCard component is a card that displays the recipe image, title, description, and category.
@@ -26,20 +28,33 @@ const RecipeCard = ({
   cookingTime,
   perPerson,
   category,
-  isFavorite,
-  score
+  favoriteRecipes,
+  score,
 }) => {
+  const { favoriteRecipe } = useRecipes();
+
+  const { mutate } = favoriteRecipe();
+
+  const isFavorite = favoriteRecipes?.includes(id);
+
   return (
     <div className="relative group">
       <Button
-        onClick={() => console.log("test")}
+        onClick={() =>
+          mutate(
+            { id },
+            {
+              onSuccess: () => queryClient.invalidateQueries("favoriteRecipes"),
+            }
+          )
+        }
         className="absolute top-2 z-50 right-2 rounded-full  group-hover:scale-125 transition-transform p-2 hover:bg-gray-50/20"
         variant={"ghost"}
         size={"icon"}
       >
         <Heart
           className={`size-8`}
-          fill={`${false ? "red" : "transparent"} `}
+          fill={`${isFavorite ? "red" : "transparent"} `}
           color="red"
         />
       </Button>
