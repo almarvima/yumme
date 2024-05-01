@@ -46,8 +46,23 @@ public class SpringUtils {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    public static ResponseEntity<JsonResponse> recipeFavouriteSaved(){
-        JsonResponse response = new JsonResponse(HttpStatus.OK.value(), "RECIPE_FAVOURITE_SAVED");
+    public static ResponseEntity<JsonResponse> favoriteRecipeSaved(){
+        JsonResponse response = new JsonResponse(HttpStatus.OK.value(), "FAVOURITE_RECIPE_SAVED");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    public static ResponseEntity<JsonResponse> favoriteRecipeRemoved(){
+        JsonResponse response = new JsonResponse(HttpStatus.OK.value(), "FAVOURITE_RECIPE_REMOVED");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    public static ResponseEntity<JsonResponse> favoriteRecipeSavedError(){
+        JsonResponse response = new JsonResponse(HttpStatus.OK.value(), "FAVOURITE_RECIPE_SAVED_ERROR");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    public static ResponseEntity<JsonResponse> favoriteRecipeSavGetError(){
+        JsonResponse response = new JsonResponse(HttpStatus.OK.value(), "FAVOURITE_RECIPE_GET_ERROR");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

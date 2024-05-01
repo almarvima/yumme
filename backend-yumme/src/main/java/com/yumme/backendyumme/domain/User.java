@@ -1,5 +1,6 @@
 package com.yumme.backendyumme.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -47,9 +48,8 @@ public class User implements UserDetails {
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Roles> rolesSet = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "recipe_favorite", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "recipe_id"))
-    private Set<Recipe> recipesSet = new HashSet<>();
+    @ManyToMany(mappedBy = "userName")
+    private List<Recipe> recipesFavorite;
 
     @OneToMany( mappedBy = "ownerId", cascade = CascadeType.PERSIST)
     private List<Recipe> recipesList;
@@ -58,7 +58,7 @@ public class User implements UserDetails {
     private List<Comment> commentsList;
 
     @OneToMany(mappedBy = "userName", cascade = CascadeType.PERSIST)
-    List<Score> score;
+    private List<Score> score;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date created_at;
@@ -112,4 +112,8 @@ public class User implements UserDetails {
     }
 
     public void onUpdate() { updated_at = new Date(); }
+
+    public Recipe getRecipesFavorite(Recipe recipe) {
+        return recipe;
+    }
 }
