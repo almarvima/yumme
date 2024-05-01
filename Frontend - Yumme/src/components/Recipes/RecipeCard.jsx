@@ -27,6 +27,7 @@ const RecipeCard = ({
   perPerson,
   category,
   isFavorite,
+  score
 }) => {
   return (
     <div className="relative group">
@@ -60,7 +61,7 @@ const RecipeCard = ({
             </p>
           </div>
 
-          <StarRating small />
+          <StarRating small score={score} />
           <div className="flex gap-4">
             <Badge variant={"outline"} className="flex gap-2 py-1 max-w-max">
               <Clock className="size-4" /> {cookingTime} min

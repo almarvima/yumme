@@ -88,6 +88,17 @@ export const useRecipes = () => {
     });
   };
 
+  /**
+   * This function is used to vote a score on a recipe.
+   * @returns A mutation object for voting on a recipe.
+   */
+  const voteRecipe = () => {
+    return useMutation({
+      mutationKey: ["voteRecipe"],
+      mutationFn: async ({ id, score }: { id: number; score: number }) => postData(`/api/score/recipe/${id}`, score),
+    });
+  };
+
   return {
     getRecipes,
     getRecipe,
@@ -95,5 +106,6 @@ export const useRecipes = () => {
     getRecipeByCategory,
     getRecipesPerUser,
     deleteRecipe,
+    voteRecipe,
   };
 };

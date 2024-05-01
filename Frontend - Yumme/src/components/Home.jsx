@@ -8,7 +8,7 @@ import { Separator } from "./ui/separator";
  * Home component - A component that displays the home page of the website
  * @returns {JSX.Element} Home component
  */
-const Home = () => {
+export const Home = () => {
   return (
     <div className="flex flex-col gap-4">
       <HeroSection />

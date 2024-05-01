@@ -20,7 +20,6 @@ const Recipes = () => {
     isLoading,
     isError,
   } = categoryParams ? getRecipeByCategory(categoryParams) : getRecipes();
-
   return (
     <section className="py-8">
       {isError && (
@@ -62,6 +61,7 @@ const Recipes = () => {
               cookingTime={recipe.cookingTime}
               perPerson={recipe.perPerson}
               category={recipe.categoryName}
+              score={recipe.score}
             />
           ))}
       </div>

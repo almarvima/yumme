@@ -49,12 +49,17 @@ const Recipe = () => {
       {recipe && (
         <>
           <article className="flex flex-col md:flex-row md:items-start gap-8 border border-teal-400 shadow-lg p-4 rounded-lg">
-            <img
-              src={recipe.imgUrl}
-              alt={recipe.title}
-              className="rounded-lg shadow-md w-full md:w-1/2 transition-transform duration-300 ease-in-out hover:scale-105"
-            />
-
+            <div className="flex flex-col gap-4 w-full h-full">
+              <img
+                src={recipe.imgUrl}
+                alt={recipe.title}
+                className="rounded-lg shadow-md w-full transition-transform duration-300 ease-in-out hover:scale-105"
+              />
+              <span className="font-medium space-y-2">
+                Average Score
+                <StarRating score={recipe.score} small />
+              </span>
+            </div>
             <div className="border-t md:border-t-0 md:border-l border-teal-500 pt-4 md:pt-0 md:pl-4 space-y-4 w-full md:w-1/2">
               <h1 className="text-5xl font-bold pb-4">{recipe.title}</h1>
               <p className="text-lg text-teal-900 tracking-wide pb-4 dark:text-white">
@@ -79,7 +84,9 @@ const Recipe = () => {
                   {recipe.categoryName}{" "}
                 </p>
               </div>
-              <StarRating />
+             
+              <StarRating score={recipe.score} recipeId={id} />
+              
             </div>
           </article>
 
