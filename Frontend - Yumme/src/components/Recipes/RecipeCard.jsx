@@ -44,7 +44,7 @@ const RecipeCard = ({
           mutate(
             { id },
             {
-              onSuccess: () => queryClient.invalidateQueries("favoriteRecipes"),
+              onSuccess: () => queryClient.invalidateQueries({queryKey: ["favoriteRecipes"]}),
             }
           )
         }
