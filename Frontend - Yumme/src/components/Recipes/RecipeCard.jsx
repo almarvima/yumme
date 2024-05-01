@@ -5,6 +5,7 @@ import { Routes } from "../../constants";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import StarRating from "./Rating";
+import { useRecipes } from "@/api/recipes";
 
 /**
  * Each RecipeCard component is a card that displays the recipe image, title, description, and category.
@@ -27,12 +28,16 @@ const RecipeCard = ({
   perPerson,
   category,
   isFavorite,
-  score
+  score,
 }) => {
+  const { favoriteRecipe } = useRecipes();
+
+  const { mutate } = favoriteRecipe();
+
   return (
     <div className="relative group">
       <Button
-        onClick={() => console.log("test")}
+        onClick={() => mutate({id})}
         className="absolute top-2 z-50 right-2 rounded-full  group-hover:scale-125 transition-transform p-2 hover:bg-gray-50/20"
         variant={"ghost"}
         size={"icon"}

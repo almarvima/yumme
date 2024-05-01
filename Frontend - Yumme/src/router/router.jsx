@@ -15,7 +15,7 @@ import UserRecipes from '../components/User/UserRecipes'
 import NotFound from '../components/ErrorPages/NotFound'
 import Forbidden from '../components/ErrorPages/Forbidden'
 import UnexpectedError from '../components/ErrorPages/UnexpectedError'
-import Recipe from '../components/Recipes/Recipe'
+import Recipe from '../components/Recipes/Recipe.jsx'
 import AppearanceSettings from '../components/Settings/AppearanceSettings'
 
 /**

@@ -6,6 +6,8 @@ import CommentSection from "./CommentSection";
 import { Skeleton } from "@/components/ui/skeleton";
 import StarRating from "./Rating";
 import { useAuth } from "@/auth";
+import { Button } from "../ui/button";
+import { Heart } from "lucide-react";
 
 /**
  * Recipe component - A component that displays a single recipe
@@ -29,6 +31,10 @@ const Recipe = () => {
     navigate("/error");
   }
 
+  const { favoriteRecipe } = useRecipes();
+
+  const { mutate } = favoriteRecipe();
+
   if (isLoading) {
     return (
       <div className="flex flex-col md:flex-row md:items-start gap-8 border border-teal-400 shadow-lg p-4 rounded-lg">
@@ -48,7 +54,19 @@ const Recipe = () => {
     <section className="container mx-auto p-4 flex flex-col gap-16">
       {recipe && (
         <>
-          <article className="flex flex-col md:flex-row md:items-start gap-8 border border-teal-400 shadow-lg p-4 rounded-lg">
+          <article className="flex relative flex-col md:flex-row md:items-start gap-8 border border-teal-400 shadow-lg p-4 rounded-lg">
+            <Button
+              onClick={() => mutate({ id })}
+              className="absolute top-2 z-50 right-2 rounded-full  group-hover:scale-125 transition-transform p-2 hover:bg-red-400/20"
+              variant={"ghost"}
+              size={"icon"}
+            >
+              <Heart
+                className={`size-8`}
+                fill={`${false ? "red" : "transparent"} `}
+                color="red"
+              />
+            </Button>
             <div className="flex flex-col gap-4 w-full h-full">
               <img
                 src={recipe.imgUrl}
@@ -84,9 +102,8 @@ const Recipe = () => {
                   {recipe.categoryName}{" "}
                 </p>
               </div>
-             
+
               <StarRating score={recipe.score} recipeId={id} />
-              
             </div>
           </article>
 

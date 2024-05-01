@@ -95,7 +95,16 @@ export const useRecipes = () => {
   const voteRecipe = () => {
     return useMutation({
       mutationKey: ["voteRecipe"],
-      mutationFn: async ({ id, score }: { id: number; score: number }) => postData(`/api/score/recipe/${id}`, score),
+      mutationFn: async ({ id, score }: { id: number; score: number }) =>
+        postData(`/api/score/recipe/${id}`, score),
+    });
+  };
+
+  const favoriteRecipe = () => {
+    return useMutation({
+      mutationKey: ["favoriteRecipe"],
+      mutationFn: async ({ id }: { id: number }) =>
+        postData(`/api/favorite/${id}/recipe`, {}),
     });
   };
 
@@ -107,5 +116,6 @@ export const useRecipes = () => {
     getRecipesPerUser,
     deleteRecipe,
     voteRecipe,
+    favoriteRecipe,
   };
 };
