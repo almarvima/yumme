@@ -8,6 +8,7 @@ import StarRating from "./Rating";
 import { useAuth } from "@/auth";
 import { Button } from "../ui/button";
 import { Heart } from "lucide-react";
+import { queryClient } from "@/config";
 
 /**
  * Recipe component - A component that displays a single recipe
@@ -17,7 +18,7 @@ const Recipe = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const { getRecipe } = useRecipes();
+  const { getRecipe, getFavoriteRecipes } = useRecipes();
 
   const { userIsAuthenticated } = useAuth();
 
@@ -34,6 +35,13 @@ const Recipe = () => {
   const { favoriteRecipe } = useRecipes();
 
   const { mutate } = favoriteRecipe();
+
+  const { data: favoriteRecipes } = getFavoriteRecipes();
+  
+
+  const isFavorite = favoriteRecipes?.includes(Number(id));
+ 
+ 
 
   if (isLoading) {
     return (
@@ -56,14 +64,25 @@ const Recipe = () => {
         <>
           <article className="flex relative flex-col md:flex-row md:items-start gap-8 border border-teal-400 shadow-lg p-4 rounded-lg">
             <Button
-              onClick={() => mutate({ id })}
+              onClick={() =>
+                mutate(
+                  { id },
+                  {
+                    onSuccess: () => {
+                      queryClient.invalidateQueries({
+                        queryKey: ["favoriteRecipes"],
+                      });
+                    },
+                  }
+                )
+              }
               className="absolute top-2 z-50 right-2 rounded-full  group-hover:scale-125 transition-transform p-2 hover:bg-red-400/20"
               variant={"ghost"}
               size={"icon"}
             >
               <Heart
                 className={`size-8`}
-                fill={`${false ? "red" : "transparent"} `}
+                fill={`${isFavorite ? "red" : "transparent"} `}
                 color="red"
               />
             </Button>

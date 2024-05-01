@@ -100,11 +100,28 @@ export const useRecipes = () => {
     });
   };
 
+
+  /**
+   * This function is used to favorite a recipe.
+   * @see https://tanstack.com/query/v5/
+   * @returns A mutation object for favoriting a recipe.
+   */
   const favoriteRecipe = () => {
     return useMutation({
       mutationKey: ["favoriteRecipe"],
       mutationFn: async ({ id }: { id: number }) =>
-        postData(`/api/favorite/${id}/recipe`, {}),
+        postData(`/api/recipe/${id}/favorite`, ""),
+    });
+  };
+
+  /**
+   *  Fetches favorite recipes.
+   * @returns A query object for fetching favorite recipes.
+   */
+  const getFavoriteRecipes = () => {
+    return useQuery({
+      queryKey: ["favoriteRecipes"],
+      queryFn: async () => fetchData("/api/recipe/favorite", true),
     });
   };
 
@@ -117,5 +134,6 @@ export const useRecipes = () => {
     deleteRecipe,
     voteRecipe,
     favoriteRecipe,
+    getFavoriteRecipes,
   };
 };

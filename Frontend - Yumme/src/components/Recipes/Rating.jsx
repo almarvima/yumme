@@ -31,19 +31,7 @@ const Rating = ({ small, score, recipeId }) => {
   const [hoveredIndex, setHoveredIndex] = React.useState(-1);
   const [userScore, setUserScore] = React.useState(null);
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
-
-  /**
-   * /**
- * "score": [
-            {
-                "id": 1,
-                "userName": "test",
-                "recipeId": 2,
-                "score": 3
-            }
-        ],
- */
-
+  
   const averageScore =
     score?.reduce((acc, curr) => acc + curr.score, 0) / score?.length;
 

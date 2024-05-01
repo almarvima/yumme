@@ -36,6 +36,7 @@ export const fetchData = async (url: string, isPrivate?: boolean) => {
  * @returns A Promise that resolves to the response data.
  */
 export const postData = async (url: string, data: unknown) => {
+  console.log("data", data);
   const response = await axios.post(url, data, {
     headers: {
       "Content-Type": "application/json",

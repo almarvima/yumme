@@ -9,7 +9,7 @@ import { useSearchParams } from "react-router-dom";
  * @returns {JSX.Element} The rendered Recipes component.
  */
 const Recipes = () => {
-  const { getRecipes, getRecipeByCategory } = useRecipes();
+  const { getRecipes, getRecipeByCategory, getFavoriteRecipes } = useRecipes();
 
   const [searchParams] = useSearchParams({ q: "" });
 
@@ -20,6 +20,9 @@ const Recipes = () => {
     isLoading,
     isError,
   } = categoryParams ? getRecipeByCategory(categoryParams) : getRecipes();
+
+  const { data: favoriteRecipes } = getFavoriteRecipes();
+
   return (
     <section className="py-8">
       {isError && (
@@ -62,6 +65,7 @@ const Recipes = () => {
               perPerson={recipe.perPerson}
               category={recipe.categoryName}
               score={recipe.score}
+              favoriteRecipes={favoriteRecipes}
             />
           ))}
       </div>
