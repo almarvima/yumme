@@ -28,6 +28,7 @@ public class Recipe {
     private User ownerId;
 
     @ManyToMany(fetch = FetchType.LAZY)
+    @JsonIgnore
     @JoinTable(name = "recipe_favorite", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "user_name"))
     private List<User> userName;
 
