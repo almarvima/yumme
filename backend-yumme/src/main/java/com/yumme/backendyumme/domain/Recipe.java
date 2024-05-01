@@ -27,8 +27,9 @@ public class Recipe {
     @JsonIgnore
     private User ownerId;
 
-    @ManyToMany(mappedBy = "recipesSet")
-    private Set<User> usersSet = new HashSet<>();
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "recipe_favorite", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "user_name"))
+    private List<User> userName;
 
     @Column(length = 100, nullable = false)
     private String title;
