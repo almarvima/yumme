@@ -109,6 +109,10 @@ public class SpringUtils {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
+    public static ResponseEntity<JsonResponse> randomResponse(){
+        JsonResponse response = new JsonResponse(HttpStatus.OK.value(), "RANDOM_RESPONSE");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
     public static class JsonResponse {
         private int status;

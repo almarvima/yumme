@@ -12,6 +12,10 @@ public interface RecipeRepository extends JpaRepository<Recipe,Integer> {
 
     @Query("SELECT r FROM Recipe r WHERE r.ownerId.id = :userId")
     List<Recipe> findByOwnerId(Long userId);
+
     @Query("SELECT r FROM Recipe r WHERE r.recipeCategory.id=:categoryId")
-    List findRecipesByCategory(Long categoryId);
+    List<Recipe> findRecipesByCategory(Long categoryId);
+
+    @Query("SELECT r FROM Recipe r WHERE r.recipeCategory.category=:categoryName")
+    List<Recipe> findRecipesByCategoryName(String categoryName);
 }

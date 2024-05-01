@@ -57,8 +57,8 @@ public class User implements UserDetails {
     @OneToMany(mappedBy ="user", cascade = CascadeType.PERSIST )
     private List<Comment> commentsList;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
-    Set<Score> score;
+    @OneToMany(mappedBy = "userName", cascade = CascadeType.PERSIST)
+    List<Score> score;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date created_at;

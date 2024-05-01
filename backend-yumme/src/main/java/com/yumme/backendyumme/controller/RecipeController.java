@@ -15,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -180,5 +182,31 @@ public class RecipeController {
         return response;
     }
 
+    @GetMapping("recipe/suggested")
+    public ResponseEntity<?> getSuggestedRecipes(HttpServletRequest header) {
+        ValidationResponse validationResponse = jwtService.validateTokenAndUser(header);
+
+        if(!validationResponse.isValid())
+            return SpringUtils.invalidToken();
+
+        User user = userRepository.findByUsername(validationResponse.getUserName()).get();
+
+        var currentRecipes = recipeService.getRecipesById(user.getId());
+
+        if (currentRecipes.isEmpty())
+            return SpringUtils.recipeNotExist();
+
+        var categoryRecipeList = new ArrayList<String>();
+
+        for (Recipe recipe : currentRecipes) {
+            categoryRecipeList.add(recipe.getCategoryName());
+        }
+
+        var suggestedRecipes = recipeService.GetSuggestedRecipes(categoryRecipeList, user.getId());
+
+
+
+        return ResponseEntity.ok(suggestedRecipes);
+    }
 
 }
