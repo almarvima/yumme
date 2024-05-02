@@ -114,7 +114,7 @@ If you need more info, you should consult official documentation for [Spring Boo
 
 This project uses the **Feature Branch Workflow** for managing branches and pull requests. The Feature Branch Workflow is a Git workflow design that helps streamline the development process. It involves creating a new branch for each new feature or bug fix and merging it back into the main branch once the feature is complete.
 
-![GitWorkflow](https://ibb.co/9W98WFd)
+![GitWorkflow](https://i.ibb.co/zZhnZyt/workflow-git.png)
 
 ## Contributing
 
