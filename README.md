@@ -63,6 +63,3 @@ We welcome contributions! If you'd like to contribute, please follow these steps
 Alternatively, see the GitHub documentation on [creating a pull request](https://docs.github.com/es/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request).
 
 ![Project Image](https://i.ibb.co/gFBxLN3/log.png)
-
-
-
