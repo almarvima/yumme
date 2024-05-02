@@ -64,6 +64,4 @@ Alternatively, see the GitHub documentation on [creating a pull request](https:/
 
 #
 
-![Project Image](https://i.ibb.co/gFBxLN3/log.png)
-
-[url=https://ibb.co/Xkvqr1b][img]https://i.ibb.co/7N6qdPX/log.png[/img][/url]
+![Project Image]([https://i.ibb.co/gFBxLN3/log.png](https://i.ibb.co/kBPxgyh/yumme-Logo2.png))
