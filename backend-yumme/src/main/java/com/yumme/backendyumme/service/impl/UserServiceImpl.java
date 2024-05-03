@@ -67,4 +67,11 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteUser(id);
         return SpringUtils.userDeleted();
     }
+
+    @Override
+    public ResponseEntity<?> changePassword(String password, User user) {
+        user.setPassword(passwordEncoder.encode(password));
+        userRepository.save(user);
+        return SpringUtils.passwordChanged();
+    }
 }

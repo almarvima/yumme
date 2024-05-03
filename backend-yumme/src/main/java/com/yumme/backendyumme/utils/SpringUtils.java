@@ -91,6 +91,16 @@ public class SpringUtils {
         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
     }
 
+    public static ResponseEntity<JsonResponse> passwordChanged() {
+        JsonResponse response = new JsonResponse(HttpStatus.OK.value(), "PASSWORD_CHANGED");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    public static ResponseEntity<JsonResponse> errorChangingpassword() {
+        JsonResponse response = new JsonResponse(HttpStatus.OK.value(), "PASSWORD_CHANGing_ERROR");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
     public static ResponseEntity<?> suggestionCreated() {
         JsonResponse response = new JsonResponse(HttpStatus.OK.value(), "SUGGESTION_CREATED");
         return new ResponseEntity<>(response, HttpStatus.OK);
