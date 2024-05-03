@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/Header/BurgerMenu.jsx</title>
+    <title>JSDoc: Source: components/User/FavoriteRecipes.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/Header/BurgerMenu.jsx</h1>
+    <h1 class="page-title">Source: components/User/FavoriteRecipes.jsx</h1>
 
     
 
@@ -26,58 +26,74 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Menu } from "lucide-react";
-import React from "react";
-import { Link } from "react-router-dom";
+            <pre class="prettyprint source linenums"><code>import { Skeleton } from "@/components/ui/skeleton";
 
-import { menuItems } from "../../constants";
-import HeaderButtons from "./HeaderButtons";
+import { useRecipes } from "../../api/recipes";
+import RecipeCard from "../Recipes/RecipeCard";
+import UploadedRecipe from "./UploadedRecipe";
 
 /**
- * Renders a burger menu component in small devices in the header component.
- *
- * @returns {JSX.Element} The burger menu component.
+ * FavoriteRecipes component.
+ * @returns {JSX.Element} The rendered FavoriteRecipes component.
  */
-const BurgerMenu = () => {
+const FavoriteRecipes = () => {
+  const { getFavoriteRecipes, getRecipes } = useRecipes();
+  const { data: favoriteRecipes, isLoading, isError } = getFavoriteRecipes();
+  const { data: recipes } = getRecipes();
+
   return (
-    &lt;DropdownMenu >
-      &lt;DropdownMenuTrigger>
-        &lt;Menu className="size-7" />
-      &lt;/DropdownMenuTrigger>
-      &lt;DropdownMenuContent
-        className="w-[220px] space-y-4 md:hidden py-4"
-        align="end"
-      >
-        &lt;DropdownMenuLabel>Yumme&lt;/DropdownMenuLabel>
-        &lt;DropdownMenuSeparator />
+    &lt;section className="py-8">
+      {isError &amp;&amp; (
+        &lt;div className="flex flex-col gap-4 items-center w-full">
+          &lt;img
+            src="/cartoon_avocado.png"
+            alt="error message"
+            className="w-72"
+          />
+          &lt;div className="flex flex-col gap-2">
+            &lt;h2 className="text-2xl font-bold text-center">Whoops!&lt;/h2>
+            &lt;p className="text-muted-foreground">
+              We're having some problems, try again later.
+            &lt;/p>
+          &lt;/div>
+        &lt;/div>
+      )}
 
-        {menuItems.map((item, index) => (
-          &lt;DropdownMenuItem className="" key={index}>
-            &lt;Link
-              to={item.to}
-              className="text-black w-full h-full hover:text-teal-700 flex gap-2 items-center "
-            >
-              {item.icon}
-              {item.label}
-            &lt;/Link>
-          &lt;/DropdownMenuItem>
-        ))}
+      &lt;div className="grid grid-cols-1 justify-items-center gap-y-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-x-8 md:gap-y-16 gap-4">
+        {isLoading &amp;&amp;
+          Array(8)
+            .fill()
+            .map((_, index) => (
+              &lt;article key={index} className="flex relative flex-col gap-4">
+                &lt;Skeleton className="size-60" />
+                &lt;Skeleton className="w-1/2 h-3" />
+                &lt;Skeleton className="w-1/4 h-3" />
+              &lt;/article>
+            ))}
 
-        &lt;HeaderButtons />
-      &lt;/DropdownMenuContent>
-    &lt;/DropdownMenu>
+        {recipes &amp;&amp;
+          recipes
+            .filter((recipe) => favoriteRecipes.includes(recipe.id))
+            .map((recipe) => (
+              &lt;RecipeCard
+                key={recipe.id}
+                id={recipe.id}
+                title={recipe.title}
+                description={recipe.description}
+                image={recipe.imgUrl}
+                cookingTime={recipe.cookingTime}
+                perPerson={recipe.perPerson}
+                category={recipe.categoryName}
+                score={recipe.score}
+                favoriteRecipes={favoriteRecipes}
+              />
+            ))}
+      &lt;/div>
+    &lt;/section>
   );
 };
 
-export default BurgerMenu;
+export default FavoriteRecipes;
 </code></pre>
         </article>
     </section>

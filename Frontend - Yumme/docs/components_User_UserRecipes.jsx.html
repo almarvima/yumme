@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/Header/BurgerMenu.jsx</title>
+    <title>JSDoc: Source: components/User/UserRecipes.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/Header/BurgerMenu.jsx</h1>
+    <h1 class="page-title">Source: components/User/UserRecipes.jsx</h1>
 
     
 
@@ -26,58 +26,57 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Menu } from "lucide-react";
+            <pre class="prettyprint source linenums"><code>import { PlusCircle } from "lucide-react";
 import React from "react";
-import { Link } from "react-router-dom";
 
-import { menuItems } from "../../constants";
-import HeaderButtons from "./HeaderButtons";
+import { Button, buttonVariants } from "../ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
+import { Link } from "react-router-dom";
+import { cn } from "../../lib/utils";
+import { Routes } from "../../constants";
+import UploadedRecipes from "./UploadedRecipes";
+import FavoriteRecipes from "./FavoriteRecipes";
 
 /**
- * Renders a burger menu component in small devices in the header component.
- *
- * @returns {JSX.Element} The burger menu component.
+ * UserRecipes component - A component that displays the user recipes
+ * @returns {JSX.Element} UserRecipes component
  */
-const BurgerMenu = () => {
+const UserRecipes = () => {
   return (
-    &lt;DropdownMenu >
-      &lt;DropdownMenuTrigger>
-        &lt;Menu className="size-7" />
-      &lt;/DropdownMenuTrigger>
-      &lt;DropdownMenuContent
-        className="w-[220px] space-y-4 md:hidden py-4"
-        align="end"
-      >
-        &lt;DropdownMenuLabel>Yumme&lt;/DropdownMenuLabel>
-        &lt;DropdownMenuSeparator />
-
-        {menuItems.map((item, index) => (
-          &lt;DropdownMenuItem className="" key={index}>
+    &lt;section className="flex min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col gap-4  py-8 md:gap-8 ">
+      &lt;Tabs defaultValue="all">
+        &lt;div className="flex items-center">
+          &lt;TabsList>
+            &lt;TabsTrigger value="all">All&lt;/TabsTrigger>
+            &lt;TabsTrigger value="saved">Saved&lt;/TabsTrigger>
+          &lt;/TabsList>
+          &lt;div className="ml-auto flex items-center gap-2">
             &lt;Link
-              to={item.to}
-              className="text-black w-full h-full hover:text-teal-700 flex gap-2 items-center "
+              size="sm"
+              className={cn(buttonVariants({ size: "sm" }), "gap-2")}
+              to={Routes.CREATE_RECIPE}
             >
-              {item.icon}
-              {item.label}
+              &lt;PlusCircle className="h-3.5 w-3.5" />
+              &lt;span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                Add Recipe
+              &lt;/span>
             &lt;/Link>
-          &lt;/DropdownMenuItem>
-        ))}
+          &lt;/div>
+        &lt;/div>
+        &lt;TabsContent value="all">
+          &lt;UploadedRecipes />
+        &lt;/TabsContent>
+        &lt;TabsContent value="saved">
+          &lt;FavoriteRecipes />
 
-        &lt;HeaderButtons />
-      &lt;/DropdownMenuContent>
-    &lt;/DropdownMenu>
+
+        &lt;/TabsContent>
+      &lt;/Tabs>
+    &lt;/section>
   );
 };
 
-export default BurgerMenu;
+export default UserRecipes;
 </code></pre>
         </article>
     </section>

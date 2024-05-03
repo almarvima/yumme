@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/Header/BurgerMenu.jsx</title>
+    <title>JSDoc: Source: components/Header/Header.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/Header/BurgerMenu.jsx</h1>
+    <h1 class="page-title">Source: components/Header/Header.jsx</h1>
 
     
 
@@ -26,58 +26,65 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Menu } from "lucide-react";
-import React from "react";
-import { Link } from "react-router-dom";
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import { Link, NavLink } from "react-router-dom";
 
-import { menuItems } from "../../constants";
-import HeaderButtons from "./HeaderButtons";
+import { menuItems } from "../../constants/";
+import BurgerMenu from "./BurgerMenu.jsx";
+import HeadersButtons from "./HeaderButtons.jsx";
+import { useAuth } from "../../auth/index";
+import UserDropdown from "./UserDropdown.jsx";
+
 
 /**
- * Renders a burger menu component in small devices in the header component.
- *
- * @returns {JSX.Element} The burger menu component.
+ * Header component - A component that displays the header of the website
+ * @returns {JSX.Element} Header component
  */
-const BurgerMenu = () => {
+const Header = () => {
+  const { userIsAuthenticated } = useAuth();
+
   return (
-    &lt;DropdownMenu >
-      &lt;DropdownMenuTrigger>
-        &lt;Menu className="size-7" />
-      &lt;/DropdownMenuTrigger>
-      &lt;DropdownMenuContent
-        className="w-[220px] space-y-4 md:hidden py-4"
-        align="end"
-      >
-        &lt;DropdownMenuLabel>Yumme&lt;/DropdownMenuLabel>
-        &lt;DropdownMenuSeparator />
+    &lt;header className="w-full  flex flex-col shadow-sm bg-teal-100 ">
+      &lt;div className=" flex justify-between gap-4  items-center p-8 container ">
+        &lt;Link to={"/"}>
+          &lt;img src="/logo.png" className="w-32 rounded-xl" alt="app logo" />
+        &lt;/Link>
 
-        {menuItems.map((item, index) => (
-          &lt;DropdownMenuItem className="" key={index}>
-            &lt;Link
-              to={item.to}
-              className="text-black w-full h-full hover:text-teal-700 flex gap-2 items-center "
-            >
-              {item.icon}
-              {item.label}
-            &lt;/Link>
-          &lt;/DropdownMenuItem>
-        ))}
+        &lt;div className="gap-4 hidden w-full justify-between items-center md:flex">
+          &lt;div className="flex flex-col w-full  md:flex-row gap-8 md:justify-center md:text-lg">
+            {menuItems.map((item, index) => (
+              &lt;NavLink
+                key={index}
+                to={item.to}
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-black border-b-2 border-teal-500"
+                    : "text-black hover:text-teal-500"
+                }
+              >
+                {item.label}
+              &lt;/NavLink>
+            ))}
+          &lt;/div>
 
-        &lt;HeaderButtons />
-      &lt;/DropdownMenuContent>
-    &lt;/DropdownMenu>
+          &lt;HeadersButtons />
+        &lt;/div>
+
+        &lt;div className="flex md:hidden">
+          {userIsAuthenticated() ? (
+            &lt;>
+              &lt;UserDropdown />
+            &lt;/>
+          ) : (
+            &lt;BurgerMenu />
+          )}
+        &lt;/div>
+      &lt;/div>
+    &lt;/header>
   );
 };
 
-export default BurgerMenu;
+export default Header;
 </code></pre>
         </article>
     </section>

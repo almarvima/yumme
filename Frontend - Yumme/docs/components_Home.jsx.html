@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/Header/BurgerMenu.jsx</title>
+    <title>JSDoc: Source: components/Home.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/Header/BurgerMenu.jsx</h1>
+    <h1 class="page-title">Source: components/Home.jsx</h1>
 
     
 
@@ -26,58 +26,28 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Menu } from "lucide-react";
-import React from "react";
-import { Link } from "react-router-dom";
-
-import { menuItems } from "../../constants";
-import HeaderButtons from "./HeaderButtons";
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import Recipes from "./Recipes/Recipes";
+import Categories from "./Categories/Categories";
+import HeroSection from "./HeroSection";
+import { Separator } from "./ui/separator";
 
 /**
- * Renders a burger menu component in small devices in the header component.
- *
- * @returns {JSX.Element} The burger menu component.
+ * Home component - A component that displays the home page of the website
+ * @returns {JSX.Element} Home component
  */
-const BurgerMenu = () => {
+export const Home = () => {
   return (
-    &lt;DropdownMenu >
-      &lt;DropdownMenuTrigger>
-        &lt;Menu className="size-7" />
-      &lt;/DropdownMenuTrigger>
-      &lt;DropdownMenuContent
-        className="w-[220px] space-y-4 md:hidden py-4"
-        align="end"
-      >
-        &lt;DropdownMenuLabel>Yumme&lt;/DropdownMenuLabel>
-        &lt;DropdownMenuSeparator />
-
-        {menuItems.map((item, index) => (
-          &lt;DropdownMenuItem className="" key={index}>
-            &lt;Link
-              to={item.to}
-              className="text-black w-full h-full hover:text-teal-700 flex gap-2 items-center "
-            >
-              {item.icon}
-              {item.label}
-            &lt;/Link>
-          &lt;/DropdownMenuItem>
-        ))}
-
-        &lt;HeaderButtons />
-      &lt;/DropdownMenuContent>
-    &lt;/DropdownMenu>
+    &lt;div className="flex flex-col gap-4">
+      &lt;HeroSection />
+      &lt;Separator />
+      &lt;Categories />
+      &lt;Recipes />
+    &lt;/div>
   );
 };
 
-export default BurgerMenu;
+export default Home;
 </code></pre>
         </article>
     </section>

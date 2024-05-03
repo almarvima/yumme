@@ -26,11 +26,15 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { Clock, Users2 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+            <pre class="prettyprint source linenums"><code>import { Clock, Heart, Users2 } from "lucide-react";
+import { Link } from "react-router-dom";
 
-import { Routes } from '../../constants';
-import { Badge } from '../ui/badge';
+import { Routes } from "../../constants";
+import { Badge } from "../ui/badge";
+import { Button } from "../ui/button";
+import StarRating from "./Rating";
+import { useRecipes } from "@/api/recipes";
+import { queryClient } from "@/config";
 
 /**
  * Each RecipeCard component is a card that displays the recipe image, title, description, and category.
@@ -38,6 +42,10 @@ import { Badge } from '../ui/badge';
  * @param {string} image - The image of the recipe.
  * @param {string} title - The title of the recipe.
  * @param {string} description - The description of the recipe.
+ * @param {number} cookingTime - The cooking time of the recipe.
+ * @param {number} perPerson - The number of people the recipe serves.
+ * @param {string} category - The category of the recipe.
+ * @param {boolean} isFavorite - The favorite status of the recipe.
  * @returns {JSX.Element} - The RecipeCard component.
  */
 const RecipeCard = ({
@@ -48,39 +56,70 @@ const RecipeCard = ({
   cookingTime,
   perPerson,
   category,
+  favoriteRecipes,
+  score,
 }) => {
-  return (
-    &lt;Link
-      to={`${Routes.RECIPE}/${id}`}
-      key={id}
-      className="border group bg-card text-card-foreground hover:scale-105 transition-transform shadow-sm flex flex-col w-full rounded-md"
-    >
-      &lt;img
-        src={image || "https://via.placeholder.com/260"}
-        alt={title}
-        className="w-full object-cover rounded-t-md aspect-square"
-      />
-      &lt;div className="px-6 py-4 flex flex-col gap-4">
-        &lt;div className="space-y-2">
-          &lt;h2 className="text-lg border-none font-semibold">{title}&lt;/h2>
-          &lt;p className="line-clamp-3 max-w-[80ch] text-xs text-muted-foreground">
-            {description} 
-          &lt;/p>
-        &lt;/div>
-        &lt;div className="flex gap-4">
-          &lt;Badge variant={"outline"} className="flex gap-2 py-1 max-w-max">
-            &lt;Clock className="size-4" /> {cookingTime} min
-          &lt;/Badge>
-          &lt;Badge variant={"outline"} className="flex gap-2 py-1 max-w-max">
-            &lt;Users2 className="size-4" /> {perPerson}
-          &lt;/Badge>
-        &lt;/div>
+  const { favoriteRecipe } = useRecipes();
 
-        &lt;Badge variant={"secondary"} className="w-min">
-          {category}
-        &lt;/Badge>
-      &lt;/div>
-    &lt;/Link>
+  const { mutate } = favoriteRecipe();
+
+  const isFavorite = favoriteRecipes?.includes(id);
+
+  return (
+    &lt;div className="relative group">
+      &lt;Button
+        onClick={() =>
+          mutate(
+            { id },
+            {
+              onSuccess: () => queryClient.invalidateQueries("favoriteRecipes"),
+            }
+          )
+        }
+        className="absolute top-2 z-50 right-2 rounded-full  group-hover:scale-125 transition-transform p-2 hover:bg-gray-50/20"
+        variant={"ghost"}
+        size={"icon"}
+      >
+        &lt;Heart
+          className={`size-8`}
+          fill={`${isFavorite ? "red" : "transparent"} `}
+          color="red"
+        />
+      &lt;/Button>
+      &lt;Link
+        key={id}
+        className="border cursor-pointer  relative bg-card text-card-foreground hover:scale-105 transition-transform shadow-sm flex flex-col w-full rounded-md"
+        to={`${Routes.RECIPE}/${id}`}
+      >
+        &lt;img
+          src={image || "https://via.placeholder.com/260"}
+          alt={title}
+          className="w-full object-cover rounded-t-md aspect-square"
+        />
+        &lt;div className="px-6 py-4 flex flex-col gap-4">
+          &lt;div className="space-y-2">
+            &lt;h2 className="text-lg border-none font-semibold">{title}&lt;/h2>
+            &lt;p className="line-clamp-3 max-w-[80ch] text-xs text-muted-foreground">
+              {description}
+            &lt;/p>
+          &lt;/div>
+
+          &lt;StarRating small score={score} />
+          &lt;div className="flex gap-4">
+            &lt;Badge variant={"outline"} className="flex gap-2 py-1 max-w-max">
+              &lt;Clock className="size-4" /> {cookingTime} min
+            &lt;/Badge>
+            &lt;Badge variant={"outline"} className="flex gap-2 py-1 max-w-max">
+              &lt;Users2 className="size-4" /> {perPerson}
+            &lt;/Badge>
+          &lt;/div>
+
+          &lt;Badge variant={"secondary"} className="w-min">
+            {category}
+          &lt;/Badge>
+        &lt;/div>
+      &lt;/Link>
+    &lt;/div>
   );
 };
 
@@ -95,13 +134,13 @@ export default RecipeCard;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#About">About</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#BurgerMenu">BurgerMenu</a></li><li><a href="global.html#Categories">Categories</a></li><li><a href="global.html#CategoryBox">CategoryBox</a></li><li><a href="global.html#Contact">Contact</a></li><li><a href="global.html#HeroSection">HeroSection</a></li><li><a href="global.html#Layout">Layout</a></li><li><a href="global.html#RecipeCard">RecipeCard</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SignUp">SignUp</a></li><li><a href="global.html#UploadedRecipe">UploadedRecipe</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#UserRecipes">UserRecipes</a></li><li><a href="global.html#UserProfile">UserProfile</a></li><li><a href="global.html#UserDropdown">UserDropdown</a></li><li><a href="global.html#UploadedRecipes">UploadedRecipes</a></li><li><a href="global.html#UploadedRecipe">UploadedRecipe</a></li><li><a href="global.html#UnexpectedError">UnexpectedError</a></li><li><a href="global.html#ThemeToggleButton">ThemeToggleButton</a></li><li><a href="global.html#SignUp">SignUp</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#router">router</a></li><li><a href="global.html#Recipes">Recipes</a></li><li><a href="global.html#RecipeCard">RecipeCard</a></li><li><a href="global.html#Recipe">Recipe</a></li><li><a href="global.html#Rating">Rating</a></li><li><a href="global.html#PrivateRoutes">PrivateRoutes</a></li><li><a href="global.html#NotFound">NotFound</a></li><li><a href="global.html#Layout">Layout</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#HeroSection">HeroSection</a></li><li><a href="global.html#HeaderButtons">HeaderButtons</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Forbidden">Forbidden</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#FavoriteRecipes">FavoriteRecipes</a></li><li><a href="global.html#CreateRecipe">CreateRecipe</a></li><li><a href="global.html#Contact">Contact</a></li><li><a href="global.html#Comment">Comment</a></li><li><a href="global.html#CategoryBox">CategoryBox</a></li><li><a href="global.html#Categories">Categories</a></li><li><a href="global.html#BurgerMenu">BurgerMenu</a></li><li><a href="global.html#AppearanceSettings">AppearanceSettings</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#About">About</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Apr 19 2024 18:56:58 GMT+0200 (Central European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 0.4.7</a> on Fri May 03 2024 16:22:02 GMT+0200 (Central European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>

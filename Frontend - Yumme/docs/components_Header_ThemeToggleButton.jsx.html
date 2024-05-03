@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/Header/BurgerMenu.jsx</title>
+    <title>JSDoc: Source: components/Header/ThemeToggleButton.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/Header/BurgerMenu.jsx</h1>
+    <h1 class="page-title">Source: components/Header/ThemeToggleButton.jsx</h1>
 
     
 
@@ -26,58 +26,35 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Menu } from "lucide-react";
-import React from "react";
-import { Link } from "react-router-dom";
-
-import { menuItems } from "../../constants";
-import HeaderButtons from "./HeaderButtons";
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import { useTheme } from "../../contexts/ThemeContext.tsx";
+import { Button } from "@/components/ui/button";
+import { Moon, Sun } from "lucide-react";
 
 /**
- * Renders a burger menu component in small devices in the header component.
- *
- * @returns {JSX.Element} The burger menu component.
+ * ThemeToggleButton component - A component that toggles the theme of the website
+ * @returns {JSX.Element} ThemeToggleButton component
  */
-const BurgerMenu = () => {
+function ThemeToggleButton() {
+  const { theme, setTheme } = useTheme();
+
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
+
   return (
-    &lt;DropdownMenu >
-      &lt;DropdownMenuTrigger>
-        &lt;Menu className="size-7" />
-      &lt;/DropdownMenuTrigger>
-      &lt;DropdownMenuContent
-        className="w-[220px] space-y-4 md:hidden py-4"
-        align="end"
-      >
-        &lt;DropdownMenuLabel>Yumme&lt;/DropdownMenuLabel>
-        &lt;DropdownMenuSeparator />
-
-        {menuItems.map((item, index) => (
-          &lt;DropdownMenuItem className="" key={index}>
-            &lt;Link
-              to={item.to}
-              className="text-black w-full h-full hover:text-teal-700 flex gap-2 items-center "
-            >
-              {item.icon}
-              {item.label}
-            &lt;/Link>
-          &lt;/DropdownMenuItem>
-        ))}
-
-        &lt;HeaderButtons />
-      &lt;/DropdownMenuContent>
-    &lt;/DropdownMenu>
+    &lt;Button
+      className="border-2 max-w-max border-grey hover:bg-teal-500 dark:hover:bg-teal-800"
+      variant={theme === "dark" ? "secondary" : "primary"}
+      onClick={toggleTheme}
+    >
+      {theme === "dark" ? &lt;Sun className="mr-1" /> : &lt;Moon className="mr-1" />}{" "}
+      Switch to {theme === "dark" ? "light" : "dark"} mode
+    &lt;/Button>
   );
-};
+}
 
-export default BurgerMenu;
+export default ThemeToggleButton;
 </code></pre>
         </article>
     </section>

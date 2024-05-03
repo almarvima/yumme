@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Recipes/Recipe.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Recipes/Recipe.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useRecipes } from "../../api/recipes";
+import CommentSection from "./CommentSection";
+
+import { Skeleton } from "@/components/ui/skeleton";
+import StarRating from "./Rating";
+import { useAuth } from "@/auth";
+import { Button } from "../ui/button";
+import { Heart } from "lucide-react";
+import { queryClient } from "@/config";
+
+/**
+ * Recipe component - A component that displays a single recipe
+ * @returns {JSX.Element} Recipe component
+ */
+const Recipe = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const { getRecipe, getFavoriteRecipes } = useRecipes();
+
+  const { userIsAuthenticated } = useAuth();
+
+  const {
+    data: recipe,
+    isLoading,
+    isError,
+  } = getRecipe(id, userIsAuthenticated());
+
+  if (isError) {
+    navigate("/error");
+  }
+
+  const { favoriteRecipe } = useRecipes();
+
+  const { mutate } = favoriteRecipe();
+
+  const { data: favoriteRecipes } = getFavoriteRecipes();
+  
+
+  const isFavorite = favoriteRecipes?.includes(Number(id));
+ 
+ 
+
+  if (isLoading) {
+    return (
+      &lt;div className="flex flex-col md:flex-row md:items-start gap-8 border border-teal-400 shadow-lg p-4 rounded-lg">
+        &lt;Skeleton className="h-[250px] w-[250px] rounded-xl" />
+        &lt;div className="space-y-4 w-full md:w-1/2">
+          &lt;Skeleton className="h-14 w-3/4" />
+          &lt;Skeleton className="h-5 w-full" count={4} />
+          &lt;Skeleton className="h-5 w-1/2" />
+          &lt;Skeleton className="h-5 w-1/2" />
+          &lt;Skeleton className="h-5 w-1/2" />
+        &lt;/div>
+      &lt;/div>
+    );
+  }
+
+  return (
+    &lt;section className="container mx-auto p-4 flex flex-col gap-16">
+      {recipe &amp;&amp; (
+        &lt;>
+          &lt;article className="flex relative flex-col md:flex-row md:items-start gap-8 border border-teal-400 shadow-lg p-4 rounded-lg">
+            &lt;Button
+              onClick={() =>
+                mutate(
+                  { id },
+                  {
+                    onSuccess: () => {
+                      queryClient.invalidateQueries({
+                        queryKey: ["favoriteRecipes"],
+                      });
+                    },
+                  }
+                )
+              }
+              className="absolute top-2 z-50 right-2 rounded-full  group-hover:scale-125 transition-transform p-2 hover:bg-red-400/20"
+              variant={"ghost"}
+              size={"icon"}
+            >
+              &lt;Heart
+                className={`size-8`}
+                fill={`${isFavorite ? "red" : "transparent"} `}
+                color="red"
+              />
+            &lt;/Button>
+            &lt;div className="flex flex-col gap-4 w-full h-full">
+              &lt;img
+                src={recipe.imgUrl}
+                alt={recipe.title}
+                className="rounded-lg shadow-md w-full transition-transform duration-300 ease-in-out hover:scale-105"
+              />
+              &lt;span className="font-medium space-y-2">
+                Average Score
+                &lt;StarRating score={recipe.score} small />
+              &lt;/span>
+            &lt;/div>
+            &lt;div className="border-t md:border-t-0 md:border-l border-teal-500 pt-4 md:pt-0 md:pl-4 space-y-4 w-full md:w-1/2">
+              &lt;h1 className="text-5xl font-bold pb-4">{recipe.title}&lt;/h1>
+              &lt;p className="text-lg text-teal-900 tracking-wide pb-4 dark:text-white">
+                {recipe.description}
+              &lt;/p>
+              &lt;div className="text-lg text-teal-900 font-light space-y-2 dark:text-white">
+                &lt;p className="mb-6">
+                  &lt;span className="font-semibold"> Ingredients: &lt;/span>{" "}
+                  {recipe.ingredients}
+                &lt;/p>
+                &lt;p className="pb-4">
+                  &lt;span className="font-semibold">Cooking Time:&lt;/span>{" "}
+                  {recipe.cookingTime} minutes
+                &lt;/p>
+                &lt;p className="pb-4">
+                  &lt;span className="font-semibold"> Servings: &lt;/span>
+                  {recipe.perPerson}
+                  {recipe.perPerson === 1 ? " person" : " people"}
+                &lt;/p>
+                &lt;p>
+                  &lt;span className="font-semibold"> Type of food: &lt;/span>
+                  {recipe.categoryName}{" "}
+                &lt;/p>
+              &lt;/div>
+
+              &lt;StarRating score={recipe.score} recipeId={id} />
+            &lt;/div>
+          &lt;/article>
+
+          &lt;CommentSection id={id} comments={recipe.comment || []} />
+        &lt;/>
+      )}
+    &lt;/section>
+  );
+};
+
+export default Recipe;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#UserRecipes">UserRecipes</a></li><li><a href="global.html#UserProfile">UserProfile</a></li><li><a href="global.html#UserDropdown">UserDropdown</a></li><li><a href="global.html#UploadedRecipes">UploadedRecipes</a></li><li><a href="global.html#UploadedRecipe">UploadedRecipe</a></li><li><a href="global.html#UnexpectedError">UnexpectedError</a></li><li><a href="global.html#ThemeToggleButton">ThemeToggleButton</a></li><li><a href="global.html#SignUp">SignUp</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#router">router</a></li><li><a href="global.html#Recipes">Recipes</a></li><li><a href="global.html#RecipeCard">RecipeCard</a></li><li><a href="global.html#Recipe">Recipe</a></li><li><a href="global.html#Rating">Rating</a></li><li><a href="global.html#PrivateRoutes">PrivateRoutes</a></li><li><a href="global.html#NotFound">NotFound</a></li><li><a href="global.html#Layout">Layout</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#HeroSection">HeroSection</a></li><li><a href="global.html#HeaderButtons">HeaderButtons</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Forbidden">Forbidden</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#FavoriteRecipes">FavoriteRecipes</a></li><li><a href="global.html#CreateRecipe">CreateRecipe</a></li><li><a href="global.html#Contact">Contact</a></li><li><a href="global.html#Comment">Comment</a></li><li><a href="global.html#CategoryBox">CategoryBox</a></li><li><a href="global.html#Categories">Categories</a></li><li><a href="global.html#BurgerMenu">BurgerMenu</a></li><li><a href="global.html#AppearanceSettings">AppearanceSettings</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#About">About</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 0.4.7</a> on Fri May 03 2024 16:22:02 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

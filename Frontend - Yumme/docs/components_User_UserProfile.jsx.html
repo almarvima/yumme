@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/Header/BurgerMenu.jsx</title>
+    <title>JSDoc: Source: components/User/UserProfile.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/Header/BurgerMenu.jsx</h1>
+    <h1 class="page-title">Source: components/User/UserProfile.jsx</h1>
 
     
 
@@ -26,58 +26,56 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Menu } from "lucide-react";
-import React from "react";
-import { Link } from "react-router-dom";
+            <pre class="prettyprint source linenums"><code>import { Edit } from "lucide-react";
+import { NavLink, Outlet } from "react-router-dom";
 
-import { menuItems } from "../../constants";
-import HeaderButtons from "./HeaderButtons";
+import { Routes } from "../../constants";
+
+const userProfileLink = [
+  {
+    name: "My Recipes",
+    to: Routes.USER_PROFILE,
+  },
+  {
+    name: "Settings",
+    to: Routes.USER_SETTINGS,
+  },
+];
 
 /**
- * Renders a burger menu component in small devices in the header component.
- *
- * @returns {JSX.Element} The burger menu component.
+ * UserProfile component - A component that displays the user profile
+ * @returns {JSX.Element} UserProfile component
  */
-const BurgerMenu = () => {
+export function UserProfile() {
   return (
-    &lt;DropdownMenu >
-      &lt;DropdownMenuTrigger>
-        &lt;Menu className="size-7" />
-      &lt;/DropdownMenuTrigger>
-      &lt;DropdownMenuContent
-        className="w-[220px] space-y-4 md:hidden py-4"
-        align="end"
-      >
-        &lt;DropdownMenuLabel>Yumme&lt;/DropdownMenuLabel>
-        &lt;DropdownMenuSeparator />
+    &lt;div className="flex min-h-screen w-full flex-col">
+      &lt;section className="sticky bg-transparent top-0 flex h-16 px-0 items-center gap-4 border-b ">
+        &lt;nav className="md:text-lg font-medium flex flex-row md:items-center gap-4 text-sm lg:gap-6">
+          &lt;Edit className="size-6 sr-only md:not-sr-only" />
+          &lt;span className="sr-only">Your Recipes&lt;/span>
 
-        {menuItems.map((item, index) => (
-          &lt;DropdownMenuItem className="" key={index}>
-            &lt;Link
-              to={item.to}
-              className="text-black w-full h-full hover:text-teal-700 flex gap-2 items-center "
+          {userProfileLink.map((link, index) => (
+            &lt;NavLink
+              key={index}
+              to={link.to}
+              end
+              className={({ isActive }) =>
+                isActive
+                  ? "text-primary border-b-2 pb-1 border-teal-500 transition-all"
+                  : "text-primary hover:text-teal-500"
+              }
             >
-              {item.icon}
-              {item.label}
-            &lt;/Link>
-          &lt;/DropdownMenuItem>
-        ))}
-
-        &lt;HeaderButtons />
-      &lt;/DropdownMenuContent>
-    &lt;/DropdownMenu>
+              {link.name}
+            &lt;/NavLink>
+          ))}
+        &lt;/nav>
+      &lt;/section>
+      &lt;Outlet />
+    &lt;/div>
   );
-};
+}
 
-export default BurgerMenu;
+export default UserProfile;
 </code></pre>
         </article>
     </section>

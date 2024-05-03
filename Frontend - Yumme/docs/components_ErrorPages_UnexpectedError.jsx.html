@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/Header/BurgerMenu.jsx</title>
+    <title>JSDoc: Source: components/ErrorPages/UnexpectedError.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/Header/BurgerMenu.jsx</h1>
+    <h1 class="page-title">Source: components/ErrorPages/UnexpectedError.jsx</h1>
 
     
 
@@ -26,58 +26,30 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Menu } from "lucide-react";
-import React from "react";
-import { Link } from "react-router-dom";
-
-import { menuItems } from "../../constants";
-import HeaderButtons from "./HeaderButtons";
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import myImage from "../../images/500.png";
 
 /**
- * Renders a burger menu component in small devices in the header component.
- *
- * @returns {JSX.Element} The burger menu component.
+ * UnexpectedError component - A component that displays the unexpected error page of the website
+ * @returns {JSX.Element} UnexpectedError component
  */
-const BurgerMenu = () => {
+const UnexpectedError = () => {
   return (
-    &lt;DropdownMenu >
-      &lt;DropdownMenuTrigger>
-        &lt;Menu className="size-7" />
-      &lt;/DropdownMenuTrigger>
-      &lt;DropdownMenuContent
-        className="w-[220px] space-y-4 md:hidden py-4"
-        align="end"
-      >
-        &lt;DropdownMenuLabel>Yumme&lt;/DropdownMenuLabel>
-        &lt;DropdownMenuSeparator />
-
-        {menuItems.map((item, index) => (
-          &lt;DropdownMenuItem className="" key={index}>
-            &lt;Link
-              to={item.to}
-              className="text-black w-full h-full hover:text-teal-700 flex gap-2 items-center "
-            >
-              {item.icon}
-              {item.label}
-            &lt;/Link>
-          &lt;/DropdownMenuItem>
-        ))}
-
-        &lt;HeaderButtons />
-      &lt;/DropdownMenuContent>
-    &lt;/DropdownMenu>
+    &lt;div className="flex flex-col items-center justify-center my-4 p-4 md:pt-10">
+      &lt;h2 className="text-6xl font-bold mb-6">Error&lt;/h2>
+      &lt;p className="mb-6 text-lg">
+        Sorry! We just encountered an unexpected error.
+      &lt;/p>
+      &lt;img
+        className="w-3/4 max-w-2xl mx-auto shadow-2xl"
+        src={myImage}
+        alt="Unexpected Error"
+      />
+    &lt;/div>
   );
 };
 
-export default BurgerMenu;
+export default UnexpectedError;
 </code></pre>
         </article>
     </section>

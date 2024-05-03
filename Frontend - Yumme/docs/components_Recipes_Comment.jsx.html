@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/Header/BurgerMenu.jsx</title>
+    <title>JSDoc: Source: components/Recipes/Comment.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/Header/BurgerMenu.jsx</h1>
+    <h1 class="page-title">Source: components/Recipes/Comment.jsx</h1>
 
     
 
@@ -26,58 +26,40 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Menu } from "lucide-react";
-import React from "react";
-import { Link } from "react-router-dom";
-
-import { menuItems } from "../../constants";
-import HeaderButtons from "./HeaderButtons";
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { UserCircle2 } from "lucide-react";
 
 /**
- * Renders a burger menu component in small devices in the header component.
- *
- * @returns {JSX.Element} The burger menu component.
+ * Comment component - Each comment in the {CommentSection.jsx} component
+ * @param {string} author - The author of the comment
+ * @param {string} comment - The comment
+ * @returns {JSX.Element} Comment component
  */
-const BurgerMenu = () => {
+const Comment = ({ author, comment }) => {
   return (
-    &lt;DropdownMenu >
-      &lt;DropdownMenuTrigger>
-        &lt;Menu className="size-7" />
-      &lt;/DropdownMenuTrigger>
-      &lt;DropdownMenuContent
-        className="w-[220px] space-y-4 md:hidden py-4"
-        align="end"
-      >
-        &lt;DropdownMenuLabel>Yumme&lt;/DropdownMenuLabel>
-        &lt;DropdownMenuSeparator />
-
-        {menuItems.map((item, index) => (
-          &lt;DropdownMenuItem className="" key={index}>
-            &lt;Link
-              to={item.to}
-              className="text-black w-full h-full hover:text-teal-700 flex gap-2 items-center "
-            >
-              {item.icon}
-              {item.label}
-            &lt;/Link>
-          &lt;/DropdownMenuItem>
-        ))}
-
-        &lt;HeaderButtons />
-      &lt;/DropdownMenuContent>
-    &lt;/DropdownMenu>
+    &lt;div className="w-full bg-gray-50 rounded-lg p-6">
+      &lt;div className="flex flex-col items-start  ">
+        &lt;div className="flex gap-2 flex-col">
+          &lt;div className="flex items-center gap-4">
+            &lt;Avatar>
+              &lt;AvatarImage src={""} alt="" />
+              &lt;AvatarFallback>
+                &lt;UserCircle2 className="size-8" strokeWidth={1.5} />
+              &lt;/AvatarFallback>
+            &lt;/Avatar>
+            &lt;h2 className="text-lg font-medium leading-none">
+              {author.charAt(0).toUpperCase() + author.slice(1)}
+            &lt;/h2>
+          &lt;/div>
+          &lt;p className="text-sm text-muted-foreground ">{comment}&lt;/p>
+        &lt;/div>
+      &lt;/div>
+    &lt;/div>
   );
 };
 
-export default BurgerMenu;
+export default Comment;
 </code></pre>
         </article>
     </section>

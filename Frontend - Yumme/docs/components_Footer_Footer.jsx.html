@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Footer/Footer.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Footer/Footer.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import { Link } from "react-router-dom";
+import { Routes } from "../../constants";
+
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+
+import { Facebook } from "lucide-react";
+import { Twitter } from "lucide-react";
+import { Instagram } from "lucide-react";
+import { Linkedin } from "lucide-react";
+import { Youtube } from "lucide-react";
+import { Mail } from "lucide-react";
+import ThemeToggleButton from "../Header/ThemeToggleButton";
+import { useAuth } from "../../auth";
+
+/**
+ * Footer component - A component that displays the footer of the website
+ * @returns {JSX.Element} Footer component
+ */
+const Footer = () => {
+  const { userIsAuthenticated } = useAuth();
+
+  return (
+    &lt;footer className="bg-teal-800 text-white">
+      &lt;div className="container mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* About Section */}
+        &lt;div>
+          &lt;h2 className="font-bold text-lg mb-2">About Us&lt;/h2>
+          &lt;p>
+            Discover a world of culinary delights with us! Dive into our diverse
+            collection of recipes, tips, and kitchen wisdom.
+          &lt;/p>
+        &lt;/div>
+
+        {/* Quick Links */}
+        &lt;div>
+          &lt;h2 className="font-bold text-lg mb-2">Quick Links&lt;/h2>
+          &lt;ul>
+            &lt;li>
+              &lt;Link
+                to={Routes.RECIPE}
+                className="hover:border-b-2 hover:border-teal-200 border-b-0 border-transparent"
+              >
+                Recipes
+              &lt;/Link>
+            &lt;/li>
+            &lt;li>
+              &lt;Link
+                to={Routes.ABOUT}
+                className="hover:border-b-2 hover:border-teal-200 border-b-0 border-transparent"
+              >
+                About us
+              &lt;/Link>
+            &lt;/li>
+            &lt;li>
+              &lt;Link
+                to={Routes.CONTACT}
+                className="hover:border-b-2 hover:border-teal-200 border-b-0 border-transparent"
+              >
+                Contact us
+              &lt;/Link>
+            &lt;/li>
+            &lt;li>
+              &lt;Link
+                to={Routes.CONTACT}
+                className="hover:border-b-2 hover:border-teal-200 border-b-0 border-transparent"
+              >
+                Blog
+              &lt;/Link>
+            &lt;/li>
+          &lt;/ul>
+        &lt;/div>
+
+        {/* Newsletter Subscription */}
+        &lt;div>
+          &lt;h2 className="font-bold text-lg mb-2">
+            Subscribe to Our Newsletter
+          &lt;/h2>
+          &lt;p>Get the latest recipes, tips, and more, straight to your inbox.&lt;/p>
+          &lt;form className="mt-4 flex">
+            &lt;Input
+              type="email"
+              className="w-full rounded-r-none"
+              placeholder="Enter your email"
+            />
+            &lt;Button
+              type="submit"
+              variant="secondary"
+              className="py-2 px-4 ml-2 border border-gray-500 hover:border-teal-50 hover:bg-teal-900 dark:text-teal-900 dark:hover:text-white bg-teal-100 rounded-l-none"
+            >
+              Subscribe
+            &lt;/Button>
+          &lt;/form>
+        &lt;/div>
+
+        {/* Social Media Links */}
+        &lt;div className="flex flex-col gap-8  lg:justify-between lg:items-center ">
+          &lt;div className="lg:h-full">
+            &lt;h2 className="font-bold text-lg mb-2">Follow Us&lt;/h2>
+            &lt;div className="flex">
+              &lt;a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mr-2 hover:text-black"
+              >
+                &lt;Facebook size={24} />
+              &lt;/a>
+              &lt;a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mr-2 hover:text-black"
+              >
+                &lt;Twitter size={24} />
+              &lt;/a>
+              &lt;a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mr-2 hover:text-black"
+              >
+                &lt;Instagram size={24} />
+              &lt;/a>
+              &lt;a
+                href="https://pinterest.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mr-2 hover:text-black"
+              >
+                {/* &lt;FaPinterest size={24} /> */}
+              &lt;/a>
+              &lt;a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mr-2 hover:text-black"
+              >
+                &lt;Linkedin size={24} />
+              &lt;/a>
+              &lt;a
+                href="https://youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mr-2 hover:text-black"
+              >
+                &lt;Youtube size={24} />
+              &lt;/a>
+              &lt;a
+                href="mailto:info@yourrecipesite.com"
+                className="mr-2 hover:text-black"
+              >
+                &lt;Mail size={24} />
+              &lt;/a>
+            &lt;/div>
+          &lt;/div>
+          {!userIsAuthenticated() &amp;&amp; &lt;ThemeToggleButton />}
+        &lt;/div>
+      &lt;/div>
+
+      {/* Copyright */}
+      &lt;div className="text-center py-6 border-t border-white-700">
+        &amp;copy; {new Date().getFullYear()} YumMe. All rights reserved.
+      &lt;/div>
+    &lt;/footer>
+  );
+};
+
+export default Footer;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#UserRecipes">UserRecipes</a></li><li><a href="global.html#UserProfile">UserProfile</a></li><li><a href="global.html#UserDropdown">UserDropdown</a></li><li><a href="global.html#UploadedRecipes">UploadedRecipes</a></li><li><a href="global.html#UploadedRecipe">UploadedRecipe</a></li><li><a href="global.html#UnexpectedError">UnexpectedError</a></li><li><a href="global.html#ThemeToggleButton">ThemeToggleButton</a></li><li><a href="global.html#SignUp">SignUp</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#router">router</a></li><li><a href="global.html#Recipes">Recipes</a></li><li><a href="global.html#RecipeCard">RecipeCard</a></li><li><a href="global.html#Recipe">Recipe</a></li><li><a href="global.html#Rating">Rating</a></li><li><a href="global.html#PrivateRoutes">PrivateRoutes</a></li><li><a href="global.html#NotFound">NotFound</a></li><li><a href="global.html#Layout">Layout</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#HeroSection">HeroSection</a></li><li><a href="global.html#HeaderButtons">HeaderButtons</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Forbidden">Forbidden</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#FavoriteRecipes">FavoriteRecipes</a></li><li><a href="global.html#CreateRecipe">CreateRecipe</a></li><li><a href="global.html#Contact">Contact</a></li><li><a href="global.html#Comment">Comment</a></li><li><a href="global.html#CategoryBox">CategoryBox</a></li><li><a href="global.html#Categories">Categories</a></li><li><a href="global.html#BurgerMenu">BurgerMenu</a></li><li><a href="global.html#AppearanceSettings">AppearanceSettings</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#About">About</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 0.4.7</a> on Fri May 03 2024 16:22:02 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

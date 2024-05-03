@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: router/router.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: router/router.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { createBrowserRouter } from 'react-router-dom'
+
+import App from '../App'
+import { Home } from '../components/Home'
+import SignIn from '../components/SignIn'
+import SignUp from '../components/SignUp'
+import About from '../components/About'
+import Contact from '../components/Contact'
+import { Routes } from '../constants'
+import PrivateRoutes from '../components/PrivateRoutes'
+import CreateRecipe from '../components/Recipes/CreateRecipe'
+import UserProfile from '../components/User/UserProfile'
+import UserSettings from '../components/User/UserSettings'
+import UserRecipes from '../components/User/UserRecipes'
+import NotFound from '../components/ErrorPages/NotFound'
+import Forbidden from '../components/ErrorPages/Forbidden'
+import UnexpectedError from '../components/ErrorPages/UnexpectedError'
+import Recipe from '../components/Recipes/Recipe.jsx'
+import AppearanceSettings from '../components/Settings/AppearanceSettings'
+
+/**
+ * The router configuration for the application.
+ * @type {BrowserRouter}
+ 
+  * @see https://reactrouter.com/en/6.22.3/routers/create-browser-router
+ */
+export const router = createBrowserRouter([
+  {
+    path: Routes.HOME,
+    element: &lt;App />,
+
+    // errorElement: &lt;div>Not found &lt;/div>,
+    children: [
+      {
+        index: true,
+        element: &lt;Home />
+      },
+      {
+        path: Routes.SIGN_IN,
+        element: &lt;SignIn />
+      },
+      {
+        path: Routes.SIGN_UP,
+        element: &lt;SignUp />
+      },
+      {
+        path: `${Routes.RECIPE}/:id`,
+        element: &lt;Recipe />
+      },
+      {
+        path: Routes.ABOUT,
+        element: &lt;About />
+      },
+      {
+        path: Routes.CONTACT,
+        element: &lt;Contact />
+      },
+      {
+        path: Routes.FORBIDDEN,
+        element: &lt;Forbidden />
+      },
+      {
+        path: Routes.ERROR,
+        element: &lt;UnexpectedError />
+      },
+      {
+        path: '*',
+        element: &lt;NotFound />
+      },
+      // Private routes
+      {
+        element: &lt;PrivateRoutes />,
+        children: [
+          {
+            path: Routes.CREATE_RECIPE,
+            element: &lt;CreateRecipe />
+          },
+          {
+            path: Routes.USER_PROFILE,
+            element: &lt;UserProfile />,
+            children: [
+              {
+                index: true,
+                element: &lt;UserRecipes />
+              },
+
+              {
+                path: Routes.CREATE_RECIPE,
+                element: &lt;CreateRecipe />
+              },
+
+              {
+                path: Routes.USER_SETTINGS,
+                element: &lt;UserSettings />,
+                children: [
+                  {
+                    index: true,
+                    element: &lt;div>general settings&lt;/div>
+                  },
+                  {
+                    path: 'appearance',
+                    element: &lt;AppearanceSettings />
+                  }
+                ]
+              }
+            ]
+          }
+          // More private routes can be added here
+        ]
+      }
+    ]
+  }
+])
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#UserRecipes">UserRecipes</a></li><li><a href="global.html#UserProfile">UserProfile</a></li><li><a href="global.html#UserDropdown">UserDropdown</a></li><li><a href="global.html#UploadedRecipes">UploadedRecipes</a></li><li><a href="global.html#UploadedRecipe">UploadedRecipe</a></li><li><a href="global.html#UnexpectedError">UnexpectedError</a></li><li><a href="global.html#ThemeToggleButton">ThemeToggleButton</a></li><li><a href="global.html#SignUp">SignUp</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#router">router</a></li><li><a href="global.html#Recipes">Recipes</a></li><li><a href="global.html#RecipeCard">RecipeCard</a></li><li><a href="global.html#Recipe">Recipe</a></li><li><a href="global.html#Rating">Rating</a></li><li><a href="global.html#PrivateRoutes">PrivateRoutes</a></li><li><a href="global.html#NotFound">NotFound</a></li><li><a href="global.html#Layout">Layout</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#HeroSection">HeroSection</a></li><li><a href="global.html#HeaderButtons">HeaderButtons</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Forbidden">Forbidden</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#FavoriteRecipes">FavoriteRecipes</a></li><li><a href="global.html#CreateRecipe">CreateRecipe</a></li><li><a href="global.html#Contact">Contact</a></li><li><a href="global.html#Comment">Comment</a></li><li><a href="global.html#CategoryBox">CategoryBox</a></li><li><a href="global.html#Categories">Categories</a></li><li><a href="global.html#BurgerMenu">BurgerMenu</a></li><li><a href="global.html#AppearanceSettings">AppearanceSettings</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#About">About</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 0.4.7</a> on Fri May 03 2024 16:22:02 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

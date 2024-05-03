@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Recipes/CreateRecipe.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Recipes/CreateRecipe.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import { useRecipes } from "../../api/recipes";
+// import { Routes } from '../../constants' // Import the categories from the constants file
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+
+import { Button } from "@/components/ui/button";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
+import { Textarea } from "../ui/textarea";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { useToast } from "@/components/ui/use-toast";
+import { SERVER_MESSAGES } from "../../config/index";
+import { useCategories } from "../../api/categories";
+import { Skeleton } from "../../components/ui/skeleton";
+
+/**
+ * CreateRecipe component - A component that displays the form to create a new recipe
+ * @returns {JSX.Element} CreateRecipe component
+ */
+const CreateRecipe = () => {
+  const { createRecipe } = useRecipes();
+  const navigate = useNavigate();
+  const { mutate } = createRecipe();
+
+  const { toast } = useToast();
+
+  /**
+   * @see https://react-hook-form.com/get-started
+   * */
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+
+  const { getCategories } = useCategories();
+
+  const { data: categories, isLoading } = getCategories();
+
+  const onSubmit = (data) => {
+    const { recipeCategory } = data;
+    const recipeData = {
+      ...data,
+      recipeCategory:
+        recipeCategory.charAt(0).toUpperCase() + recipeCategory.slice(1),
+    };
+
+    mutate(recipeData, {
+      onSuccess: (res) => {
+        if (res.code === "RECIPE_CREATED") {
+          navigate(`/profile`);
+
+          toast({
+            title: "Yay! 🎉",
+            description:
+              SERVER_MESSAGES[res.code] || "Recipe created successfully",
+            variant: "success",
+          });
+        }
+      },
+    }),
+      reset();
+  };
+
+  return (
+    &lt;section className=" ">
+      &lt;div className="bg-background  rounded py-8 flex flex-col gap-4 border-b-none  mb-4">
+        &lt;h2 className=" font-bold text-left no-underline ">New Recipe&lt;/h2>
+        &lt;form
+          onSubmit={handleSubmit(onSubmit)}
+          className="md:flex md:justify-between"
+        >
+          &lt;div className="md:w-1/2 md:pr-4">
+            &lt;div className="mb-4">
+              &lt;Label
+                className="block text-gray-700 text-lg font-bold mb-2 dark:text-teal-50"
+                htmlFor="title"
+              >
+                Recipe Title
+              &lt;/Label>
+              &lt;Input
+                {...register("title", { required: true })}
+                id="title"
+                name="title"
+                type="text"
+                className="shadow appearance-none border rounded w-full  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:text-teal-50"
+                placeholder="Title"
+              />
+              {errors.title &amp;&amp; (
+                &lt;p role="alert" className="text-destructive">
+                  Your recipe needs a title
+                &lt;/p>
+              )}
+            &lt;/div>
+            &lt;div className="mb-4 mt-8">
+              &lt;Label
+                className="block text-gray-700 text-lg font-bold mb-2 dark:text-teal-50"
+                htmlFor="description"
+              >
+                Recipe Description
+              &lt;/Label>
+              &lt;Textarea
+                {...register("description", { required: true })}
+                id="description"
+                name="description"
+                className="shadow appearance-none border rounded w-full h-64 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:text-teal-50"
+                placeholder="Description"
+              />
+              {errors.description &amp;&amp; (
+                &lt;p role="alert" className="text-destructive">
+                  This field is required
+                &lt;/p>
+              )}
+            &lt;/div>
+            &lt;div className="mb-8 mt-8">
+              &lt;Label
+                className="block text-gray-700 text-lg font-bold mb-2 dark:text-teal-50"
+                htmlFor="imgUrl"
+              >
+                Recipe Image
+              &lt;/Label>
+              {/* &lt;Input
+                id='imageUpload'
+                name='imageUpload'
+                type='file'
+                // onChange={handleImageChange}
+                className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+              /> */}
+              &lt;Input
+                type="text"
+                id="imgUrl"
+                name="imgUrl"
+                className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                {...register("imgUrl", {
+                  required: "Image URL is required",
+                  pattern: {
+                    value: /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp|svg))/i,
+                    message: "Please enter a valid image URL",
+                  },
+                })}
+                placeholder="https://example.com/image.jpg"
+              />
+              {errors.imgUrl &amp;&amp; (
+                &lt;p role="alert" className="text-destructive">
+                  {errors.imgUrl.message}
+                &lt;/p>
+              )}
+            &lt;/div>
+          &lt;/div>
+          &lt;div className="md:w-1/2 md:pl-4">
+            &lt;div className="mt-8 md:mt-0 ">
+              &lt;Label
+                className="block text-gray-700 text-lg font-bold mb-2 dark:text-teal-50"
+                htmlFor="cookingTime"
+              >
+                Cooking Time
+              &lt;/Label>
+              &lt;Input
+                {...register("cookingTime", {
+                  required: "Cooking time is required",
+                  pattern: {
+                    value: /^[1-9][0-9]*$/,
+                    message: "Please enter a valid time in minutes",
+                  },
+                })}
+                id="cookingTime"
+                name="cookingTime"
+                type="text"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:text-teal-50"
+                placeholder="Cooking Time"
+              />
+              {errors.cookingTime &amp;&amp; (
+                &lt;p role="alert" className="text-destructive">
+                  {errors.cookingTime.message}
+                &lt;/p>
+              )}
+            &lt;/div>
+            &lt;div className="grid auto-rows-max items-start mb-10 mt-8 gap-4 lg:gap-8">
+              &lt;Card>
+                &lt;CardHeader>
+                  &lt;CardTitle>Servings per person&lt;/CardTitle>
+                &lt;/CardHeader>
+                &lt;CardContent>
+                  &lt;div className="grid gap-6">
+                    &lt;div className="grid gap-3">
+                      &lt;Label htmlFor="perPerson">&lt;/Label>
+                      &lt;select
+                        {...register("perPerson", { required: true })}
+                        id="perPerson"
+                        title="perPerson"
+                        className="shadow  border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      >
+                        &lt;option value="">Select servings per person&lt;/option>
+                        &lt;option value="1">1&lt;/option>
+                        &lt;option value="2">2&lt;/option>
+                        &lt;option value="3">3&lt;/option>
+                        &lt;option value="4">4&lt;/option>
+                        &lt;option value="5">5&lt;/option>
+                        &lt;option value="6">6&lt;/option>
+                      &lt;/select>
+                      {errors.perPerson &amp;&amp; (
+                        &lt;p className="text-destructive">
+                          {" "}
+                          Please select a serving...
+                        &lt;/p>
+                      )}
+                    &lt;/div>
+                  &lt;/div>
+                &lt;/CardContent>
+              &lt;/Card>
+            &lt;/div>
+            &lt;div className="mb-10">
+              &lt;Label
+                className="block text-gray-700 text-lg font-bold mb-2 dark:text-teal-50"
+                htmlFor="ingredients"
+              >
+                Ingredients Needed
+              &lt;/Label>
+              &lt;Textarea
+                {...register("ingredients", { required: true })}
+                id="ingredients"
+                name="ingredients"
+                className="shadow appearance-none border rounded w-full h-48 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:text-teal-50"
+                placeholder="Ingredients"
+              />
+              {errors.ingredients &amp;&amp; (
+                &lt;p role="alert" className="text-destructive">
+                  This field is required
+                &lt;/p>
+              )}
+            &lt;/div>
+            &lt;div className="grid auto-rows-max items-start gap-4 lg:gap-8">
+              {isLoading ? (
+                &lt;Skeleton className="w-full h-40" />
+              ) : (
+                &lt;Card>
+                  &lt;CardHeader>
+                    &lt;CardTitle>Recipe category&lt;/CardTitle>
+                  &lt;/CardHeader>
+                  &lt;CardContent>
+                    &lt;div className="grid gap-6">
+                      &lt;div className="grid gap-3">
+                        &lt;Label htmlFor="recipeCategory">Type&lt;/Label>
+                        &lt;select
+                          {...register("recipeCategory", {
+                            required: "You must select a recipe type.",
+                          })}
+                          id="recipeCategory"
+                          title="recipeCategory"
+                          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        >
+                          &lt;option value="">Select recipe category&lt;/option>
+
+                          {categories &amp;&amp;
+                            categories.map((category) => (
+                              &lt;option
+                                key={category.id}
+                                value={category.category}
+                              >
+                                {category.category}
+                              &lt;/option>
+                            ))}
+                        &lt;/select>
+                        {errors.recipeCategory &amp;&amp; (
+                          &lt;p className="text-destructive">
+                            {errors.recipeCategory.message}
+                          &lt;/p>
+                        )}
+                      &lt;/div>
+                    &lt;/div>
+                  &lt;/CardContent>
+                &lt;/Card>
+              )}
+            &lt;/div>
+            &lt;div className="flex flex-col md:flex-row-reverse items-center mt-20 justify-between  gap-4 md:gap-4">
+              &lt;Button
+                type="submit"
+                className="w-full py-2 text-base dark:text-teal-900 dark:hover:text-teal-50 dark:hover:bg-teal-800"
+              >
+                Create Recipe
+              &lt;/Button>
+              &lt;Button
+                variant="outline"
+                className="w-full py-2  text-base dark:text-teal-900 dark:hover:text-teal-50 border border-gray-500 hover:border-teal-50 hover:bg-teal-900 hover:text-teal-50 bg-teal-100"
+                onClick={() => {
+                  navigate("/profile");
+                }}
+              >
+                Cancel
+              &lt;/Button>
+            &lt;/div>
+          &lt;/div>
+        &lt;/form>
+      &lt;/div>
+    &lt;/section>
+  );
+};
+
+export default CreateRecipe;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#UserRecipes">UserRecipes</a></li><li><a href="global.html#UserProfile">UserProfile</a></li><li><a href="global.html#UserDropdown">UserDropdown</a></li><li><a href="global.html#UploadedRecipes">UploadedRecipes</a></li><li><a href="global.html#UploadedRecipe">UploadedRecipe</a></li><li><a href="global.html#UnexpectedError">UnexpectedError</a></li><li><a href="global.html#ThemeToggleButton">ThemeToggleButton</a></li><li><a href="global.html#SignUp">SignUp</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#router">router</a></li><li><a href="global.html#Recipes">Recipes</a></li><li><a href="global.html#RecipeCard">RecipeCard</a></li><li><a href="global.html#Recipe">Recipe</a></li><li><a href="global.html#Rating">Rating</a></li><li><a href="global.html#PrivateRoutes">PrivateRoutes</a></li><li><a href="global.html#NotFound">NotFound</a></li><li><a href="global.html#Layout">Layout</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#HeroSection">HeroSection</a></li><li><a href="global.html#HeaderButtons">HeaderButtons</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Forbidden">Forbidden</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#FavoriteRecipes">FavoriteRecipes</a></li><li><a href="global.html#CreateRecipe">CreateRecipe</a></li><li><a href="global.html#Contact">Contact</a></li><li><a href="global.html#Comment">Comment</a></li><li><a href="global.html#CategoryBox">CategoryBox</a></li><li><a href="global.html#Categories">Categories</a></li><li><a href="global.html#BurgerMenu">BurgerMenu</a></li><li><a href="global.html#AppearanceSettings">AppearanceSettings</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#About">About</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 0.4.7</a> on Fri May 03 2024 16:22:02 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

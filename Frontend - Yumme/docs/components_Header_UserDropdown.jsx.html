@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/Header/BurgerMenu.jsx</title>
+    <title>JSDoc: Source: components/Header/UserDropdown.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/Header/BurgerMenu.jsx</h1>
+    <h1 class="page-title">Source: components/Header/UserDropdown.jsx</h1>
 
     
 
@@ -26,58 +26,67 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import {
+            <pre class="prettyprint source linenums"><code>import { LogOut, UserRound } from 'lucide-react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+import { useAuth } from '../../auth';
+import { Routes } from '../../constants';
+import { Button } from '../ui/button';
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Menu } from "lucide-react";
-import React from "react";
-import { Link } from "react-router-dom";
-
-import { menuItems } from "../../constants";
-import HeaderButtons from "./HeaderButtons";
+} from '../ui/dropdown-menu';
 
 /**
- * Renders a burger menu component in small devices in the header component.
- *
- * @returns {JSX.Element} The burger menu component.
+ * UserDropdown component - A component that displays the user dropdown in the header
+ * @returns {JSX.Element} UserDropdown component
  */
-const BurgerMenu = () => {
+const UserDropdown = () => {
+  const { logOut } = useAuth();
   return (
-    &lt;DropdownMenu >
-      &lt;DropdownMenuTrigger>
-        &lt;Menu className="size-7" />
+    &lt;DropdownMenu>
+      &lt;DropdownMenuTrigger asChild>
+        &lt;Button
+          variant="outline"
+          size="icon"
+          className="overflow-hidden rounded-full"
+        >
+          &lt;UserRound />
+        &lt;/Button>
       &lt;/DropdownMenuTrigger>
-      &lt;DropdownMenuContent
-        className="w-[220px] space-y-4 md:hidden py-4"
-        align="end"
-      >
-        &lt;DropdownMenuLabel>Yumme&lt;/DropdownMenuLabel>
+      &lt;DropdownMenuContent align="end">
+        &lt;DropdownMenuLabel>Profile&lt;/DropdownMenuLabel>
         &lt;DropdownMenuSeparator />
 
-        {menuItems.map((item, index) => (
-          &lt;DropdownMenuItem className="" key={index}>
-            &lt;Link
-              to={item.to}
-              className="text-black w-full h-full hover:text-teal-700 flex gap-2 items-center "
-            >
-              {item.icon}
-              {item.label}
-            &lt;/Link>
-          &lt;/DropdownMenuItem>
-        ))}
-
-        &lt;HeaderButtons />
+        &lt;DropdownMenuItem>
+          &lt;Link className="text-primary" to={`${Routes.USER_PROFILE}`}>
+            My recipes
+          &lt;/Link>
+        &lt;/DropdownMenuItem>
+        &lt;DropdownMenuItem>
+          {" "}
+          &lt;Link className="text-primary" to={`${Routes.USER_SETTINGS}`}>
+            Settings
+          &lt;/Link>
+        &lt;/DropdownMenuItem>
+        &lt;DropdownMenuSeparator />
+        &lt;DropdownMenuItem
+          className="flex  justify-between items-center"
+          onClick={() => logOut()}
+        >
+          Logout &lt;LogOut color="hsl(var(--destructive))" className="size-5" />
+        &lt;/DropdownMenuItem>
       &lt;/DropdownMenuContent>
     &lt;/DropdownMenu>
   );
 };
 
-export default BurgerMenu;
+export default UserDropdown;
 </code></pre>
         </article>
     </section>
