@@ -2,8 +2,8 @@ import React from 'react'
 import { Button } from './ui/button'
 
 /**
- * HeroSection component
- * @status : todo
+ * HeroSection component - A component that displays the hero section of the website
+ * @returns {JSX.Element} HeroSection component
  */
 const HeroSection = () => {
   return (

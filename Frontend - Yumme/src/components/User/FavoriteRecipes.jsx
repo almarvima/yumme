@@ -5,13 +5,13 @@ import RecipeCard from "../Recipes/RecipeCard";
 import UploadedRecipe from "./UploadedRecipe";
 
 /**
- * UploadedRecipes component.
- * @returns {JSX.Element} The rendered UploadedRecipes component.
+ * FavoriteRecipes component.
+ * @returns {JSX.Element} The rendered FavoriteRecipes component.
  */
-const UploadedRecipes = () => {
-  const { getRecipesPerUser } = useRecipes();
-  const { data: recipes, isLoading, isError } = getRecipesPerUser();
-  console.log("🚀 ~ UploadedRecipes ~ recipes:", recipes);
+const FavoriteRecipes = () => {
+  const { getFavoriteRecipes, getRecipes } = useRecipes();
+  const { data: favoriteRecipes, isLoading, isError } = getFavoriteRecipes();
+  const { data: recipes } = getRecipes();
 
   return (
     <section className="py-8">
@@ -44,22 +44,25 @@ const UploadedRecipes = () => {
             ))}
 
         {recipes &&
-          recipes.map((recipe) => (
-            <UploadedRecipe
-              isUserRecipe
-              key={recipe.id}
-              id={recipe.id}
-              title={recipe.title}
-              description={recipe.description}
-              image={recipe.imgUrl}
-              cookingTime={recipe.cookingTime}
-              perPerson={recipe.perPerson}
-              category={recipe.categoryName}
-            />
-          ))}
+          recipes
+            .filter((recipe) => favoriteRecipes.includes(recipe.id))
+            .map((recipe) => (
+              <RecipeCard
+                key={recipe.id}
+                id={recipe.id}
+                title={recipe.title}
+                description={recipe.description}
+                image={recipe.imgUrl}
+                cookingTime={recipe.cookingTime}
+                perPerson={recipe.perPerson}
+                category={recipe.categoryName}
+                score={recipe.score}
+                favoriteRecipes={favoriteRecipes}
+              />
+            ))}
       </div>
     </section>
   );
 };
 
-export default UploadedRecipes;
+export default FavoriteRecipes;

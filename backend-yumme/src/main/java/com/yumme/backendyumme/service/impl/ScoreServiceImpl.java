@@ -27,13 +27,22 @@ public class ScoreServiceImpl implements ScoreService {
         Optional<Recipe> recipeOptional = recipeRepository.findById(recipeId);
         var recipe = recipeOptional.get();
 
-        Score score = Score.builder()
-                .score(request.getScore())
-                .recipe(recipe)
-                .user(user)
-                .build();
+        Score existingScore = recipe.getScore().stream()
+                .filter(score -> score.getUserName().equals(user.getUsername()))
+                .findFirst()
+                .orElse(null);
 
-        scoreRepository.save(score);
+        if (existingScore != null) {
+            existingScore.setScore(request.getScore());
+            scoreRepository.save(existingScore);
+        } else {
+            Score score = Score.builder()
+                    .score(request.getScore())
+                    .recipeId((long) recipeId)
+                    .userName(user.getUsername())
+                    .build();
+            scoreRepository.save(score);
+        }
 
         return SpringUtils.scoreSaved();
     }

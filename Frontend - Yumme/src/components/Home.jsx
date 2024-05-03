@@ -4,18 +4,11 @@ import Categories from "./Categories/Categories";
 import HeroSection from "./HeroSection";
 import { Separator } from "./ui/separator";
 
-
+/**
+ * Home component - A component that displays the home page of the website
+ * @returns {JSX.Element} Home component
+ */
 export const Home = () => {
-  // const { data, isLoading } = useQuery({
-  //   queryKey: ["recipes"],
-  //   queryFn: async () => {
-  //     const data = await axios.get(
-  //       "https://jsonplaceholder.typicode.com/posts"
-  //     );
-  //     return data;
-  //   },
-  // });
-
   return (
     <div className="flex flex-col gap-4">
       <HeroSection />
@@ -25,3 +18,5 @@ export const Home = () => {
     </div>
   );
 };
+
+export default Home;

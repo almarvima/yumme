@@ -1,5 +1,10 @@
-import React from "react";
-import { Button } from "../ui/button";
+import { LogOut, UserRound } from 'lucide-react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+import { useAuth } from '../../auth';
+import { Routes } from '../../constants';
+import { Button } from '../ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,12 +12,12 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
-import { LogOut, UserRound, UserRoundPlus } from "lucide-react";
-import { Link } from "react-router-dom";
-import { Routes } from "../../constants";
-import { useAuth } from "../../auth";
+} from '../ui/dropdown-menu';
 
+/**
+ * UserDropdown component - A component that displays the user dropdown in the header
+ * @returns {JSX.Element} UserDropdown component
+ */
 const UserDropdown = () => {
   const { logOut } = useAuth();
   return (

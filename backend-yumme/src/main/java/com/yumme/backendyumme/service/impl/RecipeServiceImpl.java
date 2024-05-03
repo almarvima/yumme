@@ -6,6 +6,7 @@ import com.yumme.backendyumme.domain.User;
 import com.yumme.backendyumme.dto.request.RecipeRequest;
 import com.yumme.backendyumme.repository.CategoryRepository;
 import com.yumme.backendyumme.repository.RecipeRepository;
+import com.yumme.backendyumme.repository.UserRepository;
 import com.yumme.backendyumme.service.RecipeService;
 import com.yumme.backendyumme.utils.SpringUtils;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +24,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     private final RecipeRepository recipeRepository;
     private final CategoryRepository categoryRepository;
+    private final UserRepository userRepository;
 
 
     @Override
@@ -145,4 +148,44 @@ public class RecipeServiceImpl implements RecipeService {
         return randomListRecipes;
     }
 
+    @Override
+    public ResponseEntity<?> saveFavoriteRecipe(int recipeId, User user) {
+        Optional<Recipe> recipeOptional = recipeRepository.findById(recipeId);
+
+        if (recipeOptional.isEmpty()) {
+            return SpringUtils.recipeNotExist();
+        }
+
+        Recipe recipe = recipeOptional.get();
+
+        if (!user.getRecipesFavorite().contains(recipe)) {
+            user.getRecipesFavorite().add(recipe);
+            recipe.getUserName().add(user);
+
+            userRepository.save(user);
+            recipeRepository.save(recipe);
+            return SpringUtils.favoriteRecipeSaved();
+        } else {
+            user.getRecipesFavorite().remove(recipe);
+            recipe.getUserName().remove(user);
+
+            userRepository.save(user);
+            recipeRepository.save(recipe);
+            return SpringUtils.favoriteRecipeRemoved();
+        }
+
+    }
+
+    @Override
+    public ResponseEntity<?> getMyFavoriteRecipes(User user) {
+        List<Long> favoritesRecipesId = new ArrayList<>();
+        user.getRecipesFavorite().forEach( it ->
+                {
+                    assert false;
+                    favoritesRecipesId.add(it.getId());
+                }
+        );
+
+        return ResponseEntity.ok(favoritesRecipesId);
+    }
 }

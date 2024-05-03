@@ -14,6 +14,10 @@ const userProfileLink = [
   },
 ];
 
+/**
+ * UserProfile component - A component that displays the user profile
+ * @returns {JSX.Element} UserProfile component
+ */
 export function UserProfile() {
   return (
     <div className="flex min-h-screen w-full flex-col">

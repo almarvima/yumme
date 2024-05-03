@@ -27,8 +27,10 @@ public class Recipe {
     @JsonIgnore
     private User ownerId;
 
-    @ManyToMany(mappedBy = "recipesSet")
-    private Set<User> usersSet = new HashSet<>();
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @JoinTable(name = "recipe_favorite", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "user_name"))
+    private List<User> userName;
 
     @Column(length = 100, nullable = false)
     private String title;
@@ -53,8 +55,8 @@ public class Recipe {
     @JsonIdentityReference(alwaysAsId = true)
     private Category recipeCategory;
 
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.PERSIST)
-    Set<Score> score;
+    @OneToMany(mappedBy = "recipeId", cascade = CascadeType.PERSIST)
+    List<Score> score;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "recipe")
     @JsonIdentityReference(alwaysAsId = true)

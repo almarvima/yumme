@@ -15,8 +15,10 @@ import {
   Soup,
 } from "lucide-react";
 
+// The size of the icons in the category menu.
 const ICON_SIZE = "20";
 
+// The routes of the application, are used throughout the whole app, avoiding magic strings.
 export const Routes = {
   HOME: "/",
   RECIPE: "/recipe",
@@ -36,6 +38,7 @@ export const Routes = {
   APPEARANCE: "appearance",
 };
 
+// The items in the main menu.
 export const menuItems = [
   {
     icon: <Home height={ICON_SIZE} />,
@@ -60,6 +63,7 @@ export const menuItems = [
   },
 ];
 
+// The categories of the recipes.
 export const categories = [
   {
     icon: <Carrot height={ICON_SIZE} />,

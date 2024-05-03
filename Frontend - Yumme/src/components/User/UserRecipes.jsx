@@ -7,7 +7,12 @@ import { Link } from "react-router-dom";
 import { cn } from "../../lib/utils";
 import { Routes } from "../../constants";
 import UploadedRecipes from "./UploadedRecipes";
+import FavoriteRecipes from "./FavoriteRecipes";
 
+/**
+ * UserRecipes component - A component that displays the user recipes
+ * @returns {JSX.Element} UserRecipes component
+ */
 const UserRecipes = () => {
   return (
     <section className="flex min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col gap-4  py-8 md:gap-8 ">
@@ -30,8 +35,14 @@ const UserRecipes = () => {
             </Link>
           </div>
         </div>
-        <TabsContent value="all"><UploadedRecipes /></TabsContent>
-        <TabsContent value="saved">your saved recipes</TabsContent>
+        <TabsContent value="all">
+          <UploadedRecipes />
+        </TabsContent>
+        <TabsContent value="saved">
+          <FavoriteRecipes />
+
+
+        </TabsContent>
       </Tabs>
     </section>
   );

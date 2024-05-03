@@ -9,6 +9,13 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/components/ui/use-toast";
 import { Fragment } from "react";
 
+/**
+ * CommentSection component - A component that displays the comment section of a recipe
+ * @param {Object} props - The props of the component
+ * @param {string} props.id - The id of the recipe
+ * @param {Array} props.comments - The comments of the recipe
+ * @returns {JSX.Element} CommentSection component
+ */
 export default function CommentSection({ id, comments }) {
   const { register, handleSubmit, watch, reset } = useForm();
   const { toast } = useToast();
@@ -25,6 +32,7 @@ export default function CommentSection({ id, comments }) {
 
     mutate(recipe, {
       onSuccess: () => {
+        // Invalidate the query to refetch the data, so it includes the new comment
         queryClient.invalidateQueries({
           queryKey: ["recipe", id],
         });

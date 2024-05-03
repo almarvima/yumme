@@ -15,7 +15,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -168,16 +167,62 @@ public class RecipeController {
         return SpringUtils.commentCreate(userName, idComment);
     }
 
-    @PostMapping("recipe/favourite")
-    public ResponseEntity<?> saveFavouriteRecipe(
-            HttpServletRequest header
-
+    @PostMapping("recipe/{id}/favorite")
+    public ResponseEntity<?> saveFavoriteRecipe(
+            HttpServletRequest header,
+            @PathVariable int id
     ) {
-        var recipeId = header.getHeader("Recipe-Id");
-        System.out.println("Recepta: " + recipeId);
+        ValidationResponse validationResponse = jwtService.validateTokenAndUser(header);
+        if (!validationResponse.isValid()) {
+            return SpringUtils.invalidToken();
+        }
+
+        String userName = validationResponse.getUserName();
+        Optional<User> userOptional = userRepository.findByUsername(userName);
+
+        if (userOptional.isEmpty()) {
+            return SpringUtils.userNotExist();
+        }
+
+        User user = userOptional.get();
+
         ResponseEntity<?> response;
 
-        response = SpringUtils.recipeFavouriteSaved();
+        try {
+            response = recipeService.saveFavoriteRecipe(id, user);
+        } catch (Exception e) {
+            response = SpringUtils.favoriteRecipeSavedError();
+        }
+
+        return response;
+
+    }
+
+    @GetMapping("recipe/favorite")
+    public ResponseEntity<?> getMyFavoriteRecipes(
+            HttpServletRequest header
+    ) {
+        ValidationResponse validationResponse = jwtService.validateTokenAndUser(header);
+        if (!validationResponse.isValid()) {
+            return SpringUtils.invalidToken();
+        }
+
+        String userName = validationResponse.getUserName();
+        Optional<User> userOptional = userRepository.findByUsername(userName);
+
+        if (userOptional.isEmpty()) {
+            return SpringUtils.userNotExist();
+        }
+
+        User user = userOptional.get();
+
+        ResponseEntity<?> response;
+
+        try {
+            response = recipeService.getMyFavoriteRecipes(user);
+        } catch (Exception e) {
+            response = SpringUtils.favoriteRecipeSavGetError();
+        }
 
         return response;
     }

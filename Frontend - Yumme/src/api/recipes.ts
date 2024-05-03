@@ -3,7 +3,18 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { deleteData, fetchData, postData } from ".";
 import { queryClient } from "@/config";
 
+/**
+ * A custom hook for managing recipes.
+ * It provides functions for fetching, creating, and deleting recipes.
+ * @see https://tanstack.com/query/v5/
+ * @see https://axios-http.com/docs/intro
+ * @returns An object containing functions for interacting with recipes.
+ */
 export const useRecipes = () => {
+  /**
+   * Fetches all recipes.
+   * @returns A query object for fetching recipes.
+   */
   const getRecipes = () => {
     return useQuery({
       queryKey: ["recipes"],
@@ -11,13 +22,23 @@ export const useRecipes = () => {
     });
   };
 
-  const getRecipe = (id: number) => {
+  /**
+   * Fetches a recipe by its ID.
+   * @param id - The ID of the recipe.
+   * @param isPrivate - Whether the recipe is private (default: false).
+   * @returns A query object for fetching the recipe.
+   */
+  const getRecipe = (id: number, isPrivate = false) => {
     return useQuery({
       queryKey: ["recipe", id],
-      queryFn: async () => fetchData(`/public/recipe/${id}`),
+      queryFn: async () => fetchData(`/public/recipe/${id}`, isPrivate),
     });
   };
 
+  /**
+   * Creates a new recipe.
+   * @returns A mutation object for creating the recipe.
+   */
   const createRecipe = () => {
     return useMutation({
       mutationKey: ["createRecipe"],
@@ -25,7 +46,11 @@ export const useRecipes = () => {
     });
   };
 
-  // Fake API call to get recipes by category while waiting for the real API
+  /**
+   * Fetches recipes by category.
+   * @param category - The category of the recipes.
+   * @returns A query object for fetching the recipes.
+   */
   const getRecipeByCategory = (category: string) => {
     return useQuery({
       queryKey: ["recipes"],
@@ -36,6 +61,10 @@ export const useRecipes = () => {
     });
   };
 
+  /**
+   * Fetches recipes created by the current user.
+   * @returns A query object for fetching the recipes.
+   */
   const getRecipesPerUser = () => {
     return useQuery({
       queryKey: ["recipes", "user"],
@@ -43,6 +72,10 @@ export const useRecipes = () => {
     });
   };
 
+  /**
+   * Deletes a recipe by its ID.
+   * @returns A mutation object for deleting the recipe.
+   */
   const deleteRecipe = () => {
     return useMutation({
       mutationKey: ["deleteRecipe"],
@@ -55,6 +88,43 @@ export const useRecipes = () => {
     });
   };
 
+  /**
+   * This function is used to vote a score on a recipe.
+   * @returns A mutation object for voting on a recipe.
+   */
+  const voteRecipe = () => {
+    return useMutation({
+      mutationKey: ["voteRecipe"],
+      mutationFn: async ({ id, score }: { id: number; score: number }) =>
+        postData(`/api/score/recipe/${id}`, score),
+    });
+  };
+
+
+  /**
+   * This function is used to favorite a recipe.
+   * @see https://tanstack.com/query/v5/
+   * @returns A mutation object for favoriting a recipe.
+   */
+  const favoriteRecipe = () => {
+    return useMutation({
+      mutationKey: ["favoriteRecipe"],
+      mutationFn: async ({ id }: { id: number }) =>
+        postData(`/api/recipe/${id}/favorite`, ""),
+    });
+  };
+
+  /**
+   *  Fetches favorite recipes.
+   * @returns A query object for fetching favorite recipes.
+   */
+  const getFavoriteRecipes = () => {
+    return useQuery({
+      queryKey: ["favoriteRecipes"],
+      queryFn: async () => fetchData("/api/recipe/favorite", true),
+    });
+  };
+
   return {
     getRecipes,
     getRecipe,
@@ -62,5 +132,8 @@ export const useRecipes = () => {
     getRecipeByCategory,
     getRecipesPerUser,
     deleteRecipe,
+    voteRecipe,
+    favoriteRecipe,
+    getFavoriteRecipes,
   };
 };

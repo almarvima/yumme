@@ -19,7 +19,7 @@ import CategoryBox from "./CategoryBox";
  */
 const Categories = () => {
   /**
-   * In the future the api calls are gonna be done with query params
+   * Api calls are  done with query params
    * in the url to both make the app more SEO friendly and save the
    * state of the query so the users can share without losing the
    * state of the app

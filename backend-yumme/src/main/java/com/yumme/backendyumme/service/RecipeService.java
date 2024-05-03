@@ -20,4 +20,8 @@ public interface RecipeService {
     ResponseEntity<?> updateRecipe(int recipeId, User user, RecipeRequest request);
 
     List<Recipe> GetSuggestedRecipes(List<String> categories, Long id);
+
+    ResponseEntity<?> saveFavoriteRecipe(int recipeId, User user);
+
+    ResponseEntity<?> getMyFavoriteRecipes(User user);
 }

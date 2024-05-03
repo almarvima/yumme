@@ -11,8 +11,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
  * @returns {JSX.Element} The rendered App component.
  */
 function App() {
-  // log user-token from ls
-  console.log(localStorage.getItem("user-token"));
+
 
   return (
     <ThemeProvider>

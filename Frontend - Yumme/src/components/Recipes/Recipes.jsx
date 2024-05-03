@@ -4,19 +4,24 @@ import RecipeCard from "./RecipeCard";
 import { useRecipes } from "../../api/recipes";
 import { useSearchParams } from "react-router-dom";
 
-
-
+/**
+ * Recipes component.
+ * @returns {JSX.Element} The rendered Recipes component.
+ */
 const Recipes = () => {
-  // Ejemplo de implementación de useQuery
-  const { getRecipes, getRecipeByCategory } = useRecipes();
-  // const { data: recipes, isLoading, isError } = getRecipes();
+  const { getRecipes, getRecipeByCategory, getFavoriteRecipes } = useRecipes();
+
   const [searchParams] = useSearchParams({ q: "" });
+
+  // We are using the searchParams to get the category if it exists
   const categoryParams = searchParams.get("q");
   const {
     data: recipes,
     isLoading,
     isError,
   } = categoryParams ? getRecipeByCategory(categoryParams) : getRecipes();
+
+  const { data: favoriteRecipes } = getFavoriteRecipes();
 
   return (
     <section className="py-8">
@@ -36,7 +41,7 @@ const Recipes = () => {
         </div>
       )}
 
-      <div className="grid grid-cols-1 justify-items-center gap-y-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-x-8 md:gap-y-16 gap-4">
+      <div className="grid  grid-cols-1 justify-items-center gap-y-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-x-8 md:gap-y-16 gap-4">
         {isLoading &&
           Array(8)
             .fill()
@@ -59,6 +64,8 @@ const Recipes = () => {
               cookingTime={recipe.cookingTime}
               perPerson={recipe.perPerson}
               category={recipe.categoryName}
+              score={recipe.score}
+              favoriteRecipes={favoriteRecipes}
             />
           ))}
       </div>

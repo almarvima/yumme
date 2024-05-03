@@ -1,27 +1,136 @@
-import React from "react";
+import { Stars } from "lucide-react";
+import React, { useEffect } from "react";
+import { jwtDecode } from "jwt-decode";
+import { useRecipes } from "@/api/recipes";
+import { queryClient } from "@/config";
+import { useAuth } from "@/auth";
+
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Link } from "react-router-dom";
+import { Routes } from "@/constants";
+import { useToast } from "@/components/ui/use-toast";
 
 const MAX_STAR_RATING = 5;
 
-const Rating = () => {
+/**
+ * Rating component - A component that displays the rating of a recipe
+ * @param {boolean} small - If the rating is small, it will be displayed in a smaller size, it suits good on the recipe card
+ * @returns {JSX.Element} Rating component
+ */
+const Rating = ({ small, score, recipeId }) => {
   const [hoveredIndex, setHoveredIndex] = React.useState(-1);
+  const [userScore, setUserScore] = React.useState(null);
+  const [isDialogOpen, setIsDialogOpen] = React.useState(false);
+  
+  const averageScore =
+    score?.reduce((acc, curr) => acc + curr.score, 0) / score?.length;
 
-  return (
+  const encodedData = localStorage.getItem("user-token");
+
+  useEffect(() => {
+    if (encodedData && !small) {
+      const decodedData = jwtDecode(encodedData);
+      const userName = decodedData?.sub;
+      setUserScore(score?.find((s) => s.userName === userName)?.score);
+    }
+  }, [encodedData, score, small]);
+
+  const { userIsAuthenticated } = useAuth();
+  // const userScore = score?.find((s) => s.userName === userName)?.score;
+
+  const { voteRecipe } = useRecipes();
+
+  const { mutate } = voteRecipe();
+
+  const { toast } = useToast();
+
+  return small ? (
+    <section className="flex flex-col items-start justify-center gap-6">
+      <div className="flex items-center gap-2">
+        {[...Array(MAX_STAR_RATING)].map((_, index) => (
+          <StarIcon
+            key={index}
+            className={`size-4 text-yellow-400 ${
+              index < averageScore ? "fill-yellow-400" : ""
+            }`}
+          />
+        ))}
+        <span className="text-xs">({score?.length})</span>
+      </div>
+    </section>
+  ) : (
     <section className="flex flex-col items-start justify-center gap-6 py-12 md:py-24">
+      <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              Create an account to rate your favorite recipes
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              You need to be logged in to rate this recipe. Click the button
+              below to login.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction>
+              <Link to={Routes.SIGN_IN}>Login</Link>
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+      <p className="lg:text-xl text-base font-medium flex">
+        Your rating <Stars className="fill-yellow-400 text-yellow-500" />
+      </p>
       <div className="flex items-center gap-2">
         {[...Array(MAX_STAR_RATING)].map((_, index) => (
           <StarIcon
             key={index}
             className={`w-8 h-8 text-yellow-400 ${
-              index <= (hoveredIndex) ? "fill-yellow-400" : ""
+              index <= (userScore ? userScore - 1 : hoveredIndex)
+                ? "fill-yellow-400"
+                : ""
             } cursor-pointer`}
             onMouseEnter={() => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(-1)}
-            onClick={() => console.log(index + 1)}
+            onClick={() => {
+              userScore
+                ? null
+                : userIsAuthenticated()
+                ? mutate(
+                    { id: recipeId, score: index + 1 },
+                    {
+                      onSuccess: () => {
+                        toast({
+                          title: "Yay!",
+                          description: "You've successfully rated this recipe 🌟",
+                        });
+                        queryClient.invalidateQueries({
+                          queryKey: ["recipe", recipeId],
+                        });
+                      },
+                    }
+                  )
+                : setIsDialogOpen(true);
+            }}
           />
         ))}
       </div>
       <div className="text-base text-muted-foreground">
-        {hoveredIndex !== -1
+        {/*  */}
+        {userScore
+          ? `You've rated this recipe ${userScore} stars`
+          : hoveredIndex !== -1
           ? "You've selected " + (hoveredIndex + 1) + " stars"
           : "Hover over the stars to rate this recipe"}
       </div>
