@@ -28,6 +28,12 @@ public class AuthController {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    /**
+     * Mètode que permet registrar a l'usuari
+     *
+     * @param request DTO que conte tots els camps per poder registrar a un usuari
+     * @return ResponseEntity si l'usuari ja existeix o retorna el token
+     */
     @PostMapping("register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest request)
     {
@@ -40,6 +46,12 @@ public class AuthController {
         return ResponseEntity.ok(userService.createUser(request));
     }
 
+    /**
+     * Mètode per fer login a l'aplicació
+     *
+     * @param request DTO amb les variables per fer login.
+     * @return ResponseEntity amb el token o resposta d'error
+     */
     @PostMapping("login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request)
     {
