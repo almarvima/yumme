@@ -31,6 +31,12 @@ public class PublicController {
     @Autowired
     private CategoryRepository categoryRepository;
 
+
+    /**
+     * Metode per retornar el llistat de receptes
+     *
+     * @return
+     */
     @GetMapping("recipe")
     public ResponseEntity<List<Recipe>> GetAllRecipe (){
         List<Recipe> recipes = recipeService.getAllRecipes();
