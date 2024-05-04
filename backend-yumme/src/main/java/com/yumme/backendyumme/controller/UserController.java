@@ -31,6 +31,11 @@ public class UserController {
     private final UserService userService;
     private final UserRepository userRepository;
 
+    /**
+     * Mètode el meu usuari
+     * @param header Permet recuperar el token del usuari i recuperar l'usuari
+     * @return ResponseEntity amb l'usuari
+     */
     @GetMapping("user")
     public ResponseEntity<?> getMyUser(
         HttpServletRequest header
@@ -52,6 +57,11 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    /**
+     * Mètode per eliminar un usuari per privacitat
+     * @param header Permet recuperar el token del usuari i recuperar l'usuari
+     * @return ResponseEntity conforme s'ha eliminat l'usuari
+     */
     @DeleteMapping("user")
     public ResponseEntity<?> deleteUser(
             HttpServletRequest header

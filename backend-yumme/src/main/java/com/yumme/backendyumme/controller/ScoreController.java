@@ -27,6 +27,13 @@ public class ScoreController {
     private final UserRepository userRepository;
     private final ScoreService scoreService;
 
+    /**
+     * Mètode que permet realitzar la votació d'una recepta
+     * @param header Permet recuperar el token del usuari i recuperar l'usuari
+     * @param request És un DTO que conté un int, que és la votació de la recepta
+     * @param id Int id de la recepta
+     * @return ResponseEntity conforme s'ha guardat la votació
+     */
     @PostMapping("score/recipe/{id}")
     public ResponseEntity<?> voteRecipe(
             HttpServletRequest header,

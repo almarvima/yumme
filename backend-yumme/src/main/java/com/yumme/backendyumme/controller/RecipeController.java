@@ -33,6 +33,12 @@ public class RecipeController {
     private final RecipeService recipeService;
     private final CommentService commentService;
 
+    /**
+     * Mètode que permet crear una recepta
+     * @param request DTO que conté totes les variables per poder crear una recepta
+     * @param header Permet recuperar el token del usuari i recuperar l'usuari
+     * @return ResponseEntity conforme la recepta s'ha creat
+     */
     @PostMapping("recipe")
     public ResponseEntity<?> createRecipe(
             @RequestBody RecipeRequest request,
@@ -59,6 +65,11 @@ public class RecipeController {
         }
     }
 
+    /**
+     * Mètode que per mostrar les receptes creades per un usuari
+     * @param header Permet recuperar el token del usuari i recuperar l'usuari
+     * @return ResponseEntity amb una llista de receptes
+     */
     @GetMapping("recipe/user")
     public ResponseEntity<?> getRecipesByUsername(HttpServletRequest header) {
         List recipesById;
@@ -87,6 +98,12 @@ public class RecipeController {
 
     }
 
+    /**
+     * Mètode que permet eliminar una recepta
+     * @param header Permet recuperar el token del usuari i recuperar l'usuari
+     * @param id Int id de la recepta
+     * @return ResponseEntity conforme la recepta ha estat eliminada
+     */
     @DeleteMapping("recipe/{id}")
     public ResponseEntity<?> deleteRecipe(
             HttpServletRequest header,
@@ -118,6 +135,13 @@ public class RecipeController {
 
     }
 
+    /**
+     * Mètode per modificar una recepta
+     * @param header Permet recuperar el token del usuari i recuperar l'usuari
+     * @param request DTO de les dades que l'usuari vol modificar de la recepta
+     * @param id Int id de la recepta
+     * @return ResponseEntity conforme s'ha actualitzat la recepta
+     */
     @PutMapping("recipe/{id}")
     public ResponseEntity<?> updateRecipe(
             HttpServletRequest header,
@@ -148,6 +172,14 @@ public class RecipeController {
 
         return response;
     }
+
+    /**
+     * Mètode que permet fer una comentari d'una recepta
+     * @param header Permet recuperar el token del usuari i recuperar l'usuari
+     * @param comment DTO amb el contingut del comentari
+     * @param id Int id de la recepta
+     * @return ResponseEntity conforme s'ha guardat el comentari
+     */
     @PostMapping("recipe/{id}/comment")
     public ResponseEntity<?> addComment(
             HttpServletRequest header,
@@ -171,6 +203,12 @@ public class RecipeController {
         return SpringUtils.commentCreate(userName, idComment);
     }
 
+    /**
+     * Mètode que permet afegir com a preferida una recepta
+     * @param header Permet recuperar el token del usuari i recuperar l'usuari
+     * @param id Int id de la recepta
+     * @return ResponseEntity conforme la recepta s'ha guardat com a preferida
+     */
     @PostMapping("recipe/{id}/favorite")
     public ResponseEntity<?> saveFavoriteRecipe(
             HttpServletRequest header,
@@ -202,6 +240,11 @@ public class RecipeController {
 
     }
 
+    /**
+     * Mètode que per retornar les receptes preferides d'un usuari
+     * @param header Permet recuperar el token del usuari i recuperar l'usuari
+     * @return ResponseEntity amb un llistat de receptes
+     */
     @GetMapping("recipe/favorite")
     public ResponseEntity<?> getMyFavoriteRecipes(
             HttpServletRequest header
@@ -231,6 +274,11 @@ public class RecipeController {
         return response;
     }
 
+    /**
+     * Mètode que retorna sugeriments de receptes
+     * @param header Permet recuperar el token del usuari i recuperar l'usuari
+     * @return ResponsEntity amb un llistat de receptes
+     */
     @GetMapping("recipe/suggested")
     public ResponseEntity<?> getSuggestedRecipes(HttpServletRequest header) {
         ValidationResponse validationResponse = jwtService.validateTokenAndUser(header);
