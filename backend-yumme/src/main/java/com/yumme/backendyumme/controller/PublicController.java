@@ -17,6 +17,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * @author Albert i Marcos
+ * @version 1.0
+ * @since 1.0
+ */
 @RestController
 @RequestMapping("/public/")
 @RequiredArgsConstructor
@@ -31,11 +36,24 @@ public class PublicController {
     @Autowired
     private CategoryRepository categoryRepository;
 
+
+    /**
+     * Metode per retornar el llistat de receptes
+     *
+     * @return ResponseEntity amb el llistat de receptes
+     */
     @GetMapping("recipe")
     public ResponseEntity<List<Recipe>> GetAllRecipe (){
         List<Recipe> recipes = recipeService.getAllRecipes();
         return ResponseEntity.ok(recipes);
     }
+
+    /**
+     * Mètode per retornar la recepta segons el id
+     *
+     * @param id Int id de la recepta
+     * @return ResponseEntity amb la recepta o error si la recepta no existeix
+     */
     @GetMapping("recipe/{id}")
     public ResponseEntity<?> GetRecipeById (@PathVariable int id ){
         Recipe recipe = recipeService.getRecipeById(id);
@@ -45,12 +63,23 @@ public class PublicController {
         return SpringUtils.recipeNotExist();
     }
 
+    /**
+     * Mètode per retornar totes les categories
+     *
+     * @return ResponseEntity amb totes les categories
+     */
     @GetMapping("category")
     public ResponseEntity<List<Category>> GetAllCategories(){
         List<Category> categories = categoryService.getAllCategories();
         return ResponseEntity.ok(categories);
     }
 
+    /**
+     * Mètode per retornar
+     *
+     * @param categoryName String amb el nom de la categoria
+     * @return ResponseEntity amb totes les recepta que pertanyen a la categoria rebuda o be error indicant de que la categoria no existeix
+     */
     @GetMapping("recipe/category/{categoryName}")
     public ResponseEntity<?> GetRecipesByCategoryName(@PathVariable String categoryName){
 
@@ -67,6 +96,12 @@ public class PublicController {
         return ResponseEntity.ok(recipes);
     }
 
+    /**
+     * Mètode per crear una suggerencia a l'aplicació
+     *
+     * @param request DTO amb el String del comentari
+     * @return ResponseEnttity amb el missatge de generacio correcte o incorrecte del comentari
+     */
     @PostMapping("suggestion")
     public ResponseEntity<?> SendSuggestion (@RequestBody Suggestion request){
         boolean doIt = suggestionService.createSuggestion(request);

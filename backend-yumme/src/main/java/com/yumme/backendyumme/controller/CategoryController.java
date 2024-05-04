@@ -10,7 +10,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+/**
+ * @author Albert i Marcos
+ * @version 1.0
+ * @since 1.0
+ */
 @RestController
 @RequestMapping("/api/category")
 @RequiredArgsConstructor
@@ -18,6 +22,11 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
+    /**
+     * Mètode per retornar totes les categories
+     *
+     * @return Retorna totes les categories
+     */
     @GetMapping("getAllCategories")
     public ResponseEntity<List<Category>> GetAllCategories() {
         List<Category> categories = categoryService.getAllCategories();
