@@ -17,6 +17,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * @author Albert i Marcos
+ * @version 1.0
+ * @since 1.0
+ */
 @RestController
 @RequestMapping("/public/")
 @RequiredArgsConstructor
@@ -35,13 +40,19 @@ public class PublicController {
     /**
      * Metode per retornar el llistat de receptes
      *
-     * @return
+     * @return ResponseEntity amb el llistat de receptes
      */
     @GetMapping("recipe")
     public ResponseEntity<List<Recipe>> GetAllRecipe (){
         List<Recipe> recipes = recipeService.getAllRecipes();
         return ResponseEntity.ok(recipes);
     }
+
+    /**
+     *
+     * @param id
+     * @return
+     */
     @GetMapping("recipe/{id}")
     public ResponseEntity<?> GetRecipeById (@PathVariable int id ){
         Recipe recipe = recipeService.getRecipeById(id);
@@ -51,6 +62,9 @@ public class PublicController {
         return SpringUtils.recipeNotExist();
     }
 
+    /**
+     * @return
+     */
     @GetMapping("category")
     public ResponseEntity<List<Category>> GetAllCategories(){
         List<Category> categories = categoryService.getAllCategories();

@@ -13,7 +13,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
-
+/**
+ * @author Albert i Marcos
+ * @version 1.0
+ * @since 1.0
+ */
 @RestController
 @RequestMapping("/api/")
 @RequiredArgsConstructor
