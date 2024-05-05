@@ -65,3 +65,20 @@ export const deleteData = async (url: string, isPrivate?: boolean) => {
   );
   return response.data;
 };
+
+/**
+ * Sends a PUT request to the specified URL.
+ * @param url - The URL to send the PUT request to.
+ * @param data - The data to send in the PUT request.
+ * @returns A Promise that resolves to the response data.
+ */
+export const putData = async (url: string, data: unknown) => {
+  console.log("PUT data", data);
+  const response = await axios.put(url, data, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("user-token")}`,
+    },
+  });
+  return response.data;
+};

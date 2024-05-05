@@ -1,14 +1,24 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { usePasswordReset } from '../../api/usePasswordReset'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../auth'
 
 import { Card } from '../ui/card'
 import { Button } from '@/components/ui/button'
+import { useToast } from '@/components/ui/use-toast'
 
 /**
  * ResetPassword component renders the form to reset the password
  * @returns {JSX.Element} ResetPassword
  */
 const ResetPassword = () => {
+  const { resetPassword } = usePasswordReset()
+  const { mutate } = resetPassword()
+  const { toast } = useToast()
+  const { navigate } = useNavigate()
+  const { logOut } = useAuth()
+
   const {
     register,
     handleSubmit,
@@ -17,11 +27,32 @@ const ResetPassword = () => {
   } = useForm()
 
   const onSubmit = (data) => {
-    // Envía la data al backend para actualizar la contraseña
-    console.log(data)
+    // Sends data to backend for password reset
+    console.log(data.password)
+
+    mutate(
+      {password: data.password},
+      {
+        onSuccess: (res) => {
+          if (res.status === 200) {
+            toast({
+              title: 'Password reset!',
+              description: 'Your password has been reset successfully! You can now log in.'
+            })
+            setTimeout(() => {
+              logOut()
+            }, 3500) // Log out after 3 seconds
+          }
+        },
+        onError: (error) => {
+          console.error('Error reseting your password:', error)
+          navigate('/error')
+        }
+      }
+    )
   }
 
-  // Observa el valor del campo de contraseña para validación de coincidencia
+  // Watch the password input field to compare with the password_repeat field
   const password = watch('password')
 
   return (
