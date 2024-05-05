@@ -75,7 +75,7 @@ This will serve the frontend on: http://localhost:5173
 
 The application should now be running, with the frontend accessible on http://localhost:5173 and the backend on its respective port (commonly http://localhost:8080).
 
-## Use Cases
+## Use Cases - Diagram
 ![Use Cases](https://i.ibb.co/M99zMFg/useCases.png)
 
 
