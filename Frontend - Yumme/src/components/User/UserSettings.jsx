@@ -12,6 +12,14 @@ const userSettingsLink = [
     name: "Appearance",
     to: Routes.APPEARANCE,
   },
+  {
+    name: "Reset Password",
+    to: Routes.RESET_PASSWORD,
+  },
+  {
+    name: "Delete Account",
+    to: Routes.DELETE_ACCOUNT,
+  },
 ];
 
 const UserSettings = () => {
@@ -21,7 +29,7 @@ const UserSettings = () => {
         <h1 className="text-3xl font-semibold">Settings</h1>
       </div>
       <div className="mx-auto grid w-full max-w-7xl items-start gap-6 md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr]">
-        <nav className="grid gap-4 text-sm text-muted-foreground">
+        <nav className="grid gap-4 text-sm text-muted-foreground ">
           {userSettingsLink.map((link, index) => (
             <NavLink
               key={index}
@@ -29,7 +37,7 @@ const UserSettings = () => {
               end
               className={({ isActive }) =>
                 isActive
-                  ? "text-primary w-full bg-primary/10 font-bold transition-colors p-2 rounded-lg "
+                  ? "text-primary w-full bg-primary/10 font-bold transition-colors p-2 rounded-lg dark:bg-teal-800"
                   : "text-primary p-2 hover:font-semibold hover:bg-primary/5 transition-colors rounded-lg"
               }
             >

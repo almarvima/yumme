@@ -36,6 +36,8 @@ export const Routes = {
   FORBIDDEN: "/forbidden",
   ERROR: "/error",
   APPEARANCE: "appearance",
+  RESET_PASSWORD: "reset-password",
+  DELETE_ACCOUNT: "delete-account",
 };
 
 // The items in the main menu.

@@ -17,6 +17,7 @@ import Forbidden from '../components/ErrorPages/Forbidden'
 import UnexpectedError from '../components/ErrorPages/UnexpectedError'
 import Recipe from '../components/Recipes/Recipe.jsx'
 import AppearanceSettings from '../components/Settings/AppearanceSettings'
+import ResetPassword from '../components/Settings/ResetPassword.jsx'
 
 /**
  * The router configuration for the application.
@@ -100,6 +101,14 @@ export const router = createBrowserRouter([
                   {
                     path: 'appearance',
                     element: <AppearanceSettings />
+                  },
+                  {
+                    path: 'reset-password',
+                    element: <ResetPassword />
+                  },
+                  {
+                    path: 'delete-account',
+                    element: <div>Delete this account...</div>
                   }
                 ]
               }
