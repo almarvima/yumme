@@ -7,7 +7,7 @@
   - [Features](#features)
   - [Technology Stack](#technology-stack)
   - [Installation](#installation)
-  - [Use Cases - Diagram](#use-cases)
+  - [Use Cases - Diagram](#use-cases---diagram)
   - [Architecture](#architecture)
     - [Key Concepts](#key-concepts)
   - [Git Workflow](#git-workflow)
