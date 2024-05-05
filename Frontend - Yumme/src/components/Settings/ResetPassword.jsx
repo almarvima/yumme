@@ -41,7 +41,7 @@ const ResetPassword = () => {
             })
             setTimeout(() => {
               logOut()
-            }, 3500) // Log out after 3 seconds
+            }, 3000) // Log out after 3 seconds
           }
         },
         onError: (error) => {
